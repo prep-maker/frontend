@@ -16,7 +16,6 @@ const LoginForm = () => {
 
   const handleButtonClick = useCallback((e?: MouseEvent) => {
     e?.preventDefault();
-    console.log('hi');
   }, []);
 
   return (

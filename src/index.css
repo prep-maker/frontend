@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&family=Nosifer&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Nanum Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+
+  /* font*/
+  --h1: 3.5rem;
+  --h2: 3rem;
+  --h3: 2.5rem;
+  --h4: 2rem;
+  --h5: 1.5rem;
+  --h6: 0.75rem;
+  --bold: 700;
+
+  /* color */
+  --green: #21ffae;
+  --hoverGreen: #21ffae50;
+  --pink: #ffc2c2;
+  --hoverPink: #ffc2c250;
+  --blue: #4c00ff;
+  --hoverBlue: #4c00ff50;
+  --yellow: #ffef9d;
+  --hoverYellow: #ffef9d50;
+  --deepGray: #636363;
+  --gray: #aeaeae;
+  --lightGray: #e0e0e0;
+
+  /* border */
+  --border: 1px solid black;
+}

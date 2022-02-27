@@ -1,0 +1,6 @@
+.link {
+  font-size: var(--h5);
+  font-weight: 700;
+  color: var(--blue);
+  text-decoration: none;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styles from './Button.module.css';
 
 type ButtonProps = {
@@ -27,4 +27,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default memo(Button);

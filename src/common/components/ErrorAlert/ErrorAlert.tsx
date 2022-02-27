@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import styles from './ErrorAlert.module.css';
 import { useAppSelector, useAppDispatch } from '../../hooks/useRedux';
 import { alertError } from '../../../features/ui/uiSlice';
@@ -22,4 +22,4 @@ const ErrorAlert = () => {
   return <div>{error && <div className={styles.banner}>{error}</div>}</div>;
 };
 
-export default ErrorAlert;
+export default memo(ErrorAlert);

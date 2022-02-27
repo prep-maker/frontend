@@ -30,3 +30,12 @@ export const validatePassword = (password: string): boolean => {
 
   return true;
 };
+
+export const validateName = (name: string): boolean => {
+  name.trim();
+  if (name.length > 20) {
+    return false;
+  }
+
+  return true;
+};

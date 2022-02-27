@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Input.module.css';
 
-type InputProps = {
+export type InputProps = {
   value: string;
   placeholder?: string;
   fontSize?: 'large' | 'regular' | 'small';

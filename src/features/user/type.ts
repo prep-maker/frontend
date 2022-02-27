@@ -1,7 +1,3 @@
-export interface IAuth {
-  signup: (user: User) => Promise<UserData>;
-}
-
 export type User = {
   email: string;
   password: string;
@@ -14,3 +10,5 @@ export type UserData = {
   name: string;
   token: string;
 };
+
+export type LoginInfo = Omit<User, 'name'>;

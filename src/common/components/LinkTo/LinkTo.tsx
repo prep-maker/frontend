@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './LinkTo.module.css';
 
@@ -15,4 +15,4 @@ const LinkTo = ({ value, url }: LinkProps) => {
   );
 };
 
-export default LinkTo;
+export default memo(LinkTo);

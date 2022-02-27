@@ -1,4 +1,5 @@
 export const validateEmail = (email: string): boolean => {
+  email.trim();
   if (email.length < 5) {
     return false;
   }
@@ -18,6 +19,7 @@ export const validateEmail = (email: string): boolean => {
 };
 
 export const validatePassword = (password: string): boolean => {
+  password.trim();
   if (password.length < 6) {
     return false;
   }

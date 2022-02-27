@@ -1,0 +1,25 @@
+.input {
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  border: none;
+  outline: none;
+  color: black;
+  background-color: transparent;
+}
+
+.input::placeholder {
+  color: var(--gray);
+}
+
+.large {
+  font-size: var(--h1);
+}
+
+.regular {
+  font-size: var(--h5);
+}
+
+.small {
+  font-size: var(-h6);
+}

@@ -8,8 +8,8 @@ import { useAppDispatch } from '../../../common/hooks/useRedux';
 import useApi from '../../../common/hooks/useApi';
 
 type AuthHandler = {
-  onSignup: (user: User) => Promise<void>;
-  onLogin: (user: Omit<User, 'name'>) => Promise<void>;
+  readonly onSignup: (user: User) => Promise<void>;
+  readonly onLogin: (user: Omit<User, 'name'>) => Promise<void>;
 };
 
 const authApi = useApi(AuthAPI);
@@ -18,11 +18,15 @@ const useAuthService = (): AuthHandler => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const onAuth = (userData: UserData) => {
+    dispatch(fetchUser(userData));
+    navigate('/writing');
+  };
+
   const onSignup = async (user: User): Promise<void> => {
     try {
       const userData: UserData = await authApi.signup(user);
-      dispatch(fetchUser(userData));
-      navigate('/writing');
+      onAuth(userData);
     } catch (error) {
       const err = error as Error;
       dispatch(alertError(err.message));
@@ -32,8 +36,7 @@ const useAuthService = (): AuthHandler => {
   const onLogin = async (user: LoginInfo): Promise<void> => {
     try {
       const userData: UserData = await authApi.login(user);
-      dispatch(fetchUser(userData));
-      navigate('/writing');
+      onAuth(userData);
     } catch (error) {
       const err = error as Error;
       dispatch(alertError(err.message));

@@ -1,5 +1,7 @@
 import React, { MouseEvent, useCallback } from 'react';
+import styles from './LoginForm.module.css';
 import Button from '../../../../common/components/Button/Button';
+import LinkTo from '../../../../common/components/LinkTo/LinkTo';
 import useInput from '../../../../common/hooks/useInput';
 import {
   validateEmail,
@@ -19,7 +21,7 @@ const LoginForm = () => {
   }, []);
 
   return (
-    <form>
+    <form className={styles.wrapper}>
       <LoginInput
         type="email"
         name="email"
@@ -45,6 +47,7 @@ const LoginForm = () => {
         disabled={!isPasswordlValid || !isEmailValid}
         onClick={handleButtonClick}
       />
+      <LinkTo url="/signup" value="회원가입" />
     </form>
   );
 };

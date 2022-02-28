@@ -4,8 +4,8 @@ export type User = {
   name: string;
 };
 
-export type UserData = {
-  userId: string;
+export type UserState = {
+  id: string;
   email: string;
   name: string;
   token: string;

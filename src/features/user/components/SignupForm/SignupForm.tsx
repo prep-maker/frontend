@@ -1,4 +1,5 @@
 import React, { MouseEvent } from 'react';
+import styles from './SignupForm.module.css';
 import LoginInput from '../LoginInput/LoginInput';
 import useInput from '../../../../common/hooks/useInput';
 import {
@@ -23,34 +24,40 @@ const SignupForm = () => {
   };
 
   return (
-    <form>
-      <label htmlFor="email">이메일</label>
-      <LoginInput
-        type="email"
-        name="email"
-        value={email}
-        minLength={5}
-        maxLength={30}
-        onChange={handleEmailChange}
-      />
-      <label htmlFor="email">비밀번호</label>
-      <LoginInput
-        type="password"
-        name="password"
-        value={password}
-        minLength={6}
-        maxLength={15}
-        onChange={handlePasswordChange}
-      />
-      <label htmlFor="email">이름</label>
-      <LoginInput
-        type="text"
-        name="name"
-        value={name}
-        minLength={1}
-        maxLength={20}
-        onChange={handleNameChange}
-      />
+    <form className={styles.wrapper}>
+      <div>
+        <label htmlFor="email">이메일</label>
+        <LoginInput
+          type="email"
+          name="email"
+          value={email}
+          minLength={5}
+          maxLength={30}
+          onChange={handleEmailChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="email">비밀번호</label>
+        <LoginInput
+          type="password"
+          name="password"
+          value={password}
+          minLength={6}
+          maxLength={15}
+          onChange={handlePasswordChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="email">이름</label>
+        <LoginInput
+          type="text"
+          name="name"
+          value={name}
+          minLength={1}
+          maxLength={20}
+          onChange={handleNameChange}
+        />
+      </div>
       <Button
         value="가입하기"
         color="blue"

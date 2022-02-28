@@ -19,6 +19,7 @@ const useAuthService = (): AuthHandler => {
   const navigate = useNavigate();
 
   const onAuth = (userData: UserData) => {
+    localStorage.setItem('token', userData.token);
     dispatch(fetchUser(userData));
     navigate('/writing');
   };

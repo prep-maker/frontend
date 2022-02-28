@@ -20,7 +20,8 @@ code {
 
 #root {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
 
   /* font*/
   --h1: 3.5rem;

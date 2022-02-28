@@ -1,5 +1,8 @@
 import React, { MouseEvent, useCallback } from 'react';
 import styles from './LoginForm.module.css';
+import LoginInput from '../LoginInput/LoginInput';
+import { LoginInfo } from '../../type';
+import useAuthService from '../../hooks/useAuthService';
 import Button from '../../../../common/components/Button/Button';
 import LinkTo from '../../../../common/components/LinkTo/LinkTo';
 import useInput from '../../../../common/hooks/useInput';
@@ -7,7 +10,6 @@ import {
   validateEmail,
   validatePassword,
 } from '../../../../common/utils/validators';
-import LoginInput from '../LoginInput/LoginInput';
 
 const LoginForm = () => {
   const [email, isEmailValid, handleEmailChange] = useInput('', validateEmail);
@@ -15,9 +17,11 @@ const LoginForm = () => {
     '',
     validatePassword
   );
+  const { onLogin } = useAuthService();
 
-  const handleButtonClick = useCallback((e?: MouseEvent) => {
+  const handleButtonClick = useCallback((user: LoginInfo, e?: MouseEvent) => {
     e?.preventDefault();
+    onLogin(user);
   }, []);
 
   return (
@@ -45,7 +49,7 @@ const LoginForm = () => {
         color="blue"
         size="long"
         disabled={!isPasswordlValid || !isEmailValid}
-        onClick={handleButtonClick}
+        onClick={(e) => handleButtonClick({ email, password }, e)}
       />
       <LinkTo url="/signup" value="회원가입" />
     </form>

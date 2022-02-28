@@ -44,7 +44,7 @@ class HttpClient implements IHttpClient {
 
     try {
       const res: AxiosResponse = await this.client(req);
-      return res.data;
+      return res;
     } catch (error) {
       const err = error as AxiosError;
       if (err.response) {

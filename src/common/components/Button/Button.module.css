@@ -56,9 +56,9 @@
   height: 3rem;
 }
 
-.middle {
-  width: 12rem;
-  height: 2.5rem;
+.full {
+  width: 100%;
+  height: 100%;
 }
 
 .circle {

@@ -5,7 +5,7 @@ import styles from './Button.module.css';
 type ButtonProps = {
   value: string | ReactElement;
   color: 'pink' | 'yellow' | 'green' | 'blue' | 'transparent';
-  size: 'atom' | 'short' | 'middle' | 'long';
+  size: 'atom' | 'short' | 'middle' | 'long' | 'full';
   circle?: boolean;
   onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;

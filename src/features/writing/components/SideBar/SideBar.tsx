@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
-import Button from '../Button/Button';
+import Button from '../../../../common/components/Button/Button';
 import styles from './SideBar.module.css';
 
 type SideBarProps = {

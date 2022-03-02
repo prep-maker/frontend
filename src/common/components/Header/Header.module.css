@@ -21,6 +21,12 @@
   background-color: var(--yellow);
 }
 
+.hamburger {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
 .nav {
   display: flex;
   justify-content: space-around;

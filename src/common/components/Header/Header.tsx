@@ -12,10 +12,13 @@ const cx = classNames.bind(styles);
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const isLoggedIn = !!useAppSelector((state) => state.user.id);
   const isMobile = useMobileQuery();
+  const isLoggedIn = !!useAppSelector((state) => state.user.id);
+
   const location = useLocation();
   const isWritingPage = location.pathname === '/writing';
+  const isAuthPage =
+    location.pathname === '/login' || location.pathname === '/signup';
 
   const handleLogout = useCallback(() => {
     dispatch(logout());
@@ -24,7 +27,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.white}>
-        {isMobile ? (
+        {isMobile && !isAuthPage ? (
           <button className={styles.hamburger}>
             <GiHamburgerMenu size={25} />
           </button>

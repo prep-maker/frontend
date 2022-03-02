@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/useRedux';
 import { alertError } from '../../../features/ui/uiSlice';
 
 const ErrorAlert = () => {
-  const error = useAppSelector((state) => state.ui.error);
+  const error = useAppSelector(({ ui }) => ui.error);
   const dispatch = useAppDispatch();
 
   useEffect(() => {

@@ -9,7 +9,7 @@ import SignupForm from '../features/user/components/SignupForm/SignupForm';
 import RequiredAuth from '../common/components/RequiredAuth/RequiredAuth';
 
 const App = () => {
-  const isLoggedIn = !!useAppSelector((state) => state.user.id);
+  const isLoggedIn = !!useAppSelector(({ user }) => user.id);
 
   return (
     <>

@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 const Header = () => {
   const dispatch = useAppDispatch();
   const isMobile = useMobileQuery();
-  const isLoggedIn = !!useAppSelector((state) => state.user.id);
+  const isLoggedIn = !!useAppSelector(({ user }) => user.id);
 
   const location = useLocation();
   const isWritingPage = location.pathname === '/writing';

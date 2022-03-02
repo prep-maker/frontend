@@ -1,11 +1,11 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from '../pages/Login/Login';
-import ErrorAlert from '../common/components/ErrorAlert/ErrorAlert';
+import { useAppSelector } from '../common/hooks/useRedux';
 import Writing from '../pages/Writing/Writing';
+import ErrorAlert from '../common/components/ErrorAlert/ErrorAlert';
 import LoginForm from '../features/user/components/LoginForm/LoginForm';
 import SignupForm from '../features/user/components/SignupForm/SignupForm';
-import { useAppSelector } from '../common/hooks/useRedux';
 import RequiredAuth from '../common/components/RequiredAuth/RequiredAuth';
 
 const App = () => {

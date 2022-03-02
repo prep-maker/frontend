@@ -23,6 +23,7 @@
 }
 
 .mobile-wrapper {
+  display: none;
   position: fixed;
   z-index: 99;
   max-width: none;
@@ -45,4 +46,8 @@
 .mobile-writing {
   margin: 0;
   border-bottom: var(--border);
+}
+
+.visible {
+  display: block;
 }

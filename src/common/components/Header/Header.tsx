@@ -7,6 +7,7 @@ import styles from './Header.module.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import useMobileQuery from '../../hooks/useMobileQuery';
 import { logout } from '../../../features/user/userSlice';
+import { toggleWritingList } from '../../../features/ui/uiSlice';
 
 const cx = classNames.bind(styles);
 
@@ -23,12 +24,15 @@ const Header = () => {
   const handleLogout = () => {
     dispatch(logout());
   };
+  const handleClickHamburger = () => {
+    dispatch(toggleWritingList());
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.white}>
         {isMobile && !isAuthPage ? (
-          <button className={styles.hamburger}>
+          <button className={styles.hamburger} onClick={handleClickHamburger}>
             <GiHamburgerMenu size={25} />
           </button>
         ) : (

@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type UIState = {
   error: string;
+  showWritingList: boolean;
 };
 
 const initialState: UIState = {
   error: '',
+  showWritingList: false,
 };
 
 export const uiSlice = createSlice({
@@ -15,9 +17,12 @@ export const uiSlice = createSlice({
     alertError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+    toggleWritingList: (state) => {
+      state.showWritingList = !state.showWritingList;
+    },
   },
 });
 
-export const { alertError } = uiSlice.actions;
+export const { alertError, toggleWritingList } = uiSlice.actions;
 
 export default uiSlice.reducer;

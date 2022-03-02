@@ -4,6 +4,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import styles from './WritingList.module.css';
 import useMobileQuery from '../../../../common/hooks/useMobileQuery';
 import Button from '../../../../common/components/Button/Button';
+import { useAppSelector } from '../../../../common/hooks/useRedux';
 
 type WritingListProps = {
   readonly writings: {
@@ -17,9 +18,16 @@ const cx = classNames.bind(styles);
 
 const WritingList = ({ writings }: WritingListProps) => {
   const isMobile = useMobileQuery();
+  const show = useAppSelector(({ ui }) => ui.showWritingList);
 
   return (
-    <aside className={cx('wrapper', { 'mobile-wrapper': isMobile })}>
+    <aside
+      className={cx(
+        'wrapper',
+        { 'mobile-wrapper': isMobile },
+        { visible: show }
+      )}
+    >
       <header className={cx('header', { 'mobile-header': isMobile })}>
         <Button
           border={!isMobile}

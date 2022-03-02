@@ -2,12 +2,12 @@ import { IHttpClient } from '../../network/http';
 import { AxiosResponse } from 'axios';
 import { User, LoginInfo, UserState } from './type';
 
-export interface IAuth {
+export interface IAuthAPI {
   readonly signup: (user: User) => Promise<UserState>;
   readonly login: (user: LoginInfo) => Promise<UserState>;
 }
 
-class AuthAPI implements IAuth {
+class AuthAPI implements IAuthAPI {
   constructor(private http: IHttpClient) {}
 
   signup = async (user: User): Promise<UserState> => {

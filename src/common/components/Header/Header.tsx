@@ -20,9 +20,9 @@ const Header = () => {
   const isAuthPage =
     location.pathname === '/login' || location.pathname === '/signup';
 
-  const handleLogout = useCallback(() => {
+  const handleLogout = () => {
     dispatch(logout());
-  }, []);
+  };
 
   return (
     <header className={styles.header}>

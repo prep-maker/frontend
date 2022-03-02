@@ -34,13 +34,13 @@ code {
 
   /* color */
   --green: #21ffae;
-  --hoverGreen: #21ffae50;
+  --hoverGreen: #a0ffde;
   --pink: #ffc2c2;
-  --hoverPink: #ffc2c250;
+  --hoverPink: #fcdddd;
   --blue: #4c00ff;
   --hoverBlue: #a680ff;
   --yellow: #ffef9d;
-  --hoverYellow: #ffef9d50;
+  --hoverYellow: #fcf6c9;
   --darkGray: #636363;
   --gray: #aeaeae;
   --lightGray: #e0e0e0;

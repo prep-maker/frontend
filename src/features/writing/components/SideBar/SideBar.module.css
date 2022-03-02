@@ -13,7 +13,34 @@
   height: 5rem;
 }
 
+.list {
+  margin: 0;
+}
+
 .writing {
   height: 3rem;
   margin: 1rem 0;
+}
+
+.mobile-wrapper {
+  max-width: none;
+  width: 100%;
+  padding: 0;
+  border: none;
+}
+
+.mobile-header {
+  height: 3rem;
+  border-bottom: var(--border);
+  background-color: var(--green);
+  transition: background-color 200ms ease-in-out;
+}
+
+.mobile-header:hover {
+  background-color: var(--hoverGreen);
+}
+
+.mobile-writing {
+  margin: 0;
+  border-bottom: var(--border);
 }

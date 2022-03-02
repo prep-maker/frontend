@@ -1,7 +1,9 @@
 import React from 'react';
+import classNames from 'classnames/bind';
 import { AiOutlinePlus } from 'react-icons/ai';
-import Button from '../../../../common/components/Button/Button';
 import styles from './SideBar.module.css';
+import useMobileQuery from '../../../../common/hooks/useMobileQuery';
+import Button from '../../../../common/components/Button/Button';
 
 type SideBarProps = {
   readonly writings: {
@@ -10,22 +12,31 @@ type SideBarProps = {
   }[];
 };
 
+const cx = classNames.bind(styles);
+
 const SideBar = ({ writings }: SideBarProps) => {
+  const isMobile = useMobileQuery();
+
   return (
-    <aside className={styles.wrapper}>
-      <header className={styles.header}>
+    <aside className={cx('wrapper', { 'mobile-wrapper': isMobile })}>
+      <header className={cx('header', { 'mobile-header': isMobile })}>
         <Button
-          value={<AiOutlinePlus />}
-          circle={true}
-          size="middle"
+          border={!isMobile}
+          value={isMobile ? '새 글 작성' : <AiOutlinePlus />}
+          circle={!isMobile}
+          size={isMobile ? 'full' : 'middle'}
           color="green"
           onClick={() => {}}
         />
       </header>
-      <ul>
+      <ul className={styles.list}>
         {writings.map((writing) => (
-          <li key={writing.id} className={styles.writing}>
+          <li
+            key={writing.id}
+            className={cx('writing', { 'mobile-writing': isMobile })}
+          >
             <Button
+              border={!isMobile}
               value={writing.title}
               color="transparent"
               size="full"

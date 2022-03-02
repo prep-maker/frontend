@@ -8,7 +8,7 @@ export const initialState: UserState = {
   token: '',
 };
 
-export const uiSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
@@ -18,6 +18,6 @@ export const uiSlice = createSlice({
   },
 });
 
-export const { fetchUser } = uiSlice.actions;
+export const { fetchUser } = userSlice.actions;
 
-export default uiSlice.reducer;
+export default userSlice.reducer;

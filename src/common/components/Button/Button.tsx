@@ -9,6 +9,7 @@ type ButtonProps = {
   circle?: boolean;
   onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
+  border?: boolean;
 };
 
 const cn = classNames.bind(styles);
@@ -20,10 +21,17 @@ const Button = ({
   circle = false,
   onClick,
   disabled = false,
+  border = true,
 }: ButtonProps) => {
   return (
     <button
-      className={cn('button', color, size, { circle: circle })}
+      className={cn(
+        'button',
+        color,
+        size,
+        { circle },
+        { 'no-border': !border }
+      )}
       onClick={onClick}
       disabled={disabled}
     >

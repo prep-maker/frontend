@@ -1,4 +1,7 @@
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: var(--border);
   border-radius: 0.5rem;
   font-size: var(--h5);
@@ -40,7 +43,21 @@
   color: white;
 }
 
+.transparent {
+  background-color: transparent;
+}
+
+.transparent:hover {
+  background-color: var(--lightGray);
+}
+
 .long {
   width: 20rem;
   height: 3rem;
+}
+
+.circle {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
 }

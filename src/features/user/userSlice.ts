@@ -12,12 +12,15 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    fetchUser: (state, action: PayloadAction<UserState>) => {
-      state = action.payload;
+    setUser: (state, action: PayloadAction<UserState>) => {
+      state.id = action.payload.id;
+      state.email = action.payload.email;
+      state.name = action.payload.name;
+      state.token = action.payload.token;
     },
   },
 });
 
-export const { fetchUser } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

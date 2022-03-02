@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthAPI from '../api';
 import { LoginInfo, User, UserState } from '../type';
-import { fetchUser } from '../userSlice';
+import { setUser } from '../userSlice';
 import { alertError } from '../../ui/uiSlice';
 import { useAppDispatch } from '../../../common/hooks/useRedux';
 import useApi from '../../../common/hooks/useApi';
@@ -19,7 +19,7 @@ const useAuthService = (): AuthHandler => {
   const navigate = useNavigate();
 
   const onAuth = (userResponse: UserState) => {
-    dispatch(fetchUser(userResponse));
+    dispatch(setUser(userResponse));
     navigate('/writing');
   };
 

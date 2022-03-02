@@ -8,7 +8,7 @@ import SignupForm from '../features/user/components/SignupForm/SignupForm';
 import { useAppSelector } from '../common/hooks/useRedux';
 
 const App = () => {
-  const userId: string = useAppSelector((state) => state.user.id);
+  const isLoggedIn = !!useAppSelector((state) => state.user.id);
 
   return (
     <>
@@ -17,7 +17,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            userId ? (
+            isLoggedIn ? (
               <Navigate replace to="/writing" />
             ) : (
               <Navigate replace to="/login" />

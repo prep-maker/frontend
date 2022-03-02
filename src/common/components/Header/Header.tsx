@@ -24,7 +24,13 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.white}>
-        {isMobile ? <GiHamburgerMenu /> : <div>PREP Maker</div>}
+        {isMobile ? (
+          <button className={styles.hamburger}>
+            <GiHamburgerMenu size={25} />
+          </button>
+        ) : (
+          <div>PREP Maker</div>
+        )}
         {isLoggedIn && (
           <>
             <nav className={styles.nav}>

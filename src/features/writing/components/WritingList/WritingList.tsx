@@ -5,7 +5,7 @@ import styles from './WritingList.module.css';
 import useMobileQuery from '../../../../common/hooks/useMobileQuery';
 import Button from '../../../../common/components/Button/Button';
 
-type SideBarProps = {
+type WritingListProps = {
   readonly writings: {
     id: string;
     title: string;
@@ -15,10 +15,10 @@ type SideBarProps = {
 
 const cx = classNames.bind(styles);
 
-const SideBar = ({ writings, show = true }: SideBarProps) => {
+const WritingList = ({ writings }: WritingListProps) => {
   const isMobile = useMobileQuery();
 
-  return show ? (
+  return (
     <aside className={cx('wrapper', { 'mobile-wrapper': isMobile })}>
       <header className={cx('header', { 'mobile-header': isMobile })}>
         <Button
@@ -47,7 +47,7 @@ const SideBar = ({ writings, show = true }: SideBarProps) => {
         ))}
       </ul>
     </aside>
-  ) : null;
+  );
 };
 
-export default SideBar;
+export default WritingList;

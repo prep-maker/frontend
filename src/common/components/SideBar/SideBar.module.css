@@ -1,0 +1,19 @@
+.wrapper {
+  max-width: 15rem;
+  flex: 1;
+  padding: 1rem;
+  border: var(--border);
+  border-top: none;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 5rem;
+}
+
+.writing {
+  height: 3rem;
+  margin: 1rem 0;
+}

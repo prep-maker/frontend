@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import { AiOutlinePlus } from 'react-icons/ai';
-import styles from './SideBar.module.css';
+import styles from './WritingList.module.css';
 import useMobileQuery from '../../../../common/hooks/useMobileQuery';
 import Button from '../../../../common/components/Button/Button';
 
@@ -10,14 +10,15 @@ type SideBarProps = {
     id: string;
     title: string;
   }[];
+  show?: boolean;
 };
 
 const cx = classNames.bind(styles);
 
-const SideBar = ({ writings }: SideBarProps) => {
+const SideBar = ({ writings, show = true }: SideBarProps) => {
   const isMobile = useMobileQuery();
 
-  return (
+  return show ? (
     <aside className={cx('wrapper', { 'mobile-wrapper': isMobile })}>
       <header className={cx('header', { 'mobile-header': isMobile })}>
         <Button
@@ -46,7 +47,7 @@ const SideBar = ({ writings }: SideBarProps) => {
         ))}
       </ul>
     </aside>
-  );
+  ) : null;
 };
 
 export default SideBar;

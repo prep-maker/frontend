@@ -23,6 +23,8 @@
 }
 
 .mobile-wrapper {
+  position: fixed;
+  z-index: 99;
   max-width: none;
   width: 100%;
   padding: 0;

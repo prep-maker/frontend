@@ -6,7 +6,7 @@ import Writing from '../pages/Writing/Writing';
 import ErrorAlert from '../common/components/ErrorAlert/ErrorAlert';
 import LoginForm from '../features/user/components/LoginForm/LoginForm';
 import SignupForm from '../features/user/components/SignupForm/SignupForm';
-import RequiredAuth from '../common/components/RequiredAuth/RequiredAuth';
+import AuthRequired from '../common/components/AuthRequired/AuthRequired';
 
 const App = () => {
   const isLoggedIn = !!useAppSelector(({ user }) => user.id);
@@ -32,9 +32,9 @@ const App = () => {
         <Route
           path="/writing"
           element={
-            <RequiredAuth>
+            <AuthRequired>
               <Writing />
-            </RequiredAuth>
+            </AuthRequired>
           }
         />
         <Route path="/review" />

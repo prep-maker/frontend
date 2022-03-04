@@ -1,10 +1,6 @@
 export const validateEmail = (email: string): boolean => {
   email.trim();
-  if (email.length < 5) {
-    return false;
-  }
-
-  if (email.length > 30) {
+  if (email.length < 5 || email.length > 30) {
     return false;
   }
 
@@ -20,11 +16,7 @@ export const validateEmail = (email: string): boolean => {
 
 export const validatePassword = (password: string): boolean => {
   password.trim();
-  if (password.length < 6) {
-    return false;
-  }
-
-  if (password.length > 15) {
+  if (password.length < 6 || password.length > 15) {
     return false;
   }
 
@@ -34,6 +26,15 @@ export const validatePassword = (password: string): boolean => {
 export const validateName = (name: string): boolean => {
   name.trim();
   if (name.length > 20) {
+    return false;
+  }
+
+  return true;
+};
+
+export const validateTitle = (title: string): boolean => {
+  title.trim();
+  if (title.length > 100 || title.length < 1) {
     return false;
   }
 

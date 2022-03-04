@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { deleteFromStore } from '../../common/utils/store';
 import { NormalizedObjects } from '../../common/types/state';
 import {
   fetchEditingByUserId,
@@ -48,14 +49,18 @@ export const writingsSlice = createSlice({
       })
       .addCase(updateWriting.fulfilled, (state, action) => {
         const { id, title, isDone } = action.payload;
+
+        if (isDone) {
+          deleteFromStore(state, id);
+          return;
+        }
+
         state.byId[id].title = title;
         state.byId[id].isDone = isDone;
       })
       .addCase(deleteWriting.fulfilled, (state, action) => {
         const writingId = action.payload;
-        delete state.byId[writingId];
-        state.allIds = state.allIds.filter((id) => id !== writingId);
-        state.current = state.allIds[state.allIds.length - 1];
+        deleteFromStore(state, writingId);
       })
       .addCase(createWriting.fulfilled, (state, action) => {
         const { id, title, isDone } = action.payload;

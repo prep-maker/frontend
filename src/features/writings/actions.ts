@@ -2,20 +2,24 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IWritingAPI, WritingResponse } from './writingAPI';
 import { Writing } from './writingsSlice';
 
+type WritingExtraConfig = { extra: { writingAPI: IWritingAPI } };
+
 export const fetchEditingByUserId = createAsyncThunk<
   WritingResponse[],
   string,
-  { extra: { writingAPI: IWritingAPI } }
+  WritingExtraConfig
 >('writings/fetchEditingByUserIdStatus', async (userId: string, { extra }) => {
   const result = await extra.writingAPI.getEditingByUserId(userId);
 
   return result;
 });
 
+type UpdateArg = { userId: string; writing: Omit<Writing, 'blocks'> };
+
 export const updateWriting = createAsyncThunk<
   WritingResponse,
-  { userId: string; writing: Omit<Writing, 'blocks'> },
-  { extra: { writingAPI: IWritingAPI } }
+  UpdateArg,
+  WritingExtraConfig
 >('writings/updateTitleStatus', async ({ userId, writing }, { extra }) => {
   const result = await extra.writingAPI.update(userId, writing);
 

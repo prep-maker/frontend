@@ -3,7 +3,7 @@ import WritingList from '../../features/writings/components/WritingList/WritingL
 import Header from '../../common/components/Header/Header';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/useRedux';
 import useWritings from '../../features/writings/hooks/useWritings';
-import { fetchEditingWritingsByUserId } from '../../features/writings/writingsSlice';
+import { fetchEditingByUserId } from '../../features/writings/writingsSlice';
 import styles from './Writing.module.css';
 import WritingSkeleton from './WritingSkeleton';
 import WritingTitle from '../../features/writings/components/WritingTitle/WritingTitle';
@@ -16,7 +16,7 @@ const Writing = () => {
   const writings = useWritings();
 
   useEffect(() => {
-    dispatch(fetchEditingWritingsByUserId(userId));
+    dispatch(fetchEditingByUserId(userId));
   }, [userId]);
 
   return (

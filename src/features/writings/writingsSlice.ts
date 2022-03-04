@@ -15,7 +15,7 @@ const initialState: NormalizedObjects<Writing> & { current: string } = {
   current: '',
 };
 
-export const fetchEditingWritingsByUserId = createAsyncThunk<
+export const fetchEditingByUserId = createAsyncThunk<
   WritingResponse[],
   string,
   { extra: { writingAPI: IWritingAPI } }
@@ -30,7 +30,7 @@ export const writingsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchEditingWritingsByUserId.fulfilled, (state, action) => {
+    builder.addCase(fetchEditingByUserId.fulfilled, (state, action) => {
       const writings = action.payload;
       const ids = writings.map((writing) => writing.id);
       state.allIds = ids;

@@ -3,7 +3,9 @@ import classNames from 'classnames/bind';
 import { AiOutlinePlus } from 'react-icons/ai';
 import styles from './WritingList.module.css';
 import useMobileQuery from '../../../../common/hooks/useMobileQuery';
-import Button from '../../../../common/components/Button/Button';
+import Button, {
+  ButtonSkeleton,
+} from '../../../../common/components/Button/Button';
 import { useAppSelector } from '../../../../common/hooks/useRedux';
 
 type WritingListProps = {
@@ -58,4 +60,33 @@ const WritingList = ({ writings }: WritingListProps) => {
   );
 };
 
+export const WritingListSkeleton = () => {
+  const isMobile = useMobileQuery();
+  const show = useAppSelector(({ ui }) => ui.show.writingList);
+
+  return (
+    <aside
+      className={cx(
+        'wrapper',
+        { 'mobile-wrapper': isMobile },
+        { visible: show }
+      )}
+    >
+      <header className={cx('header', { 'mobile-header': isMobile })}>
+        <ButtonSkeleton
+          size={isMobile ? 'full' : 'middle'}
+          circle={!isMobile}
+        />
+      </header>
+      <ul className={styles.list}>
+        <li className={styles.writing}>
+          <ButtonSkeleton size="full" />
+        </li>
+        <li className={styles.writing}>
+          <ButtonSkeleton size="full" />
+        </li>
+      </ul>
+    </aside>
+  );
+};
 export default WritingList;

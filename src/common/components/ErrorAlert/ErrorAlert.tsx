@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import styles from './ErrorAlert.module.css';
 import { useAppSelector, useAppDispatch } from '../../hooks/useRedux';
-import { alertError } from '../../../features/ui/uiSlice';
+import { clearError } from '../../../features/ui/uiSlice';
 
 const ErrorAlert = () => {
   const error = useAppSelector(({ ui }) => ui.error);
@@ -12,12 +12,12 @@ const ErrorAlert = () => {
 
     if (error) {
       timer = setTimeout(() => {
-        dispatch(alertError(''));
-      }, 3000);
+        dispatch(clearError());
+      }, 1000);
     }
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [error]);
 
   return <div>{error && <div className={styles.banner}>{error}</div>}</div>;
 };

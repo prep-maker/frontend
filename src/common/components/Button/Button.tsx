@@ -4,7 +4,7 @@ import styles from './Button.module.css';
 
 type ButtonProps = {
   value: string | ReactElement;
-  color: 'pink' | 'yellow' | 'green' | 'blue' | 'transparent';
+  color: 'pink' | 'yellow' | 'green' | 'blue' | 'transparent' | 'gray';
   size: 'atom' | 'short' | 'middle' | 'long' | 'full';
   circle?: boolean;
   onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void;
@@ -37,6 +37,28 @@ const Button = ({
     >
       {value}
     </button>
+  );
+};
+
+type ButtonSkeletonProps = {
+  size: 'atom' | 'short' | 'middle' | 'long' | 'full';
+  circle?: boolean;
+};
+
+export const ButtonSkeleton = ({
+  size,
+  circle = false,
+}: ButtonSkeletonProps) => {
+  return (
+    <Button
+      value=""
+      color="gray"
+      size={size}
+      circle={circle}
+      onClick={() => {}}
+      disabled={true}
+      border={false}
+    />
   );
 };
 

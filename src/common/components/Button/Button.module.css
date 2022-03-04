@@ -51,6 +51,10 @@
   background-color: var(--lightGray);
 }
 
+.gray {
+  background-color: var(--lightGray);
+}
+
 .long {
   width: 20rem;
   height: 3rem;

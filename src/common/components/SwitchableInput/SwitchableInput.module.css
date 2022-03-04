@@ -1,0 +1,16 @@
+.wrapper {
+  text-align: center;
+  max-width: 100%;
+}
+
+.input {
+  border: none;
+  border-bottom: 2px solid black;
+  outline: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.input:focus {
+  border-bottom: 2px solid var(--blue);
+}

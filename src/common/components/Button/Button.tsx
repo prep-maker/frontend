@@ -4,7 +4,14 @@ import styles from './Button.module.css';
 
 type ButtonProps = {
   value: string | ReactElement;
-  color: 'pink' | 'yellow' | 'green' | 'blue' | 'transparent' | 'gray';
+  color:
+    | 'pink'
+    | 'yellow'
+    | 'green'
+    | 'blue'
+    | 'transparent'
+    | 'gray'
+    | 'magenta';
   size: 'atom' | 'short' | 'middle' | 'long' | 'full';
   circle?: boolean;
   onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void;

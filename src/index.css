@@ -45,6 +45,8 @@ code {
   --gray: #aeaeae;
   --lightGray: #e0e0e0;
   --red: #e72a00;
+  --magenta: #f178b6;
+  --magentaHover: #fd9bcc;
 
   /* border */
   --border: 1px solid black;

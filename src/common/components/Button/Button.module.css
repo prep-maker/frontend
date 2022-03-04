@@ -51,6 +51,15 @@
   background-color: var(--lightGray);
 }
 
+.magenta {
+  background-color: var(--magenta);
+  color: white;
+}
+
+.magenta:hover {
+  background-color: var(--magentaHover);
+}
+
 .gray {
   background-color: var(--lightGray);
 }
@@ -58,6 +67,16 @@
 .long {
   width: 20rem;
   height: 3rem;
+}
+
+.middle {
+  width: 6.5rem;
+  height: 2.5rem;
+}
+
+.short {
+  width: 5.5rem;
+  height: 2.5rem;
 }
 
 .full {

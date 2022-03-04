@@ -8,6 +8,7 @@ import styles from './Writing.module.css';
 import WritingSkeleton from './WritingSkeleton';
 import WritingTitle from '../../features/writings/components/WritingTitle/WritingTitle';
 import Button from '../../common/components/Button/Button';
+import WritingFooter from '../../features/writings/components/WritingFooter/WritingFooter';
 
 const Writing = () => {
   const dispatch = useAppDispatch();
@@ -30,28 +31,7 @@ const Writing = () => {
           <section className={styles.writing}>
             <WritingTitle />
             <div className={styles.editor} />
-            <div className={styles.buttons}>
-              <Button
-                value="삭제"
-                color="magenta"
-                size="short"
-                onClick={() => {}}
-              />
-              <div className={styles.row}>
-                <Button
-                  value="완료"
-                  color="yellow"
-                  size="short"
-                  onClick={() => {}}
-                />
-                <Button
-                  value="저장"
-                  color="blue"
-                  size="short"
-                  onClick={() => {}}
-                />
-              </div>
-            </div>
+            <WritingFooter />
           </section>
         </main>
       )}

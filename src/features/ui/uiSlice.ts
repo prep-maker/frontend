@@ -1,7 +1,15 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  ActionReducerMapBuilder,
+  AsyncThunk,
+  createSlice,
+} from '@reduxjs/toolkit';
+import { login, signup } from '../user/userSlice';
+import { IAuthAPI } from '../user/authAPI';
 
 type UIState = {
   error?: string;
+  loading: 'idle' | 'pending';
+  currentRequestId?: string;
   show: {
     writingList: boolean;
   };
@@ -9,6 +17,8 @@ type UIState = {
 
 const initialState: UIState = {
   error: undefined,
+  loading: 'idle',
+  currentRequestId: undefined,
   show: {
     writingList: false,
   },
@@ -25,9 +35,40 @@ export const uiSlice = createSlice({
       state.error = '';
     },
   },
+  extraReducers: (builder) => {
+    handleThunkStatus(builder, login);
+    handleThunkStatus(builder, signup);
+  },
 });
 
-export const { alertError, toggleWritingList } = uiSlice.actions;
+const handleThunkStatus = <Returned, ThunkArg>(
+  builder: ActionReducerMapBuilder<UIState>,
+  thunk: AsyncThunk<Returned, ThunkArg, { extra: { authAPI: IAuthAPI } }>
+) => {
+  builder
+    .addCase(thunk.pending, (state, action) => {
+      if (state.loading === 'idle') {
+        state.loading = 'pending';
+        state.currentRequestId = action.meta.requestId;
+      }
+    })
+    .addCase(thunk.fulfilled, (state, action) => {
+      const { requestId } = action.meta;
+      if (state.loading === 'pending' && state.currentRequestId === requestId) {
+        state.loading = 'idle';
+        state.currentRequestId = undefined;
+      }
+    })
+    .addCase(thunk.rejected, (state, action) => {
+      const { requestId } = action.meta;
+      if (state.loading === 'pending' && state.currentRequestId === requestId) {
+        state.loading = 'idle';
+        state.error = action.error.message;
+        state.currentRequestId = undefined;
+      }
+    });
+};
+
 export const { toggleWritingList, clearError } = uiSlice.actions;
 
 export default uiSlice.reducer;

@@ -6,7 +6,7 @@ import axios, {
 } from 'axios';
 
 type ClientOption<T> = {
-  body: T;
+  body?: T;
   method: 'get' | 'post' | 'put' | 'delete';
 };
 

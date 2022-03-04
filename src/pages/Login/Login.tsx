@@ -1,15 +1,23 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import styles from './Login.module.css';
 import Header from '../../common/components/Header/Header';
+import { useAppSelector } from '../../common/hooks/useRedux';
 
 const Login = () => {
+  const isLoggedIn = !!useAppSelector(({ user }) => user.id);
   return (
     <>
-      <Header />
-      <main className={styles.main}>
-        <Outlet />
-      </main>
+      {isLoggedIn ? (
+        <Navigate to="/writing" />
+      ) : (
+        <>
+          <Header />
+          <main className={styles.main}>
+            <Outlet />
+          </main>
+        </>
+      )}
     </>
   );
 };

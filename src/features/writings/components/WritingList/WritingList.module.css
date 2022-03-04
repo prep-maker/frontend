@@ -1,6 +1,5 @@
 .wrapper {
-  max-width: 15rem;
-  flex: 1;
+  width: 15rem;
   padding: 1rem;
   border: var(--border);
   border-top: none;

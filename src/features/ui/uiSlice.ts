@@ -4,7 +4,7 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 import { login, signup } from '../user/userSlice';
-import { IAuthAPI } from '../user/authAPI';
+import { fetchEditingWritingsByUserId } from '../writings/writingsSlice';
 
 type UIState = {
   error?: string;
@@ -38,12 +38,13 @@ export const uiSlice = createSlice({
   extraReducers: (builder) => {
     handleThunkStatus(builder, login);
     handleThunkStatus(builder, signup);
+    handleThunkStatus(builder, fetchEditingWritingsByUserId);
   },
 });
 
-const handleThunkStatus = <Returned, ThunkArg>(
+const handleThunkStatus = <Returned, ThunkArg, API>(
   builder: ActionReducerMapBuilder<UIState>,
-  thunk: AsyncThunk<Returned, ThunkArg, { extra: { authAPI: IAuthAPI } }>
+  thunk: AsyncThunk<Returned, ThunkArg, { extra: API }>
 ) => {
   builder
     .addCase(thunk.pending, (state, action) => {

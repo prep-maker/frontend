@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { IAuthAPI } from './authAPI';
 import { LoginInfo, User, UserState } from './type';

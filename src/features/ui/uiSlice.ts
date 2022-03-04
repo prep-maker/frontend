@@ -3,11 +3,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 type UIState = {
   error: string;
   showWritingList: boolean;
+  show: {
+    writingList: boolean;
+  };
 };
 
 const initialState: UIState = {
   error: '',
   showWritingList: false,
+  show: {
+    writingList: false,
+  },
 };
 
 export const uiSlice = createSlice({
@@ -18,7 +24,7 @@ export const uiSlice = createSlice({
       state.error = action.payload;
     },
     toggleWritingList: (state) => {
-      state.showWritingList = !state.showWritingList;
+      state.show.writingList = !state.show.writingList;
     },
   },
 });

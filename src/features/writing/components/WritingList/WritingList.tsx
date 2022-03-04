@@ -18,7 +18,7 @@ const cx = classNames.bind(styles);
 
 const WritingList = ({ writings }: WritingListProps) => {
   const isMobile = useMobileQuery();
-  const show = useAppSelector(({ ui }) => ui.showWritingList);
+  const show = useAppSelector(({ ui }) => ui.show.writingList);
 
   return (
     <aside

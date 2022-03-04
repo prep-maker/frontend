@@ -6,7 +6,7 @@ import useCurrentWriting from '../../hooks/useCurrentWriting';
 import styles from './WritingTitle.module.css';
 
 const WritingTitle = () => {
-  const title = useCurrentWriting().title;
+  const title = useCurrentWriting()?.title;
   const [value, isValid, onChange] = useInput(title, validateTitle);
   const handleEnter = () => {
     if (!isValid) {

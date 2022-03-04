@@ -43,11 +43,11 @@
   color: white;
 }
 
-.transparent {
-  background-color: transparent;
+.white {
+  background-color: white;
 }
 
-.transparent:hover {
+.white:hover {
   background-color: var(--lightGray);
 }
 

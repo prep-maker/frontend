@@ -49,7 +49,7 @@ const WritingList = ({ writings }: WritingListProps) => {
             <Button
               border={!isMobile}
               value={writing.title}
-              color="transparent"
+              color="white"
               size="full"
               onClick={() => {}}
             />

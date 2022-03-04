@@ -13,6 +13,10 @@ const WritingFooter = () => {
   const writing = useCurrentWriting();
   const userId = useAppSelector(({ user }) => user.id);
 
+  if (!writing) {
+    return <WritingFooterSkeleton />;
+  }
+
   const handleDelete = () => {
     dispatch(deleteWriting({ userId, writingId: writing.id }));
   };
@@ -44,6 +48,27 @@ const WritingFooter = () => {
           />
         </div>
         <Button value="저장" color="blue" size="short" onClick={() => {}} />
+      </div>
+    </div>
+  );
+};
+
+export const WritingFooterSkeleton = () => {
+  const ButtonSkeleton = (
+    <Button
+      value=""
+      color="gray"
+      size="short"
+      border={false}
+      onClick={() => {}}
+    />
+  );
+  return (
+    <div className={styles.wrapper}>
+      {ButtonSkeleton}
+      <div className={styles.column}>
+        <div className={styles.middle}>{ButtonSkeleton}</div>
+        {ButtonSkeleton}
       </div>
     </div>
   );

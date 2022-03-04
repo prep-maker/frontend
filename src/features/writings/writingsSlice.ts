@@ -18,7 +18,12 @@ const initialState: NormalizedObjects<Writing> & { current: string } = {
 export const writingsSlice = createSlice({
   name: 'writing',
   initialState,
-  reducers: {},
+  reducers: {
+    pickWriting: (state, action) => {
+      const writingId: string = action.payload;
+      state.current = writingId;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchEditingByUserId.fulfilled, (state, action) => {
@@ -43,5 +48,7 @@ export const writingsSlice = createSlice({
       });
   },
 });
+
+export const { pickWriting } = writingsSlice.actions;
 
 export default writingsSlice.reducer;

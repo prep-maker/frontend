@@ -1,12 +1,16 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import { AiOutlinePlus } from 'react-icons/ai';
-import styles from './WritingList.module.css';
 import useMobileQuery from '../../../../common/hooks/useMobileQuery';
 import Button, {
   ButtonSkeleton,
 } from '../../../../common/components/Button/Button';
-import { useAppSelector } from '../../../../common/hooks/useRedux';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../common/hooks/useRedux';
+import { pickWriting } from '../../writingsSlice';
+import styles from './WritingList.module.css';
 
 type WritingListProps = {
   readonly writings: {
@@ -21,6 +25,11 @@ const cx = classNames.bind(styles);
 const WritingList = ({ writings }: WritingListProps) => {
   const isMobile = useMobileQuery();
   const show = useAppSelector(({ ui }) => ui.show.writingList);
+  const dispatch = useAppDispatch();
+
+  const handleClick = (writingId: string) => {
+    dispatch(pickWriting(writingId));
+  };
 
   return (
     <aside
@@ -51,7 +60,7 @@ const WritingList = ({ writings }: WritingListProps) => {
               value={writing.title}
               color="white"
               size="full"
-              onClick={() => {}}
+              onClick={() => handleClick(writing.id)}
             />
           </li>
         ))}
@@ -59,6 +68,8 @@ const WritingList = ({ writings }: WritingListProps) => {
     </aside>
   );
 };
+
+export default WritingList;
 
 export const WritingListSkeleton = () => {
   const isMobile = useMobileQuery();
@@ -89,4 +100,3 @@ export const WritingListSkeleton = () => {
     </aside>
   );
 };
-export default WritingList;

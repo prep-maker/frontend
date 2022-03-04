@@ -8,7 +8,8 @@ import {
   validateName,
 } from '../../../../common/utils/validators';
 import Button from '../../../../common/components/Button/Button';
-import useAuthService from '../../hooks/useAuthService';
+import { useAppDispatch } from '../../../../common/hooks/useRedux';
+import { signup } from '../../userSlice';
 
 const SignupForm = () => {
   const [email, isEmailValid, handleEmailChange] = useInput('', validateEmail);
@@ -17,10 +18,11 @@ const SignupForm = () => {
     validatePassword
   );
   const [name, isNameValid, handleNameChange] = useInput('', validateName);
-  const { onSignup } = useAuthService();
+
+  const dispatch = useAppDispatch();
   const handleButtonClick = (e?: MouseEvent) => {
     e?.preventDefault();
-    onSignup({ email, password, name });
+    dispatch(signup({ email, password, name }));
   };
 
   return (

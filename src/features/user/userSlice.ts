@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UserState } from './type';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { WritableDraft } from 'immer/dist/internal';
+import { IAuthAPI } from './authAPI';
+import { LoginInfo, User, UserState } from './type';
 
 export const initialState: UserState = {
   id: '',
@@ -8,16 +10,30 @@ export const initialState: UserState = {
   token: '',
 };
 
+export const login = createAsyncThunk<
+  UserState,
+  LoginInfo,
+  { extra: { authAPI: IAuthAPI } }
+>('user/loginStatus', async (user, { extra }) => {
+  const result = await extra.authAPI.login(user);
+
+  return result;
+});
+
+export const signup = createAsyncThunk<
+  UserState,
+  User,
+  { extra: { authAPI: IAuthAPI } }
+>('user/logoutStatus', async (user, { extra }) => {
+  const result = await extra.authAPI.signup(user);
+
+  return result;
+});
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<UserState>) => {
-      state.id = action.payload.id;
-      state.email = action.payload.email;
-      state.name = action.payload.name;
-      state.token = action.payload.token;
-    },
     logout: (state) => {
       state.id = '';
       state.email = '';
@@ -25,8 +41,27 @@ export const userSlice = createSlice({
       state.token = '';
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(login.fulfilled, (state, action) => {
+        const user: UserState = action.payload;
+        setUser(state, user);
+      })
+      .addCase(signup.fulfilled, (state, action) => {
+        const user: UserState = action.payload;
+        setUser(state, user);
+      });
+  },
 });
 
-export const { login, logout } = userSlice.actions;
+const setUser = (state: WritableDraft<UserState>, user: UserState) => {
+  const { email, id, name, token } = user;
+  state.id = id;
+  state.email = email;
+  state.name = name;
+  state.token = token;
+};
+
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

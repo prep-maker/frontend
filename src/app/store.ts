@@ -4,13 +4,16 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import uiReducer from '../features/ui/uiSlice';
 import userReducer from '../features/user/userSlice';
+import writingsReducer from '../features/writings/writingsSlice';
 import AuthAPI from '../features/user/authAPI';
 import HttpClient from '../network/http';
 import config from '../common/utils/config';
+import WritingAPI from '../features/writings/writingAPI';
 
 const reducers = combineReducers({
   ui: uiReducer,
   user: userReducer,
+  writings: writingsReducer,
 });
 
 const persisitConfig = {
@@ -22,6 +25,7 @@ const persistedReducer = persistReducer(persisitConfig, reducers);
 
 const http = HttpClient.getHttp(config.baseUrl);
 const authAPI = new AuthAPI(http);
+const writingAPI = new WritingAPI(http);
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -30,6 +34,7 @@ export const store = configureStore({
       thunk: {
         extraArgument: {
           authAPI,
+          writingAPI,
         },
       },
     }).concat(logger),

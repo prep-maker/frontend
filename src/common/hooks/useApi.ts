@@ -1,8 +1,9 @@
 import { IAuthAPI } from '../../features/user/authAPI';
+import { IWritingAPI } from '../../features/writings/writingAPI';
 import HttpClient, { IHttpClient } from '../../network/http';
 import config from '../utils/config';
 
-export type API = IAuthAPI;
+export type API = IAuthAPI | IWritingAPI;
 
 interface APIConstructable {
   new (http: IHttpClient): API;

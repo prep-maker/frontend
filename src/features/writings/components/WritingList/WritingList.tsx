@@ -11,6 +11,7 @@ import {
 } from '../../../../common/hooks/useRedux';
 import { pickWriting } from '../../writingsSlice';
 import styles from './WritingList.module.css';
+import { createWriting } from '../../actions';
 
 type WritingListProps = {
   readonly writings: {
@@ -27,8 +28,14 @@ const WritingList = ({ writings }: WritingListProps) => {
   const show = useAppSelector(({ ui }) => ui.show.writingList);
   const dispatch = useAppDispatch();
 
-  const handleClick = (writingId: string) => {
+  const handlePickWriting = (writingId: string) => {
     dispatch(pickWriting(writingId));
+  };
+
+  const userId = useAppSelector(({ user }) => user.id);
+
+  const handleCreate = () => {
+    dispatch(createWriting(userId));
   };
 
   return (
@@ -46,7 +53,7 @@ const WritingList = ({ writings }: WritingListProps) => {
           circle={!isMobile}
           size={isMobile ? 'full' : 'middle'}
           color="green"
-          onClick={() => {}}
+          onClick={handleCreate}
         />
       </header>
       <ul className={styles.list}>
@@ -60,7 +67,7 @@ const WritingList = ({ writings }: WritingListProps) => {
               value={writing.title}
               color="white"
               size="full"
-              onClick={() => handleClick(writing.id)}
+              onClick={() => handlePickWriting(writing.id)}
             />
           </li>
         ))}

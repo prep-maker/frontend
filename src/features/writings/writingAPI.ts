@@ -27,6 +27,7 @@ export interface IWritingAPI {
     writing: Omit<Writing, 'blocks'>
   ) => Promise<WritingResponse>;
   readonly delete: (userId: string, writingId: string) => Promise<void>;
+  readonly create: (userId: string) => Promise<WritingResponse>;
 }
 
 class WritingAPI implements IWritingAPI {
@@ -70,6 +71,15 @@ class WritingAPI implements IWritingAPI {
     await this.http.fetch(`/users/${userId}/writings/${writingId}`, {
       method: 'delete',
     });
+  };
+
+  create = async (userId: string) => {
+    const result: AxiosResponse<WritingResponse> = await this.http.fetch(
+      `users/${userId}/writings`,
+      { method: 'post' }
+    );
+
+    return result.data;
   };
 }
 

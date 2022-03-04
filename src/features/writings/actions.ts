@@ -37,3 +37,13 @@ export const deleteWriting = createAsyncThunk<
 
   return writingId;
 });
+
+export const createWriting = createAsyncThunk<
+  WritingResponse,
+  string,
+  WritingExtraConfig
+>('writings/createStatus', async (userId, { extra }) => {
+  const result = await extra.writingAPI.create(userId);
+
+  return result;
+});

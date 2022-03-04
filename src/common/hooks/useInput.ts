@@ -1,14 +1,14 @@
 import React, { useState, useCallback } from 'react';
 
-const useInput = <T>(
-  initialValue: T,
-  validate: (value: T) => boolean
-): [T, boolean, React.FormEventHandler, () => void] => {
+const useInput = (
+  initialValue: string,
+  validate: (value: string) => boolean
+): [string, boolean, React.FormEventHandler, () => void] => {
   const [value, setValue] = useState(initialValue);
   const [isValid, setIsValid] = useState(false);
 
-  const handleChange = useCallback((e) => {
-    const { value } = e.target;
+  const handleChange = useCallback((e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
 
     if (validate(value)) {
       setIsValid(true);

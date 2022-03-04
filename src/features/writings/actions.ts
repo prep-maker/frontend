@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IWritingAPI, WritingResponse } from '../writingAPI';
-import { Writing } from '../writingsSlice';
+import { IWritingAPI, WritingResponse } from './writingAPI';
+import { Writing } from './writingsSlice';
 
 export const fetchEditingByUserId = createAsyncThunk<
   WritingResponse[],

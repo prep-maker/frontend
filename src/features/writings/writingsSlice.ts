@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NormalizedObjects } from '../../common/types/state';
-import { fetchEditingByUserId, updateWriting } from './actions/thunks';
+import { fetchEditingByUserId, updateWriting } from './actions';
 
 export type Writing = {
   id: string;

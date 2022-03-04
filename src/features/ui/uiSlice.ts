@@ -4,10 +4,7 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 import { login, signup } from '../user/userSlice';
-import {
-  fetchEditingByUserId,
-  updateWriting,
-} from '../writings/actions/thunks';
+import { fetchEditingByUserId, updateWriting } from '../writings/actions';
 
 type UIState = {
   error?: string;

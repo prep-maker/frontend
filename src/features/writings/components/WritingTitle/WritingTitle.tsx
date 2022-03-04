@@ -6,7 +6,7 @@ import {
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
 import { validateTitle } from '../../../../common/utils/validators';
-import { updateWriting } from '../../actions/thunks';
+import { updateWriting } from '../../actions';
 import useCurrentWriting from '../../hooks/useCurrentWriting';
 import { Writing } from '../../writingsSlice';
 import styles from './WritingTitle.module.css';

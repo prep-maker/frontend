@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../../common/hooks/useRedux';
+import { Writing } from '../writingsSlice';
 
-const useWritings = () => {
+const useWritings = (): Writing[] => {
   const allIds = useAppSelector(({ writings }) => writings.allIds);
   const byId = useAppSelector(({ writings }) => writings.byId);
 

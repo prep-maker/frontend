@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { NormalizedObjects } from '../../common/types/state';
 import { IWritingAPI, WritingResponse } from './writingAPI';
 
-type Writing = {
+export type Writing = {
   id: string;
   title: string;
   isDone: boolean;

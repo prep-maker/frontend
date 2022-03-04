@@ -22,7 +22,7 @@ const Writing = () => {
   return (
     <>
       <Header />
-      {isLoading ? (
+      {isLoading && !writings.length ? (
         <WritingSkeleton />
       ) : (
         <main className={styles.main}>

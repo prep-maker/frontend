@@ -6,17 +6,25 @@ import {
 } from '../../../../common/hooks/useRedux';
 import styles from './WritingFooter.module.css';
 import useCurrentWriting from '../../hooks/useCurrentWriting';
-import { deleteWriting } from '../../actions';
+import { deleteWriting, updateWriting } from '../../actions';
 
 const WritingFooter = () => {
   const dispatch = useAppDispatch();
-  const writingId = useCurrentWriting()?.id;
+  const writing = useCurrentWriting();
   const userId = useAppSelector(({ user }) => user.id);
 
   const handleDelete = () => {
-    dispatch(deleteWriting({ userId, writingId }));
+    dispatch(deleteWriting({ userId, writingId: writing.id }));
   };
-  const handleFinish = () => {};
+
+  const finished = {
+    id: writing.id,
+    title: writing.title,
+    isDone: true,
+  };
+  const handleFinish = () => {
+    dispatch(updateWriting({ userId, writing: finished }));
+  };
   const handleSave = () => {};
   return (
     <div className={styles.wrapper}>
@@ -28,7 +36,12 @@ const WritingFooter = () => {
       />
       <div className={styles.column}>
         <div className={styles.middle}>
-          <Button value="완료" color="yellow" size="short" onClick={() => {}} />
+          <Button
+            value="완료"
+            color="yellow"
+            size="short"
+            onClick={handleFinish}
+          />
         </div>
         <Button value="저장" color="blue" size="short" onClick={() => {}} />
       </div>

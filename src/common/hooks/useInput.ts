@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 const useInput = (
   initialValue: string,
@@ -6,6 +6,10 @@ const useInput = (
 ): [string, boolean, React.FormEventHandler, () => void] => {
   const [value, setValue] = useState(initialValue);
   const [isValid, setIsValid] = useState(false);
+
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
 
   const handleChange = useCallback((e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;

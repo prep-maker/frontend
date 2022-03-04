@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NormalizedObjects } from '../../common/types/state';
-import { fetchEditingByUserId, updateWriting } from './actions';
+import { fetchEditingByUserId, updateWriting, deleteWriting } from './actions';
 
 export type Writing = {
   id: string;
@@ -45,6 +45,12 @@ export const writingsSlice = createSlice({
         const { id, title, isDone } = action.payload;
         state.byId[id].title = title;
         state.byId[id].isDone = isDone;
+      })
+      .addCase(deleteWriting.fulfilled, (state, action) => {
+        const writingId = action.payload;
+        delete state.byId[writingId];
+        state.allIds = state.allIds.filter((id) => id !== writingId);
+        state.current = state.allIds[state.allIds.length - 1];
       });
   },
 });

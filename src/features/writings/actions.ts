@@ -25,3 +25,15 @@ export const updateWriting = createAsyncThunk<
 
   return result;
 });
+
+type DeleteArg = { userId: string; writingId: string };
+
+export const deleteWriting = createAsyncThunk<
+  string,
+  DeleteArg,
+  WritingExtraConfig
+>('writings/deleteStatus', async ({ userId, writingId }, { extra }) => {
+  await extra.writingAPI.delete(userId, writingId);
+
+  return writingId;
+});

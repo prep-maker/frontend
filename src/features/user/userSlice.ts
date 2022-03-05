@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { IAuthAPI } from './authAPI';
-import { LoginInfo, User, UserState } from './type';
+import { LoginInfo, User, UserState } from './types';
 
 export const initialState: UserState = {
   id: '',

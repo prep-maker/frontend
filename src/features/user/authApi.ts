@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { User, LoginInfo, UserState } from './type';
+import { User, LoginInfo, UserState } from './types';
 import { IHttpClient } from '../../network/http';
 
 export interface IAuthAPI {

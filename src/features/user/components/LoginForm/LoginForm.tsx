@@ -1,7 +1,7 @@
 import React, { MouseEvent, useCallback } from 'react';
 import styles from './LoginForm.module.css';
 import LoginInput from '../LoginInput/LoginInput';
-import { LoginInfo } from '../../type';
+import { LoginInfo } from '../../types';
 import Button from '../../../../common/components/Button/Button';
 import LinkTo from '../../../../common/components/LinkTo/LinkTo';
 import useInput from '../../../../common/hooks/useInput';

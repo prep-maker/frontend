@@ -35,6 +35,9 @@ export const uiSlice = createSlice({
     toggleWritingList: (state) => {
       state.show.writingList = !state.show.writingList;
     },
+    alertError: (state, action) => {
+      state.error = action.payload;
+    },
     clearError: (state) => {
       state.error = '';
     },
@@ -76,6 +79,6 @@ const handleThunkStatus = <Returned, ThunkArg, API>(
     });
 };
 
-export const { toggleWritingList, clearError } = uiSlice.actions;
+export const { toggleWritingList, clearError, alertError } = uiSlice.actions;
 
 export default uiSlice.reducer;

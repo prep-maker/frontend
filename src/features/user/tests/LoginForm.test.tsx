@@ -6,6 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { store } from '../../../app/store';
 import LoginForm from '../components/LoginForm/LoginForm';
+import { PLACEHOLDER } from '../../../common/constants/auth';
 
 describe('LoginForm Component', () => {
   beforeEach(() => {
@@ -20,10 +21,10 @@ describe('LoginForm Component', () => {
 
   it('이메일과 비밀번호를 입력받는다.', () => {
     const emailInput = screen.getByPlaceholderText(
-      /이메일/g
+      PLACEHOLDER.EMAIL
     ) as HTMLInputElement;
     const passwordInput = screen.getByPlaceholderText(
-      /비밀번호/g
+      PLACEHOLDER.PASSWORD
     ) as HTMLInputElement;
 
     userEvent.click(emailInput);

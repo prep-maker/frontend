@@ -1,7 +1,5 @@
 import React, { MouseEvent, useCallback } from 'react';
-import styles from './LoginForm.module.css';
-import LoginInput from '../LoginInput/LoginInput';
-import { LoginInfo } from '../../types';
+
 import Button from '../../../../common/components/Button/Button';
 import LinkTo from '../../../../common/components/LinkTo/LinkTo';
 import useInput from '../../../../common/hooks/useInput';
@@ -11,6 +9,10 @@ import {
 } from '../../../../common/utils/validators';
 import { useAppDispatch } from '../../../../common/hooks/useRedux';
 import { login } from '../../userSlice';
+import { LoginInfo } from '../../types';
+import LoginInput from '../LoginInput/LoginInput';
+import styles from './LoginForm.module.css';
+import { PLACEHOLDER } from '../../../../common/constants/auth';
 
 const LoginForm = () => {
   const [email, isEmailValid, handleEmailChange] = useInput('', validateEmail);
@@ -31,7 +33,7 @@ const LoginForm = () => {
       <LoginInput
         type="email"
         name="email"
-        placeholder="이메일을 입력해주세요."
+        placeholder={PLACEHOLDER.EMAIL}
         value={email}
         minLength={5}
         maxLength={30}
@@ -40,7 +42,7 @@ const LoginForm = () => {
       <LoginInput
         type="password"
         name="password"
-        placeholder="비밀번호를 입력해주세요."
+        placeholder={PLACEHOLDER.PASSWORD}
         value={password}
         minLength={6}
         maxLength={15}

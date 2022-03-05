@@ -12,7 +12,7 @@ const Login = () => {
         <Navigate to="/writing" />
       ) : (
         <>
-          <Header />
+          <Header isLoggedIn={false} />
           <main className={styles.main}>
             <Outlet />
           </main>

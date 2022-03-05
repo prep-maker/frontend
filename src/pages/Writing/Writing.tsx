@@ -22,7 +22,7 @@ const Writing = () => {
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={true} />
       {isLoading && !writings.length ? (
         <WritingSkeleton />
       ) : (

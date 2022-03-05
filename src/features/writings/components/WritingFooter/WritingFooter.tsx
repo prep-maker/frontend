@@ -1,32 +1,49 @@
 import React from 'react';
+
 import Button from '../../../../common/components/Button/Button';
+import { BLOCK_TYPE } from '../../../../common/constants/block';
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
-import styles from './WritingFooter.module.css';
+import { alertError } from '../../../ui/uiSlice';
 import useCurrentWriting from '../../hooks/useCurrentWriting';
 import { deleteWriting, updateWriting } from '../../actions';
+import styles from './WritingFooter.module.css';
 
 const WritingFooter = () => {
-  const dispatch = useAppDispatch();
   const writing = useCurrentWriting();
-  const userId = useAppSelector(({ user }) => user.id);
 
   if (!writing) {
     return <WritingFooterSkeleton />;
   }
 
+  const dispatch = useAppDispatch();
+  const userId = useAppSelector(({ user }) => user.id);
+
   const handleDelete = () => {
     dispatch(deleteWriting({ userId, writingId: writing.id }));
   };
 
-  const finished = {
-    id: writing.id,
-    title: writing.title,
-    isDone: true,
-  };
+  const blocksById = useAppSelector(({ blocks }) => blocks.byId);
   const handleFinish = () => {
+    if (writing.blocks.length !== 1) {
+      alertError('블록이 1개일때만 완료할 수  있습니다.');
+      return;
+    }
+
+    const blockId = writing.blocks[0];
+
+    if (blocksById[blockId].type !== BLOCK_TYPE.PREP) {
+      alertError('PREP 블럭만 완료할 수 있습니다.');
+      return;
+    }
+
+    const finished = {
+      id: writing.id,
+      title: writing.title,
+      isDone: true,
+    };
     dispatch(updateWriting({ userId, writing: finished }));
   };
   const handleSave = () => {};
@@ -47,7 +64,7 @@ const WritingFooter = () => {
             onClick={handleFinish}
           />
         </div>
-        <Button value="저장" color="blue" size="short" onClick={() => {}} />
+        <Button value="저장" color="blue" size="short" onClick={handleSave} />
       </div>
     </div>
   );

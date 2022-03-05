@@ -2,18 +2,21 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
+
+import config from '../common/utils/config';
 import uiReducer from '../features/ui/uiSlice';
 import userReducer from '../features/user/userSlice';
 import writingsReducer from '../features/writings/writingsSlice';
 import AuthAPI from '../features/user/authAPI';
 import HttpClient from '../network/http';
-import config from '../common/utils/config';
 import WritingAPI from '../features/writings/writingAPI';
+import blocksReducer from '../features/blocks/blocksSlice';
 
 const reducers = combineReducers({
   ui: uiReducer,
   user: userReducer,
   writings: writingsReducer,
+  blocks: blocksReducer,
 });
 
 const persisitConfig = {

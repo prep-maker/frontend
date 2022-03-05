@@ -4,7 +4,11 @@ import {
   createSlice,
 } from '@reduxjs/toolkit';
 import { login, signup } from '../user/userSlice';
-import { fetchEditingByUserId, updateWriting } from '../writings/actions';
+import {
+  deleteWriting,
+  fetchEditingByUserId,
+  updateWriting,
+} from '../writings/actions';
 
 type UIState = {
   error?: string;
@@ -40,6 +44,7 @@ export const uiSlice = createSlice({
     handleThunkStatus(builder, signup);
     handleThunkStatus(builder, fetchEditingByUserId);
     handleThunkStatus(builder, updateWriting);
+    handleThunkStatus(builder, deleteWriting);
   },
 });
 

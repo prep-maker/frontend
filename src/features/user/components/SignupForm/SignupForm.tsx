@@ -10,6 +10,7 @@ import {
 import Button from '../../../../common/components/Button/Button';
 import { useAppDispatch } from '../../../../common/hooks/useRedux';
 import { signup } from '../../userSlice';
+import { PLACEHOLDER } from '../../../../common/constants/auth';
 
 const SignupForm = () => {
   const [email, isEmailValid, handleEmailChange] = useInput('', validateEmail);
@@ -35,6 +36,7 @@ const SignupForm = () => {
           value={email}
           minLength={5}
           maxLength={30}
+          placeholder={PLACEHOLDER.EMAIL}
           onChange={handleEmailChange}
         />
       </div>
@@ -46,6 +48,7 @@ const SignupForm = () => {
           value={password}
           minLength={6}
           maxLength={15}
+          placeholder={PLACEHOLDER.PASSWORD}
           onChange={handlePasswordChange}
         />
       </div>
@@ -57,6 +60,7 @@ const SignupForm = () => {
           value={name}
           minLength={1}
           maxLength={20}
+          placeholder={PLACEHOLDER.NAME}
           onChange={handleNameChange}
         />
       </div>

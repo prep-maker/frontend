@@ -29,7 +29,6 @@ export const blocksSlice = createSlice({
       const blocks = action.payload;
 
       for (const block of blocks) {
-        console.log(block.id);
         state.allIds.push(block.id);
         state.byId[block.id] = block;
       }

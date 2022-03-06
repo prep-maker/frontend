@@ -1,31 +1,34 @@
 import { AxiosResponse } from 'axios';
 import { IHttpClient } from '../../network/http';
 import { Block } from './blocksSlice';
-import { ParagraphType } from './types';
-
-type CreateRequest = {
-  userId: string;
-  writingId: string;
-  type: ParagraphType & 'PREP';
-};
+import { ParagraphType, CreateRequest } from './types';
 
 export interface IBlockAPI {
-  readonly create: (request: CreateRequest) => Promise<Block>;
+  readonly create: (request: CreateRequest) => Promise<Block[]>;
 }
 
 class BlockAPI implements IBlockAPI {
   constructor(private http: IHttpClient) {}
 
-  create = async (request: CreateRequest): Promise<Block> => {
-    const { userId, writingId, type } = request;
+  create = async (request: CreateRequest): Promise<Block[]> => {
+    const { userId, writingId, types } = request;
+    const fetch = this.requestNewBlock.bind(this, userId, writingId);
+    const result = await Promise.all(types.map(fetch));
+
+    return result;
+  };
+
+  private requestNewBlock = async (
+    userId: string,
+    writingId: string,
+    type: ParagraphType
+  ) => {
+    const newBlock = { type, paragraphs: [] };
     const result: AxiosResponse<Block> = await this.http.fetch(
       `/users/${userId}/writings/${writingId}/blocks`,
       {
         method: 'post',
-        body: {
-          type,
-          paragraphs: [],
-        },
+        body: newBlock,
       }
     );
 

@@ -1,0 +1,9 @@
+.wrapper {
+  margin: 0.5rem 0;
+}
+
+.button {
+  position: relative;
+  top: 2rem;
+  cursor: pointer;
+}

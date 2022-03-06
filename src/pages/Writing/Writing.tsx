@@ -7,8 +7,8 @@ import { fetchEditingByUserId } from '../../features/writings/actions';
 import styles from './Writing.module.css';
 import WritingSkeleton from './WritingSkeleton';
 import WritingTitle from '../../features/writings/components/WritingTitle/WritingTitle';
-import Button from '../../common/components/Button/Button';
 import WritingFooter from '../../features/writings/components/WritingFooter/WritingFooter';
+import BlockEditor from '../../features/blocks/components/BlockEditor/BlockEditor';
 
 const Writing = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ const Writing = () => {
           <WritingList writings={writings} />
           <section className={styles.writing}>
             <WritingTitle />
-            <div className={styles.editor} />
+            <BlockEditor />
             <WritingFooter />
           </section>
         </main>

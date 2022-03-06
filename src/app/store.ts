@@ -11,6 +11,7 @@ import AuthAPI from '../features/user/authAPI';
 import HttpClient from '../network/http';
 import WritingAPI from '../features/writings/writingAPI';
 import blocksReducer from '../features/blocks/blocksSlice';
+import BlockAPI from '../features/blocks/blockAPI';
 
 const reducers = combineReducers({
   ui: uiReducer,
@@ -29,6 +30,7 @@ const persistedReducer = persistReducer(persisitConfig, reducers);
 const http = HttpClient.getHttp(config.baseUrl);
 const authAPI = new AuthAPI(http);
 const writingAPI = new WritingAPI(http);
+const blockAPI = new BlockAPI(http);
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -38,6 +40,7 @@ export const store = configureStore({
         extraArgument: {
           authAPI,
           writingAPI,
+          blockAPI,
         },
       },
     }).concat(logger),

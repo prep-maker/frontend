@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import Button from '../../../../common/components/Button/Button';
 import { BLOCK_TYPE } from '../../../../common/constants/block';
@@ -13,20 +13,23 @@ import styles from './WritingFooter.module.css';
 
 const WritingFooter = () => {
   const writing = useCurrentWriting();
-
-  if (!writing) {
-    return <WritingFooterSkeleton />;
-  }
-
   const dispatch = useAppDispatch();
   const userId = useAppSelector(({ user }) => user.id);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
+    if (!writing) {
+      return;
+    }
+
     dispatch(deleteWriting({ userId, writingId: writing.id }));
-  };
+  }, [userId, writing?.isDone]);
 
   const blocksById = useAppSelector(({ blocks }) => blocks.byId);
-  const handleFinish = () => {
+  const handleFinish = useCallback(() => {
+    if (!writing) {
+      return;
+    }
+
     if (writing.blocks.length !== 1) {
       alertError('블록이 1개일때만 완료할 수  있습니다.');
       return;
@@ -45,8 +48,14 @@ const WritingFooter = () => {
       isDone: true,
     };
     dispatch(updateWriting({ userId, writing: finished }));
-  };
+  }, [writing, userId]);
+
   const handleSave = () => {};
+
+  if (!writing) {
+    return <WritingFooterSkeleton />;
+  }
+
   return (
     <div className={styles.wrapper}>
       <Button

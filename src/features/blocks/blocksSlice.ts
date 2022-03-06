@@ -3,7 +3,7 @@ import { NormalizedObjects } from '../../common/types/state';
 import { createBlock } from './actions';
 import { BlockType, ParagraphType } from './types';
 
-type Paragraph = {
+export type Paragraph = {
   readonly type: ParagraphType;
   readonly content: string;
 };
@@ -11,7 +11,7 @@ type Paragraph = {
 export type Block = {
   readonly id: string;
   readonly type: BlockType;
-  readonly paragraphs?: Paragraph[];
+  readonly paragraphs: Paragraph[];
 };
 
 const initialState: NormalizedObjects<Block> & { current: string } = {

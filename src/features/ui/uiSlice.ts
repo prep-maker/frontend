@@ -3,6 +3,7 @@ import {
   AsyncThunk,
   createSlice,
 } from '@reduxjs/toolkit';
+import { createBlock } from '../blocks/actions';
 import { login, signup } from '../user/userSlice';
 import {
   deleteWriting,
@@ -48,6 +49,7 @@ export const uiSlice = createSlice({
     handleThunkStatus(builder, fetchEditingByUserId);
     handleThunkStatus(builder, updateWriting);
     handleThunkStatus(builder, deleteWriting);
+    handleThunkStatus(builder, createBlock);
   },
 });
 

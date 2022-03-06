@@ -14,10 +14,9 @@ export type Block = {
   readonly paragraphs: Paragraph[];
 };
 
-const initialState: NormalizedObjects<Block> & { current: string } = {
+const initialState: NormalizedObjects<Block> = {
   allIds: [],
   byId: {},
-  current: '',
 };
 
 export const blocksSlice = createSlice({

@@ -1,0 +1,56 @@
+.wrapper {
+  width: 100%;
+}
+
+.wrapper.pink {
+  border: 2px solid var(--pink);
+}
+
+.wrapper.yellow {
+  border: 2px solid var(--yellow);
+}
+
+.wrapper.green {
+  border: 2px solid var(--green);
+}
+
+.text {
+  width: 100%;
+  height: 1.5rem;
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  font-size: var(--h5);
+  resize: none;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+
+.summary {
+  width: 500px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.header.pink {
+  background-color: var(--pink);
+}
+
+.header.yellow {
+  background-color: var(--yellow);
+}
+
+.header.green {
+  background-color: var(--green);
+}
+
+.folded {
+  justify-content: space-between;
+  overflow: hidden;
+}

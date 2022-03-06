@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import classNames from 'classnames/bind';
 import { AiOutlinePlus } from 'react-icons/ai';
 import useMobileQuery from '../../../../common/hooks/useMobileQuery';
@@ -28,15 +28,15 @@ const WritingList = ({ writings }: WritingListProps) => {
   const show = useAppSelector(({ ui }) => ui.show.writingList);
   const dispatch = useAppDispatch();
 
-  const handlePickWriting = (writingId: string) => {
+  const handlePickWriting = useCallback((writingId: string) => {
     dispatch(pickWriting(writingId));
-  };
+  }, []);
 
   const userId = useAppSelector(({ user }) => user.id);
 
-  const handleCreate = () => {
+  const handleCreate = useCallback(() => {
     dispatch(createWriting(userId));
-  };
+  }, [userId]);
 
   return (
     <aside

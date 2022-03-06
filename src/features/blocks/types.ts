@@ -11,7 +11,7 @@ export type BlockType =
 
 export type ParagraphType = 'P' | 'R' | 'E' | 'P';
 
-export type CreateRequest = {
+export type NewBlockRequest = {
   userId: string;
   writingId: string;
   types: ParagraphType[];

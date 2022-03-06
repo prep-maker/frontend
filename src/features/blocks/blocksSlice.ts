@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NormalizedObjects } from '../../common/types/state';
-import { createBlock } from './actions';
+import { deleteFromStore } from '../../common/utils/store';
+import { createBlock, deleteBlock } from './actions';
 import { BlockType, ParagraphType } from './types';
 
 export type Paragraph = {
@@ -24,14 +25,19 @@ export const blocksSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(createBlock.fulfilled, (state, action) => {
-      const blocks = action.payload;
+    builder
+      .addCase(createBlock.fulfilled, (state, action) => {
+        const blocks = action.payload;
 
-      for (const block of blocks) {
-        state.allIds.push(block.id);
-        state.byId[block.id] = block;
-      }
-    });
+        for (const block of blocks) {
+          state.allIds.push(block.id);
+          state.byId[block.id] = block;
+        }
+      })
+      .addCase(deleteBlock.fulfilled, (state, action) => {
+        const { blockId } = action.payload;
+        deleteFromStore(state, blockId);
+      });
   },
 });
 

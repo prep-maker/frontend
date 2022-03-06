@@ -7,6 +7,7 @@ import {
   deleteWriting,
   createWriting,
 } from './actions';
+import { deleteBlock } from '../blocks/actions';
 
 export type Writing = {
   id: string;
@@ -67,6 +68,12 @@ export const writingsSlice = createSlice({
         state.allIds.push(id);
         state.byId[id] = { id, title, isDone, blocks: [] };
         state.current = id;
+      })
+      .addCase(deleteBlock.fulfilled, (state, action) => {
+        const { writingId, blockId } = action.payload;
+        state.byId[writingId].blocks = state.byId[writingId].blocks.filter(
+          (id) => id !== blockId
+        );
       });
   },
 });

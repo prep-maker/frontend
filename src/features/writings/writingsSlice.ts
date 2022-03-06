@@ -71,9 +71,8 @@ export const writingsSlice = createSlice({
       })
       .addCase(deleteBlock.fulfilled, (state, action) => {
         const { writingId, blockId } = action.payload;
-        state.byId[writingId].blocks = state.byId[writingId].blocks.filter(
-          (id) => id !== blockId
-        );
+        const blocks = state.byId[writingId].blocks;
+        state.byId[writingId].blocks = blocks.filter((id) => id !== blockId);
       });
   },
 });

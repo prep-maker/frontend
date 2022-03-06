@@ -52,5 +52,7 @@
 
 .folded {
   justify-content: space-between;
+  align-items: center;
+  padding-left: 2rem;
   overflow: hidden;
 }

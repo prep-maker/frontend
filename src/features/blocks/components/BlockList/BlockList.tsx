@@ -7,13 +7,19 @@ const BlockList = () => {
   const blocks = useCurrentBlocks();
 
   return (
-    <ul>
-      {blocks.map((block) => (
-        <li key={block?.id}>
-          <BlockItem id={block?.id} paragraphs={block.paragraphs} />
-        </li>
-      ))}
-    </ul>
+    <>
+      {blocks.length ? (
+        <ul>
+          {blocks.map((block) => (
+            <li key={block.id}>
+              <BlockItem id={block.id} paragraphs={block.paragraphs} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div>블록이 없습니다.</div>
+      )}
+    </>
   );
 };
 

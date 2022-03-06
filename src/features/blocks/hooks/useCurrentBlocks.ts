@@ -4,15 +4,10 @@ import { Block } from '../blocksSlice';
 
 const useCurrentBlocks = (): Block[] => {
   const currentWriting = useCurrentWriting();
-
-  if (!currentWriting) {
-    return [];
-  }
-
   const blocksById = useAppSelector(({ blocks }) => blocks.byId);
-  const currentBlocks = currentWriting.blocks;
+  const currentBlocks = currentWriting?.blocks;
 
-  return currentBlocks.map((id) => blocksById[id]);
+  return currentBlocks?.map((id) => blocksById[id]);
 };
 
 export default useCurrentBlocks;

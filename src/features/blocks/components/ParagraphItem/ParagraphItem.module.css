@@ -28,7 +28,7 @@
 .header {
   display: flex;
   justify-content: flex-end;
-  padding: 0.5rem;
+  padding: 5px;
 }
 
 .summary {

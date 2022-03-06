@@ -10,3 +10,9 @@ export type BlockType =
   | 'PREP';
 
 export type ParagraphType = 'P' | 'R' | 'E' | 'P';
+
+export type CreateRequest = {
+  userId: string;
+  writingId: string;
+  types: ParagraphType[];
+};

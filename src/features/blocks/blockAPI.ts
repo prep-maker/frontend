@@ -23,7 +23,10 @@ class BlockAPI implements IBlockAPI {
     writingId: string,
     type: ParagraphType
   ) => {
-    const newBlock = { type, paragraphs: [] };
+    const newBlock = {
+      type,
+      paragraphs: [{ type, content: '' }],
+    };
     const result: AxiosResponse<Block> = await this.http.fetch(
       `/users/${userId}/writings/${writingId}/blocks`,
       {

@@ -1,16 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { IHttpClient } from '../../network/http';
 import { Writing } from './writingsSlice';
-
-type Block = {
-  id: string;
-  type: 'P' | 'R' | 'E' | 'PR' | 'RE' | 'EP' | 'PRE' | 'REP' | 'PREP';
-  canMerge: boolean;
-  paragraphs: {
-    type: 'P' | 'R' | 'E';
-    content: string;
-  }[];
-};
+import { Block } from '../blocks/blocksSlice';
 
 export type WritingResponse = {
   id: string;

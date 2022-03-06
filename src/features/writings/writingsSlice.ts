@@ -37,7 +37,7 @@ export const writingsSlice = createSlice({
         const writings = action.payload;
         const ids = writings.map((writing) => writing.id);
         state.allIds = ids;
-        state.current = ids[ids.length - 1];
+        state.current = ids[0];
 
         for (const writing of writings) {
           state.byId[writing.id] = {

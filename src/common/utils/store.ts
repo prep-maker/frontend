@@ -9,6 +9,6 @@ export const deleteFromStore = <T>(
   state.allIds = state.allIds.filter((idItem) => idItem !== id);
 
   if (state.current && state.current === id) {
-    state.current = state.allIds[state.allIds.length - 1];
+    state.current = state.allIds[0];
   }
 };

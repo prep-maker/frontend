@@ -16,3 +16,9 @@ export type NewBlockRequest = {
   writingId: string;
   types: ParagraphType[];
 };
+
+export type IdParams = {
+  userId: string;
+  writingId: string;
+  blockId: string;
+};

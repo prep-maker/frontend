@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 
 import useCurrentBlocks from '../../hooks/useCurrentBlocks';
 import BlockItem from '../BlockItem/BlockItem';
+import styles from './BlockList.module.css';
 
 const BlockList = () => {
   const blocks = useCurrentBlocks();
@@ -17,7 +18,7 @@ const BlockList = () => {
           ))}
         </ul>
       ) : (
-        <div>블록이 없습니다.</div>
+        <div className={styles.message}>내용이 없습니다.</div>
       )}
     </>
   );

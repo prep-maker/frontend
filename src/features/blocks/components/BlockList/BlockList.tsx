@@ -8,7 +8,7 @@ const BlockList = () => {
 
   return (
     <>
-      {blocks.length ? (
+      {blocks?.length ? (
         <ul>
           {blocks.map((block) => (
             <li key={block.id}>

@@ -4,7 +4,6 @@ import { Block } from '../blocksSlice';
 
 const useCurrentBlocks = (): Block[] => {
   const currentWriting = useCurrentWriting();
-  console.log(currentWriting);
 
   if (!currentWriting) {
     return [];

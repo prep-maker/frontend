@@ -27,7 +27,7 @@ export const blocksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createBlock.fulfilled, (state, action) => {
-        const blocks = action.payload;
+        const { blocks } = action.payload;
 
         for (const block of blocks) {
           state.allIds.push(block.id);

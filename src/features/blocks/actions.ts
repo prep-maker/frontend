@@ -6,13 +6,13 @@ import { IdParams, NewBlockRequest } from './types';
 type BlockExtraConfig = { extra: { blockAPI: IBlockAPI } };
 
 export const createBlock = createAsyncThunk<
-  Block[],
+  { blocks: Block[]; writingId: string },
   NewBlockRequest,
   BlockExtraConfig
 >('blocks/createStatus', async ({ userId, writingId, types }, { extra }) => {
-  const result = await extra.blockAPI.create({ userId, writingId, types });
+  const blocks = await extra.blockAPI.create({ userId, writingId, types });
 
-  return result;
+  return { blocks, writingId };
 });
 
 export const deleteBlock = createAsyncThunk<

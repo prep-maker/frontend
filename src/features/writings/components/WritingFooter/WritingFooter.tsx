@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Button from '../../../../common/components/Button/Button';
 import { BLOCK_TYPE } from '../../../../common/constants/block';
@@ -20,6 +20,7 @@ const WritingFooter = () => {
   const writing = useAppSelector(
     ({ writings }) => writings.byId[writingId as string]
   );
+  const navigate = useNavigate();
 
   const handleDelete = useCallback(() => {
     if (!writing) {
@@ -27,7 +28,8 @@ const WritingFooter = () => {
     }
 
     dispatch(deleteWriting({ userId, writingId: writingId as string }));
-  }, [userId, writing?.isDone]);
+    navigate('/writing');
+  }, [userId, writingId]);
 
   const blocksById = useAppSelector(({ blocks }) => blocks.byId);
   const handleFinish = useCallback(() => {

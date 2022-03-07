@@ -62,7 +62,7 @@ const WritingFooter = () => {
   };
 
   if (!writing) {
-    return <WritingFooterSkeleton />;
+    return <div className={styles.wrapper} />;
   }
 
   return (
@@ -83,27 +83,6 @@ const WritingFooter = () => {
           />
         </div>
         <Button value="저장" color="blue" size="short" onClick={handleSave} />
-      </div>
-    </div>
-  );
-};
-
-export const WritingFooterSkeleton = () => {
-  const ButtonSkeleton = (
-    <Button
-      value=""
-      color="gray"
-      size="short"
-      border={false}
-      onClick={() => {}}
-    />
-  );
-  return (
-    <div className={styles.wrapper}>
-      {ButtonSkeleton}
-      <div className={styles.column}>
-        <div className={styles.middle}>{ButtonSkeleton}</div>
-        {ButtonSkeleton}
       </div>
     </div>
   );

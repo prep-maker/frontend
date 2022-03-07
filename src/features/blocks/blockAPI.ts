@@ -1,11 +1,17 @@
 import { AxiosResponse } from 'axios';
 import { IHttpClient } from '../../network/http';
 import { Block } from './blocksSlice';
-import { ParagraphType, NewBlockRequest, IdParams } from './types';
+import {
+  ParagraphType,
+  NewBlockRequest,
+  IdParams,
+  BlocksUpdateRequest,
+} from './types';
 
 export interface IBlockAPI {
   readonly create: (request: NewBlockRequest) => Promise<Block[]>;
   readonly delete: (request: IdParams) => Promise<void>;
+  readonly update: (request: BlocksUpdateRequest) => Promise<Block[]>;
 }
 
 class BlockAPI implements IBlockAPI {
@@ -45,6 +51,16 @@ class BlockAPI implements IBlockAPI {
       `/users/${userId}/writings/${writingId}/blocks/${blockId}`,
       { method: 'delete' }
     );
+  };
+
+  update = async (request: BlocksUpdateRequest) => {
+    const { userId, writingId, blocks } = request;
+    const result: AxiosResponse<Block[]> = await this.http.fetch(
+      `/users/${userId}/writings/${writingId}/blocks`,
+      { method: 'put', body: { blocks } }
+    );
+
+    return result.data;
   };
 }
 

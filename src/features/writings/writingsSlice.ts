@@ -7,7 +7,7 @@ import {
   deleteWriting,
   createWriting,
 } from './actions';
-import { createBlock, deleteBlock } from '../blocks/actions';
+import { createBlock, deleteBlock, saveBlocks } from '../blocks/actions';
 
 export type Writing = {
   id: string;
@@ -70,6 +70,11 @@ export const writingsSlice = createSlice({
         const { blocks, writingId } = action.payload;
         const blockIds = blocks.map((block) => block.id);
         state.byId[writingId].blocks.push(...blockIds);
+      })
+      .addCase(saveBlocks.fulfilled, (state, action) => {
+        const { writingId, newBlocks } = action.payload;
+        const blockIds = newBlocks.map((block) => block.id);
+        state.byId[writingId].blocks = blockIds;
       });
   },
 });

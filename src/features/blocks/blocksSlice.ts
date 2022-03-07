@@ -27,7 +27,6 @@ export const blocksSlice = createSlice({
   reducers: {
     updateParagraph: (state, action) => {
       const { blockId, index, value } = action.payload;
-      console.log(value);
       state.byId[blockId].paragraphs[index].content = value;
     },
   },

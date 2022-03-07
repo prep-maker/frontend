@@ -31,7 +31,6 @@ class WritingAPI implements IWritingAPI {
         method: 'get',
       }
     );
-    console.log(result.data);
 
     return result.data;
   };

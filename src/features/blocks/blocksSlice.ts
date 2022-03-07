@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NormalizedObjects } from '../../common/types/state';
 import { deleteFromStore } from '../../common/utils/store';
 import { createBlock, deleteBlock } from './actions';
+import { fetchEditingByUserId, deleteWriting } from '../writings/actions';
 import { BlockType, ParagraphType } from './types';
 
 export type Paragraph = {
@@ -26,6 +27,20 @@ export const blocksSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(fetchEditingByUserId.fulfilled, (state, action) => {
+        const writings = action.payload;
+        state.byId = {};
+        state.allIds = [];
+
+        for (const writing of writings) {
+          const blockIds = writing.blocks.map((block) => block.id);
+          state.allIds.push(...blockIds);
+
+          for (const block of writing.blocks) {
+            state.byId[block.id] = block;
+          }
+        }
+      })
       .addCase(createBlock.fulfilled, (state, action) => {
         const { blocks } = action.payload;
 
@@ -37,6 +52,10 @@ export const blocksSlice = createSlice({
       .addCase(deleteBlock.fulfilled, (state, action) => {
         const { blockId } = action.payload;
         deleteFromStore(state, blockId);
+      })
+      .addCase(deleteWriting.fulfilled, (state, action) => {
+        const { blocks } = action.payload;
+        blocks.forEach((block) => deleteFromStore(state, block.id));
       });
   },
 });

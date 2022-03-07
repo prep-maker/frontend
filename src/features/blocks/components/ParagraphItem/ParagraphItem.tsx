@@ -5,12 +5,14 @@ import { MdKeyboardArrowRight, MdKeyboardArrowDown } from 'react-icons/md';
 import { useAppDispatch } from '../../../../common/hooks/useRedux';
 import { Paragraph, updateParagraph } from '../../blocksSlice';
 import styles from './ParagraphItem.module.css';
+import useCorrection from '../../hooks/useCorrection';
 
 const cx = classNames.bind(styles);
 
 type ParagraphItemProps = Paragraph & {
   index: number;
   blockId: string;
+  setWarning: (value: string) => void;
 };
 
 const ParagraphItem = ({
@@ -18,10 +20,13 @@ const ParagraphItem = ({
   content,
   index,
   blockId,
+  setWarning,
 }: ParagraphItemProps) => {
   const [isFolded, setIsFolded] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
+
+  useCorrection({ type, value: content, callback: setWarning });
 
   useEffect(() => {
     if (!textareaRef.current) {

@@ -4,11 +4,11 @@ import Header from '../../common/components/Header/Header';
 import { useAppDispatch, useAppSelector } from '../../common/hooks/useRedux';
 import useWritings from '../../features/writings/hooks/useWritings';
 import { fetchEditingByUserId } from '../../features/writings/actions';
-import styles from './Writing.module.css';
-import WritingSkeleton from './WritingSkeleton';
 import WritingTitle from '../../features/writings/components/WritingTitle/WritingTitle';
 import WritingFooter from '../../features/writings/components/WritingFooter/WritingFooter';
-import BlockEditor from '../../features/blocks/components/BlockEditor/BlockEditor';
+import WritingSkeleton from './WritingSkeleton';
+import styles from './Writing.module.css';
+import { Outlet } from 'react-router-dom';
 import WritingMenu from '../../features/writings/components/WritingMenu/WritingMenu';
 
 const Writing = () => {
@@ -31,7 +31,7 @@ const Writing = () => {
           <WritingMenu />
           <section className={styles.writing}>
             <WritingTitle />
-            <BlockEditor />
+            <Outlet />
             <WritingFooter />
           </section>
         </main>

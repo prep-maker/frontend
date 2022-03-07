@@ -8,6 +8,7 @@ import LoginForm from '../features/user/components/LoginForm/LoginForm';
 import SignupForm from '../features/user/components/SignupForm/SignupForm';
 import AuthRequired from '../common/components/AuthRequired/AuthRequired';
 import BlockEditor from '../features/blocks/components/BlockEditor/BlockEditor';
+import WritingList from '../features/writings/components/WritingList/WritingList';
 
 const App = () => {
   const isLoggedIn = !!useAppSelector(({ user }) => user.id);
@@ -38,6 +39,7 @@ const App = () => {
             </AuthRequired>
           }
         >
+          <Route index element={<WritingList responsive={false} />} />
           <Route path=":writingId" element={<BlockEditor />} />
         </Route>
         <Route path="/review" />

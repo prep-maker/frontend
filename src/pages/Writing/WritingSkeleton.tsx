@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './Writing.module.css';
-import { WritingListSkeleton } from '../../features/writings/components/WritingList/WritingList';
+
+import { WritingMenuSkeleton } from '../../features/writings/components/WritingMenu/WritingMenu';
 
 const WritingSkeleton = () => {
   return (
     <main className={styles.main}>
-      <WritingListSkeleton />
+      <WritingMenuSkeleton />
     </main>
   );
 };

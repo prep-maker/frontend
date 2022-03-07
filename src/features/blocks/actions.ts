@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { IBlockAPI } from './blockAPI';
 import { Block } from './blocksSlice';
-import { IdParams, NewBlockRequest } from './types';
+import { BlocksUpdateRequest, IdParams, NewBlockRequest } from './types';
 
 type BlockExtraConfig = { extra: { blockAPI: IBlockAPI } };
 
@@ -23,4 +23,14 @@ export const deleteBlock = createAsyncThunk<
   await extra.blockAPI.delete({ userId, writingId, blockId });
 
   return { writingId, blockId };
+});
+
+export const saveBlocks = createAsyncThunk<
+  Block[],
+  BlocksUpdateRequest,
+  BlockExtraConfig
+>('blocks/saveStatus', async ({ userId, writingId, blocks }, { extra }) => {
+  const updated = await extra.blockAPI.update({ userId, writingId, blocks });
+
+  return updated;
 });

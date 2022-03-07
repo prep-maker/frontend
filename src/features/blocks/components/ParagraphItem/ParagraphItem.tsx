@@ -28,7 +28,7 @@ const ParagraphItem = ({
       return;
     }
 
-    fixToScrollHeight(textareaRef.current);
+    heightenByScroll(textareaRef.current);
   }, [textareaRef.current]);
 
   const handleChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -36,7 +36,7 @@ const ParagraphItem = ({
       return;
     }
 
-    fixToScrollHeight(textareaRef.current);
+    heightenByScroll(textareaRef.current);
     dispatch(updateParagraph({ blockId, index, value: e.currentTarget.value }));
   };
 
@@ -76,9 +76,8 @@ const ParagraphItem = ({
   );
 };
 
-const fixToScrollHeight = (element: HTMLTextAreaElement) => {
+const heightenByScroll = (element: HTMLTextAreaElement) => {
   const MIN_HEIGHT = '16px';
-
   element.style.height = MIN_HEIGHT;
   element.style.height = element.scrollHeight + 'px';
 };

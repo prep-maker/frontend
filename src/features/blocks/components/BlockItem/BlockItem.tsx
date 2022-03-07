@@ -1,6 +1,7 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
+
 import {
   useAppDispatch,
   useAppSelector,
@@ -9,6 +10,7 @@ import { deleteBlock } from '../../actions';
 
 import { Paragraph } from '../../blocksSlice';
 import ParagraphItem from '../ParagraphItem/ParagraphItem';
+import Warning from '../Warning/Warning';
 import styles from './BlockItem.module.css';
 
 type BlockItemProps = {
@@ -17,6 +19,7 @@ type BlockItemProps = {
 };
 
 const BlockItem = ({ id, paragraphs }: BlockItemProps) => {
+  const [warning, setWarning] = useState('');
   const dispatch = useAppDispatch();
   const userId = useAppSelector(({ user }) => user.id);
   const { writingId } = useParams();
@@ -32,6 +35,7 @@ const BlockItem = ({ id, paragraphs }: BlockItemProps) => {
       <button className={styles.button} onClick={handleDelete}>
         <AiOutlineClose />
       </button>
+      <Warning message={warning} />
       {paragraphs.map((paragraph, i) => (
         <ParagraphItem
           key={paragraph.type}
@@ -39,6 +43,7 @@ const BlockItem = ({ id, paragraphs }: BlockItemProps) => {
           content={paragraph.content}
           index={i}
           blockId={id}
+          setWarning={setWarning}
         />
       ))}
     </div>

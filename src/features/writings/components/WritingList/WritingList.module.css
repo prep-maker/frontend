@@ -1,19 +1,6 @@
-.wrapper {
-  width: 15rem;
-  padding: 1rem;
-  border: var(--border);
-  border-top: none;
-}
-
-.header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 5rem;
-}
-
 .list {
   margin: 0;
+  width: 100%;
 }
 
 .writing {
@@ -21,32 +8,7 @@
   margin: 1rem 0;
 }
 
-.mobile-wrapper {
-  display: none;
-  position: fixed;
-  z-index: 99;
-  max-width: none;
-  width: 100%;
-  padding: 0;
-  border: none;
-}
-
-.mobile-header {
-  height: 3rem;
-  border-bottom: var(--border);
-  background-color: var(--green);
-  transition: background-color 200ms ease-in-out;
-}
-
-.mobile-header:hover {
-  background-color: var(--hoverGreen);
-}
-
 .mobile-writing {
   margin: 0;
   border-bottom: var(--border);
-}
-
-.visible {
-  display: block;
 }

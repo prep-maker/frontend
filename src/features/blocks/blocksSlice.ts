@@ -24,7 +24,13 @@ const initialState: NormalizedObjects<Block> = {
 export const blocksSlice = createSlice({
   name: 'block',
   initialState,
-  reducers: {},
+  reducers: {
+    updateParagraph: (state, action) => {
+      const { blockId, index, value } = action.payload;
+      console.log(value);
+      state.byId[blockId].paragraphs[index].content = value;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchEditingByUserId.fulfilled, (state, action) => {

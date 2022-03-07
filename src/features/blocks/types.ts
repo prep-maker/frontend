@@ -9,7 +9,7 @@ export type BlockType =
   | 'REP'
   | 'PREP';
 
-export type ParagraphType = 'P' | 'R' | 'E' | 'P';
+export type ParagraphType = 'P' | 'R' | 'E';
 
 export type NewBlockRequest = {
   userId: string;

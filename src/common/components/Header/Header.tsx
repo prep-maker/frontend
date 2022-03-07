@@ -16,7 +16,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const isMobile = useMobileQuery();
 
   const location = useLocation();
-  const isWritingPage = location.pathname === '/writing';
+  const isWritingPage = location.pathname.includes('/writing');
 
   const handleLogout = () => {
     dispatch(logout());

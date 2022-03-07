@@ -1,11 +1,11 @@
 import React, { memo, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Button from '../../../../common/components/Button/Button';
 import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
-import useCurrentWriting from '../../../writings/hooks/useCurrentWriting';
 import { ParagraphType } from '../../types';
 import { createBlock } from '../../actions';
 import styles from './BlockEditorHeader.module.css';
@@ -13,11 +13,11 @@ import styles from './BlockEditorHeader.module.css';
 const BlockEditorHeader = () => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(({ user }) => user.id);
-  const writingId = useCurrentWriting()?.id;
+  const { writingId } = useParams();
 
   const handleClick = useCallback(
     (types: ParagraphType[]) =>
-      dispatch(createBlock({ userId, writingId, types })),
+      dispatch(createBlock({ userId, writingId: writingId as string, types })),
     [userId, writingId]
   );
 

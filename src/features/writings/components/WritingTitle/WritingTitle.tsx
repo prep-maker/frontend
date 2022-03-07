@@ -1,4 +1,6 @@
 import React, { memo } from 'react';
+import { useParams } from 'react-router-dom';
+
 import SwitchableInput from '../../../../common/components/SwitchableInput/SwitchableInput';
 import useInput from '../../../../common/hooks/useInput';
 import {
@@ -7,13 +9,15 @@ import {
 } from '../../../../common/hooks/useRedux';
 import { validateTitle } from '../../../../common/utils/validators';
 import { updateWriting } from '../../actions';
-import useCurrentWriting from '../../hooks/useCurrentWriting';
 import { Writing } from '../../writingsSlice';
 import styles from './WritingTitle.module.css';
 
 const WritingTitle = () => {
   const dispatch = useAppDispatch();
-  const writing: Writing = useCurrentWriting();
+  const { writingId } = useParams();
+  const writing = useAppSelector(
+    ({ writings }) => writings.byId[writingId as string]
+  );
   const userId: string = useAppSelector(({ user }) => user.id);
   const [value, isValid, onChange] = useInput(writing?.title, validateTitle);
 

@@ -7,6 +7,7 @@ import ErrorAlert from '../common/components/ErrorAlert/ErrorAlert';
 import LoginForm from '../features/user/components/LoginForm/LoginForm';
 import SignupForm from '../features/user/components/SignupForm/SignupForm';
 import AuthRequired from '../common/components/AuthRequired/AuthRequired';
+import BlockEditor from '../features/blocks/components/BlockEditor/BlockEditor';
 
 const App = () => {
   const isLoggedIn = !!useAppSelector(({ user }) => user.id);
@@ -36,7 +37,9 @@ const App = () => {
               <Writing />
             </AuthRequired>
           }
-        />
+        >
+          <Route path=":writingId" element={<BlockEditor />} />
+        </Route>
         <Route path="/review" />
       </Routes>
     </>

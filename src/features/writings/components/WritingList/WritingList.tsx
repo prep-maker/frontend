@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 import classNames from 'classnames/bind';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
+
 import useMobileQuery from '../../../../common/hooks/useMobileQuery';
 import Button, {
   ButtonSkeleton,
@@ -9,9 +11,8 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
-import { pickWriting } from '../../writingsSlice';
-import styles from './WritingList.module.css';
 import { createWriting } from '../../actions';
+import styles from './WritingList.module.css';
 
 type WritingListProps = {
   readonly writings: {
@@ -27,9 +28,9 @@ const WritingList = ({ writings }: WritingListProps) => {
   const isMobile = useMobileQuery();
   const show = useAppSelector(({ ui }) => ui.show.writingList);
   const dispatch = useAppDispatch();
-
-  const handlePickWriting = useCallback((writingId: string) => {
-    dispatch(pickWriting(writingId));
+  const navigate = useNavigate();
+  const handleListClick = useCallback((writingId: string) => {
+    navigate(`/writing/${writingId}`);
   }, []);
 
   const userId = useAppSelector(({ user }) => user.id);
@@ -67,7 +68,7 @@ const WritingList = ({ writings }: WritingListProps) => {
               value={writing.title}
               color="white"
               size="full"
-              onClick={() => handlePickWriting(writing.id)}
+              onClick={() => handleListClick(writing.id)}
             />
           </li>
         ))}

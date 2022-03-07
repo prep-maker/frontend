@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Button from '../../../../common/components/Button/Button';
 import { BLOCK_TYPE } from '../../../../common/constants/block';
@@ -7,21 +8,25 @@ import {
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
 import { alertError } from '../../../ui/uiSlice';
-import useCurrentWriting from '../../hooks/useCurrentWriting';
+import { saveBlocks } from '../../../blocks/actions';
+import useBlocksByWritingId from '../../../blocks/hooks/useBlocksByWritingId';
 import { deleteWriting, updateWriting } from '../../actions';
 import styles from './WritingFooter.module.css';
 
 const WritingFooter = () => {
-  const writing = useCurrentWriting();
+  const { writingId } = useParams();
   const dispatch = useAppDispatch();
   const userId = useAppSelector(({ user }) => user.id);
+  const writing = useAppSelector(
+    ({ writings }) => writings.byId[writingId as string]
+  );
 
   const handleDelete = useCallback(() => {
     if (!writing) {
       return;
     }
 
-    dispatch(deleteWriting({ userId, writingId: writing.id }));
+    dispatch(deleteWriting({ userId, writingId: writingId as string }));
   }, [userId, writing?.isDone]);
 
   const blocksById = useAppSelector(({ blocks }) => blocks.byId);
@@ -50,7 +55,11 @@ const WritingFooter = () => {
     dispatch(updateWriting({ userId, writing: finished }));
   }, [writing, userId]);
 
-  const handleSave = () => {};
+  const blocks = useBlocksByWritingId(writingId as string);
+
+  const handleSave = () => {
+    dispatch(saveBlocks({ userId, writingId: writing.id, blocks }));
+  };
 
   if (!writing) {
     return <WritingFooterSkeleton />;

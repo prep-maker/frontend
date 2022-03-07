@@ -1,11 +1,13 @@
 import React, { memo } from 'react';
+import { useParams } from 'react-router-dom';
 
-import useCurrentBlocks from '../../hooks/useCurrentBlocks';
+import useBlocksByWritingId from '../../hooks/useBlocksByWritingId';
 import BlockItem from '../BlockItem/BlockItem';
 import styles from './BlockList.module.css';
 
 const BlockList = () => {
-  const blocks = useCurrentBlocks();
+  const { writingId } = useParams();
+  const blocks = useBlocksByWritingId(writingId as string);
 
   return (
     <>

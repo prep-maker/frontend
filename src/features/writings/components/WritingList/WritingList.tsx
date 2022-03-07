@@ -13,18 +13,11 @@ import {
 } from '../../../../common/hooks/useRedux';
 import { createWriting } from '../../actions';
 import styles from './WritingList.module.css';
-
-type WritingListProps = {
-  readonly writings: {
-    id: string;
-    title: string;
-  }[];
-  show?: boolean;
-};
+import useWritings from '../../hooks/useWritings';
 
 const cx = classNames.bind(styles);
 
-const WritingList = ({ writings }: WritingListProps) => {
+const WritingList = () => {
   const isMobile = useMobileQuery();
   const show = useAppSelector(({ ui }) => ui.show.writingList);
   const dispatch = useAppDispatch();
@@ -32,6 +25,7 @@ const WritingList = ({ writings }: WritingListProps) => {
   const handleListClick = useCallback((writingId: string) => {
     navigate(`/writing/${writingId}`);
   }, []);
+  const writings = useWritings();
 
   const userId = useAppSelector(({ user }) => user.id);
 

@@ -27,7 +27,7 @@ const Writing = () => {
         <WritingSkeleton />
       ) : (
         <main className={styles.main}>
-          <WritingList writings={writings} />
+          <WritingList />
           <section className={styles.writing}>
             <WritingTitle />
             <BlockEditor />

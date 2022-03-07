@@ -13,8 +13,6 @@ type ParagraphItemProps = Paragraph & {
   blockId: string;
 };
 
-const MIN_HEIGHT = '16px';
-
 const ParagraphItem = ({
   type,
   content,
@@ -30,8 +28,7 @@ const ParagraphItem = ({
       return;
     }
 
-    textareaRef.current.style.height = MIN_HEIGHT;
-    textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+    fixToScrollHeight(textareaRef.current);
   }, [textareaRef.current]);
 
   const handleChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
@@ -39,8 +36,7 @@ const ParagraphItem = ({
       return;
     }
 
-    textareaRef.current.style.height = MIN_HEIGHT;
-    textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+    fixToScrollHeight(textareaRef.current);
     dispatch(updateParagraph({ blockId, index, value: e.currentTarget.value }));
   };
 
@@ -78,6 +74,13 @@ const ParagraphItem = ({
       )}
     </>
   );
+};
+
+const fixToScrollHeight = (element: HTMLTextAreaElement) => {
+  const MIN_HEIGHT = '16px';
+
+  element.style.height = MIN_HEIGHT;
+  element.style.height = element.scrollHeight + 'px';
 };
 
 export default ParagraphItem;

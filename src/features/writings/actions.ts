@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Block } from '../blocks/blocksSlice';
 import { IWritingAPI, WritingResponse } from './writingAPI';
 import { Writing } from './writingsSlice';
 
@@ -29,13 +30,13 @@ export const updateWriting = createAsyncThunk<
 type DeleteArg = { userId: string; writingId: string };
 
 export const deleteWriting = createAsyncThunk<
-  string,
+  { id: string; blocks: Block[] },
   DeleteArg,
   WritingExtraConfig
 >('writings/deleteStatus', async ({ userId, writingId }, { extra }) => {
-  await extra.writingAPI.delete(userId, writingId);
+  const result = await extra.writingAPI.delete(userId, writingId);
 
-  return writingId;
+  return { id: writingId, blocks: result };
 });
 
 export const createWriting = createAsyncThunk<

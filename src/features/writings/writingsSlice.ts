@@ -60,7 +60,7 @@ export const writingsSlice = createSlice({
         state.byId[id].isDone = isDone;
       })
       .addCase(deleteWriting.fulfilled, (state, action) => {
-        const id = action.payload;
+        const { id } = action.payload;
         deleteFromStore(state, id);
       })
       .addCase(createWriting.fulfilled, (state, action) => {

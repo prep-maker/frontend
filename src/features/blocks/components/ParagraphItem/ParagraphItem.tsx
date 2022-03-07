@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from 'react-icons/md';
 
-import useInput from '../../../../common/hooks/useInput';
+import { useAppDispatch } from '../../../../common/hooks/useRedux';
 import { Paragraph, updateParagraph } from '../../blocksSlice';
 import styles from './ParagraphItem.module.css';
-import { useAppDispatch } from '../../../../common/hooks/useRedux';
 
 const cx = classNames.bind(styles);
 
@@ -23,7 +22,6 @@ const ParagraphItem = ({
   blockId,
 }: ParagraphItemProps) => {
   const [isFolded, setIsFolded] = useState(false);
-  const [value, isValid, onChange] = useInput(content, () => true);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
 
@@ -37,8 +35,6 @@ const ParagraphItem = ({
   }, [textareaRef.current]);
 
   const handleChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    onChange(e);
-
     if (!textareaRef.current) {
       return;
     }
@@ -54,7 +50,7 @@ const ParagraphItem = ({
     <>
       {isFolded ? (
         <div className={cx(color, 'header', 'folded')}>
-          <span className={styles.summary}>{value}</span>
+          <span className={styles.summary}>{content}</span>
           <button
             className={styles.button}
             onClick={() => setIsFolded((prev) => !prev)}
@@ -75,7 +71,7 @@ const ParagraphItem = ({
           <textarea
             className={styles.text}
             ref={textareaRef}
-            value={value}
+            value={content}
             onChange={handleChange}
           />
         </div>

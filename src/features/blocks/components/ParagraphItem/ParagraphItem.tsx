@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -9,11 +9,32 @@ import { useAppDispatch } from '../../../../common/hooks/useRedux';
 
 const cx = classNames.bind(styles);
 
-const ParagraphItem = ({ type, content }: Paragraph) => {
+type ParagraphItemProps = Paragraph & {
+  index: number;
+  blockId: string;
+};
+
+const MIN_HEIGHT = '16px';
+
+const ParagraphItem = ({
+  type,
+  content,
+  index,
+  blockId,
+}: ParagraphItemProps) => {
   const [isFolded, setIsFolded] = useState(false);
   const [value, isValid, onChange] = useInput(content, () => true);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!textareaRef.current) {
+      return;
+    }
+
+    textareaRef.current.style.height = MIN_HEIGHT;
+    textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+  }, [textareaRef.current]);
 
   const handleChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     onChange(e);
@@ -22,7 +43,6 @@ const ParagraphItem = ({ type, content }: Paragraph) => {
       return;
     }
 
-    const MIN_HEIGHT = '16px';
     textareaRef.current.style.height = MIN_HEIGHT;
     textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
     dispatch(updateParagraph({ blockId, index, value: e.currentTarget.value }));

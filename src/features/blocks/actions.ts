@@ -26,11 +26,11 @@ export const deleteBlock = createAsyncThunk<
 });
 
 export const saveBlocks = createAsyncThunk<
-  Block[],
+  { newBlocks: Block[]; oldBlocks: Block[]; writingId: string },
   BlocksUpdateRequest,
   BlockExtraConfig
 >('blocks/saveStatus', async ({ userId, writingId, blocks }, { extra }) => {
   const updated = await extra.blockAPI.update({ userId, writingId, blocks });
 
-  return updated;
+  return { newBlocks: updated, oldBlocks: blocks, writingId };
 });

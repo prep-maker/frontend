@@ -1,3 +1,5 @@
+import { Block } from './blocksSlice';
+
 export type BlockType =
   | 'P'
   | 'R'
@@ -21,4 +23,8 @@ export type IdParams = {
   userId: string;
   writingId: string;
   blockId: string;
+};
+
+export type BlocksUpdateRequest = Omit<IdParams, 'blockId'> & {
+  blocks: Block[];
 };

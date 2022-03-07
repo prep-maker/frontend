@@ -1,5 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useParams } from 'react-router-dom';
 import {
   useAppDispatch,
   useAppSelector,
@@ -18,10 +19,12 @@ type BlockItemProps = {
 const BlockItem = ({ id, paragraphs }: BlockItemProps) => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(({ user }) => user.id);
-  const writingId = useAppSelector(({ writings }) => writings.current);
+  const { writingId } = useParams();
 
   const handleDelete = useCallback(() => {
-    dispatch(deleteBlock({ userId, writingId, blockId: id }));
+    dispatch(
+      deleteBlock({ userId, writingId: writingId as string, blockId: id })
+    );
   }, [userId, writingId, id]);
 
   return (
@@ -29,11 +32,13 @@ const BlockItem = ({ id, paragraphs }: BlockItemProps) => {
       <button className={styles.button} onClick={handleDelete}>
         <AiOutlineClose />
       </button>
-      {paragraphs.map((paragraph) => (
+      {paragraphs.map((paragraph, i) => (
         <ParagraphItem
           key={paragraph.type}
           type={paragraph.type}
           content={paragraph.content}
+          index={i}
+          blockId={id}
         />
       ))}
     </div>

@@ -7,8 +7,4 @@ export const deleteFromStore = <T>(
 ) => {
   delete state.byId[id];
   state.allIds = state.allIds.filter((idItem) => idItem !== id);
-
-  if (state.current && state.current === id) {
-    state.current = state.allIds[0];
-  }
 };

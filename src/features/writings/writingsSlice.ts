@@ -16,28 +16,21 @@ export type Writing = {
   blocks: string[];
 };
 
-const initialState: NormalizedObjects<Writing> & { current: string } = {
+const initialState: NormalizedObjects<Writing> = {
   allIds: [],
   byId: {},
-  current: '',
 };
 
 export const writingsSlice = createSlice({
   name: 'writing',
   initialState,
-  reducers: {
-    pickWriting: (state, action) => {
-      const writingId: string = action.payload;
-      state.current = writingId;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchEditingByUserId.fulfilled, (state, action) => {
         const writings = action.payload;
         const ids = writings.map((writing) => writing.id);
         state.allIds = ids;
-        state.current = ids[0];
 
         for (const writing of writings) {
           state.byId[writing.id] = {
@@ -67,7 +60,6 @@ export const writingsSlice = createSlice({
         const { id, title, isDone } = action.payload;
         state.allIds.push(id);
         state.byId[id] = { id, title, isDone, blocks: [] };
-        state.current = id;
       })
       .addCase(deleteBlock.fulfilled, (state, action) => {
         const { writingId, blockId } = action.payload;
@@ -81,7 +73,5 @@ export const writingsSlice = createSlice({
       });
   },
 });
-
-export const { pickWriting } = writingsSlice.actions;
 
 export default writingsSlice.reducer;

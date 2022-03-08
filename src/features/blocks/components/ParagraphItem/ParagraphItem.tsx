@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 type ParagraphItemProps = Paragraph & {
   index: number;
   blockId: string;
-  setWarning: (value: string) => void;
+  onWarning: (value: string) => void;
 };
 
 const ParagraphItem = ({
@@ -20,13 +20,13 @@ const ParagraphItem = ({
   content,
   index,
   blockId,
-  setWarning,
+  onWarning,
 }: ParagraphItemProps) => {
   const [isFolded, setIsFolded] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const dispatch = useAppDispatch();
 
-  useCorrection({ type, value: content, callback: setWarning });
+  useCorrection({ type, value: content, callback: onWarning });
 
   useEffect(() => {
     if (!textareaRef.current) {

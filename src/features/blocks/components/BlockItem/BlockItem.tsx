@@ -43,7 +43,7 @@ const BlockItem = ({ id, paragraphs }: BlockItemProps) => {
           content={paragraph.content}
           index={i}
           blockId={id}
-          setWarning={setWarning}
+          onWarning={setWarning}
         />
       ))}
     </div>

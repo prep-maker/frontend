@@ -29,6 +29,18 @@ export const blocksSlice = createSlice({
       const { blockId, index, value } = action.payload;
       state.byId[blockId].paragraphs[index].content = value;
     },
+    mergeBlocks: (state, action) => {
+      const { targetId, mergedId } = action.payload;
+      const target = state.byId[targetId];
+      const merged = state.byId[mergedId];
+      target.paragraphs.push(...merged.paragraphs);
+
+      if (target.type !== 'PREP') {
+        state.byId[targetId].type = (target.type + merged.type) as BlockType;
+      }
+
+      deleteFromStore(state, mergedId);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -75,6 +87,6 @@ export const blocksSlice = createSlice({
   },
 });
 
-export const { updateParagraph } = blocksSlice.actions;
+export const { updateParagraph, mergeBlocks } = blocksSlice.actions;
 
 export default blocksSlice.reducer;

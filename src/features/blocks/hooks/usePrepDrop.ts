@@ -16,14 +16,13 @@ const mergePair: { [K in BlockType]: BlockType[] } = {
 const usePrepDrop = (
   type: BlockType,
   id: string
-): [{ isOver: boolean }, ConnectDropTarget] => {
-  return useDrop(() => ({
+): [{ isOver: boolean }, ConnectDropTarget] =>
+  useDrop(() => ({
     accept: mergePair[type],
     drop: () => ({ id }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
     }),
   }));
-};
 
 export default usePrepDrop;

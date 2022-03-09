@@ -78,9 +78,9 @@ export const writingsSlice = createSlice({
         state.byId[writingId].blocks = blockIds;
       })
       .addCase(combineBlocks, (state, action) => {
-        const { writingId, mergedId } = action.payload;
+        const { writingId, combinedId } = action.payload;
         const blocks = state.byId[writingId].blocks;
-        state.byId[writingId].blocks = blocks.filter((id) => id !== mergedId);
+        state.byId[writingId].blocks = blocks.filter((id) => id !== combinedId);
       });
   },
 });

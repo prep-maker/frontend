@@ -45,16 +45,14 @@ class BlockAPI implements IBlockAPI {
     return result.data;
   };
 
-  delete = async (request: IdParams): Promise<void> => {
-    const { userId, writingId, blockId } = request;
+  delete = async ({ userId, writingId, blockId }: IdParams): Promise<void> => {
     await this.http.fetch(
       `/users/${userId}/writings/${writingId}/blocks/${blockId}`,
       { method: 'delete' }
     );
   };
 
-  update = async (request: BlocksUpdateRequest) => {
-    const { userId, writingId, blocks } = request;
+  update = async ({ userId, writingId, blocks }: BlocksUpdateRequest) => {
     const result: AxiosResponse<Block[]> = await this.http.fetch(
       `/users/${userId}/writings/${writingId}/blocks`,
       { method: 'put', body: { blocks } }

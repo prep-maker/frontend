@@ -8,7 +8,7 @@ import {
   createWriting,
 } from './actions';
 import { createBlock, deleteBlock, saveBlocks } from '../blocks/actions';
-import { mergeBlocks } from '../blocks/blocksSlice';
+import { combineBlocks } from '../blocks/blocksSlice';
 
 export type Writing = {
   id: string;
@@ -77,7 +77,7 @@ export const writingsSlice = createSlice({
         const blockIds = newBlocks.map((block) => block.id);
         state.byId[writingId].blocks = blockIds;
       })
-      .addCase(mergeBlocks, (state, action) => {
+      .addCase(combineBlocks, (state, action) => {
         const { writingId, mergedId } = action.payload;
         const blocks = state.byId[writingId].blocks;
         state.byId[writingId].blocks = blocks.filter((id) => id !== mergedId);

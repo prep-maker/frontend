@@ -29,7 +29,7 @@ export const blocksSlice = createSlice({
       const { blockId, index, value } = action.payload;
       state.byId[blockId].paragraphs[index].content = value;
     },
-    mergeBlocks: (state, action) => {
+    combineBlocks: (state, action) => {
       const { targetId, mergedId } = action.payload;
       const target = state.byId[targetId];
       const merged = state.byId[mergedId];
@@ -87,6 +87,6 @@ export const blocksSlice = createSlice({
   },
 });
 
-export const { updateParagraph, mergeBlocks } = blocksSlice.actions;
+export const { updateParagraph, combineBlocks } = blocksSlice.actions;
 
 export default blocksSlice.reducer;

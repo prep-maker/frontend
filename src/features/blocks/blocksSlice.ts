@@ -30,16 +30,16 @@ export const blocksSlice = createSlice({
       state.byId[blockId].paragraphs[index].content = value;
     },
     combineBlocks: (state, action) => {
-      const { targetId, mergedId } = action.payload;
+      const { targetId, combinedId } = action.payload;
       const target = state.byId[targetId];
-      const merged = state.byId[mergedId];
+      const merged = state.byId[combinedId];
       target.paragraphs.push(...merged.paragraphs);
 
       if (target.type !== 'PREP') {
         state.byId[targetId].type = (target.type + merged.type) as BlockType;
       }
 
-      deleteFromStore(state, mergedId);
+      deleteFromStore(state, combinedId);
     },
   },
   extraReducers: (builder) => {

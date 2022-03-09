@@ -1,4 +1,5 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import classNames from 'classnames/bind';
 import { useDrag, useDrop } from 'react-dnd';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
@@ -8,54 +9,77 @@ import {
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
 import { deleteBlock } from '../../actions';
-
-import { Paragraph } from '../../blocksSlice';
-import useDragAndDrop from '../../hooks/useDragAndDrop';
+import { Block, combineBlocks } from '../../blocksSlice';
+import { BlockType } from '../../types';
 import ParagraphItem from '../ParagraphItem/ParagraphItem';
 import Warning from '../Warning/Warning';
 import styles from './BlockItem.module.css';
+import usePrepDrag from '../../hooks/usePrepDrag';
+import usePrepDrop from '../../hooks/usePrepDrop';
 
 type BlockItemProps = {
-  id: string;
-  paragraphs: Paragraph[];
+  block: Block;
+  combine: any;
 };
 
-const BlockItem = ({ id, paragraphs }: BlockItemProps) => {
-  const [warning, setWarning] = useState('');
-  const dispatch = useAppDispatch();
-  const userId = useAppSelector(({ user }) => user.id);
-  const { writingId } = useParams();
-  const block = useAppSelector(({ blocks }) => blocks.byId[id]);
+type DropResult = {
+  id: string;
+  type: BlockType;
+};
 
-  const {
-    useDrag: [collected, drag],
-    useDrop: [{ canDrop, isOver }, drop],
-  } = useDragAndDrop(block.type, id);
+const mergePair: { [K in BlockType]: BlockType[] } = {
+  P: ['R', 'RE', 'REP'],
+  R: ['E', 'EP'],
+  E: ['P'],
+  PR: ['E', 'EP'],
+  RE: ['P'],
+  EP: [],
+  PRE: ['P'],
+  REP: [],
+  PREP: ['PREP'],
+};
+
+const cx = classNames.bind(styles);
+
+const BlockItem = ({ block, combine }: BlockItemProps) => {
+  const [warning, setWarning] = useState('');
+  const { writingId } = useParams();
+  const userId = useAppSelector(({ user }) => user.id);
+  const dispatch = useAppDispatch();
+  const divRef = useRef<HTMLDivElement>(null);
+
+  const [collected, drag] = usePrepDrag(
+    block.type,
+    block.id,
+    writingId as string
+  );
+
+  const [{ isOver }, drop] = usePrepDrop(block.type, block.id);
 
   const handleDelete = useCallback(() => {
     dispatch(
-      deleteBlock({ userId, writingId: writingId as string, blockId: id })
+      deleteBlock({ userId, writingId: writingId as string, blockId: block.id })
     );
-  }, [userId, writingId, id]);
+  }, [userId, writingId, block]);
+
+  drag(drop(divRef));
 
   return (
-    <div ref={drop}>
-      <div className={styles.wrapper} ref={drag}>
-        <button className={styles.button} onClick={handleDelete}>
-          <AiOutlineClose />
-        </button>
-        <Warning message={warning} />
-        {paragraphs.map((paragraph, i) => (
-          <ParagraphItem
-            key={paragraph.type}
-            type={paragraph.type}
-            content={paragraph.content}
-            index={i}
-            blockId={id}
-            onWarning={setWarning}
-          />
-        ))}
-      </div>
+    <div className={cx('wrapper', { isOver })} ref={divRef}>
+      <button className={styles.button} onClick={handleDelete}>
+        <AiOutlineClose />
+      </button>
+      <Warning message={warning} />
+      {block.paragraphs.map((paragraph, i) => (
+        <ParagraphItem
+          key={i}
+          type={paragraph.type}
+          content={paragraph.content}
+          index={i}
+          blockId={block.id}
+          onWarning={setWarning}
+        />
+      ))}
     </div>
   );
 };

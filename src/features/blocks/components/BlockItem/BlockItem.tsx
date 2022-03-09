@@ -1,6 +1,5 @@
-import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
-import { useDrag, useDrop } from 'react-dnd';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
 
@@ -9,13 +8,12 @@ import {
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
 import { deleteBlock } from '../../actions';
-import { Block, combineBlocks } from '../../blocksSlice';
-import { BlockType } from '../../types';
+import { Block } from '../../blocksSlice';
 import ParagraphItem from '../ParagraphItem/ParagraphItem';
 import Warning from '../Warning/Warning';
-import styles from './BlockItem.module.css';
 import usePrepDrag from '../../hooks/usePrepDrag';
 import usePrepDrop from '../../hooks/usePrepDrop';
+import styles from './BlockItem.module.css';
 
 type BlockItemProps = {
   block: Block;

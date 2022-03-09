@@ -21,6 +21,7 @@ const WritingFooter = () => {
     ({ writings }) => writings.byId[writingId as string]
   );
   const navigate = useNavigate();
+  const blocks = useBlocksByWritingId(writingId as string);
 
   const handleDelete = useCallback(() => {
     if (!writing) {
@@ -31,21 +32,18 @@ const WritingFooter = () => {
     navigate('/writing');
   }, [userId, writingId]);
 
-  const blocksById = useAppSelector(({ blocks }) => blocks.byId);
   const handleFinish = useCallback(() => {
     if (!writing) {
       return;
     }
 
-    if (writing.blocks.length !== 1) {
-      alertError('블록이 1개일때만 완료할 수  있습니다.');
+    if (blocks.length !== 1) {
+      dispatch(alertError('블록이 1개일때만 완료할 수  있습니다.'));
       return;
     }
 
-    const blockId = writing.blocks[0];
-
-    if (blocksById[blockId].type !== BLOCK_TYPE.PREP) {
-      alertError('PREP 블럭만 완료할 수 있습니다.');
+    if (blocks[0].type !== BLOCK_TYPE.PREP) {
+      dispatch(alertError('PREP 블럭만 완료할 수 있습니다.'));
       return;
     }
 
@@ -56,8 +54,6 @@ const WritingFooter = () => {
     };
     dispatch(updateWriting({ userId, writing: finished }));
   }, [writing, userId]);
-
-  const blocks = useBlocksByWritingId(writingId as string);
 
   const handleSave = () => {
     dispatch(saveBlocks({ userId, writingId: writing.id, blocks }));

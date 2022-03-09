@@ -19,40 +19,18 @@ import usePrepDrop from '../../hooks/usePrepDrop';
 
 type BlockItemProps = {
   block: Block;
-  combine: any;
-};
-
-type DropResult = {
-  id: string;
-  type: BlockType;
-};
-
-const mergePair: { [K in BlockType]: BlockType[] } = {
-  P: ['R', 'RE', 'REP'],
-  R: ['E', 'EP'],
-  E: ['P'],
-  PR: ['E', 'EP'],
-  RE: ['P'],
-  EP: [],
-  PRE: ['P'],
-  REP: [],
-  PREP: ['PREP'],
 };
 
 const cx = classNames.bind(styles);
 
-const BlockItem = ({ block, combine }: BlockItemProps) => {
+const BlockItem = ({ block }: BlockItemProps) => {
   const [warning, setWarning] = useState('');
   const { writingId } = useParams();
   const userId = useAppSelector(({ user }) => user.id);
   const dispatch = useAppDispatch();
   const divRef = useRef<HTMLDivElement>(null);
 
-  const [collected, drag] = usePrepDrag(
-    block.type,
-    block.id,
-    writingId as string
-  );
+  const [, drag] = usePrepDrag(block.type, block.id, writingId as string);
 
   const [{ isOver }, drop] = usePrepDrop(block.type, block.id);
 

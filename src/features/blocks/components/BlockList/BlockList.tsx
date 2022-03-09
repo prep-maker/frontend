@@ -15,7 +15,7 @@ const BlockList = () => {
         <ul>
           {blocks.map((block) => (
             <li key={block.id}>
-              <BlockItem id={block.id} paragraphs={block.paragraphs} />
+              <BlockItem block={block} />
             </li>
           ))}
         </ul>

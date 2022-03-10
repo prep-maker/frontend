@@ -1,0 +1,14 @@
+.main {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+.writing {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 5%;
+  width: 100%;
+}

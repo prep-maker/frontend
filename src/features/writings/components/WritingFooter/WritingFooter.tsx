@@ -32,7 +32,7 @@ const WritingFooter = () => {
     navigate('/writing');
   }, [userId, writingId]);
 
-  const handleFinish = useCallback(() => {
+  const handleFinish = useCallback(async () => {
     if (!writing) {
       return;
     }
@@ -52,6 +52,7 @@ const WritingFooter = () => {
       title: writing.title,
       isDone: true,
     };
+    await dispatch(saveBlocks({ writingId: writing.id, blocks }));
     dispatch(updateWriting(finished));
   }, [writing, userId]);
 

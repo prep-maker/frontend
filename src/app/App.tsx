@@ -9,6 +9,8 @@ import SignupForm from '../features/user/components/SignupForm/SignupForm';
 import AuthRequired from '../common/components/AuthRequired/AuthRequired';
 import BlockEditor from '../features/blocks/components/BlockEditor/BlockEditor';
 import WritingList from '../features/writings/components/WritingList/WritingList';
+import Review from '../pages/Review/Review';
+import WritingViewer from '../features/reviews/components/WritingViewer';
 
 const App = () => {
   const isLoggedIn = !!useAppSelector(({ user }) => user.id);
@@ -27,9 +29,22 @@ const App = () => {
             )
           }
         />
+
         <Route element={<Login />}>
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignupForm />} />
+        </Route>
+
+        <Route
+          path="/writing"
+          element={
+            <AuthRequired>
+              <Writing />
+            </AuthRequired>
+          }
+        >
+          <Route index element={<WritingList responsive={false} />} />
+          <Route path=":writingId" element={<BlockEditor />} />
         </Route>
         <Route
           path="/writing"
@@ -42,7 +57,17 @@ const App = () => {
           <Route index element={<WritingList responsive={false} />} />
           <Route path=":writingId" element={<BlockEditor />} />
         </Route>
-        <Route path="/review" />
+        <Route
+          path="/review"
+          element={
+            <AuthRequired>
+              <Review />
+            </AuthRequired>
+          }
+        >
+          <Route index element={<WritingList responsive={false} />} />
+          <Route path=":writingId" element={<WritingViewer />} />
+        </Route>
       </Routes>
     </>
   );

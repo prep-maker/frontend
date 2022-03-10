@@ -6,9 +6,12 @@ import {
   updateWriting,
   deleteWriting,
   createWriting,
+  fetchDoneByUserId,
 } from './actions';
 import { createBlock, deleteBlock, saveBlocks } from '../blocks/actions';
 import { combineBlocks } from '../blocks/blocksSlice';
+import { WritableDraft } from 'immer/dist/internal';
+import { WritingResponse } from './writingAPI';
 
 export type Writing = {
   id: string;
@@ -30,17 +33,11 @@ export const writingsSlice = createSlice({
     builder
       .addCase(fetchEditingByUserId.fulfilled, (state, action) => {
         const writings = action.payload;
-        const ids = writings.map((writing) => writing.id);
-        state.allIds = ids;
-
-        for (const writing of writings) {
-          state.byId[writing.id] = {
-            id: writing.id,
-            title: writing.title,
-            isDone: writing.isDone,
-            blocks: writing.blocks.map((block) => block.id),
-          };
-        }
+        setWritings(state, writings);
+      })
+      .addCase(fetchDoneByUserId.fulfilled, (state, action) => {
+        const writings = action.payload;
+        setWritings(state, writings);
       })
       .addCase(updateWriting.fulfilled, (state, action) => {
         const { id, title, isDone } = action.payload;
@@ -84,5 +81,22 @@ export const writingsSlice = createSlice({
       });
   },
 });
+
+const setWritings = (
+  state: WritableDraft<NormalizedObjects<Writing>>,
+  writings: WritingResponse[]
+) => {
+  const ids = writings.map((writing) => writing.id);
+  state.allIds = ids;
+
+  for (const writing of writings) {
+    state.byId[writing.id] = {
+      id: writing.id,
+      title: writing.title,
+      isDone: writing.isDone,
+      blocks: writing.blocks.map((block) => block.id),
+    };
+  }
+};
 
 export default writingsSlice.reducer;

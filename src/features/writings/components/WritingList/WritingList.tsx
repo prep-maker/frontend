@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from 'react';
 import classNames from 'classnames/bind';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import useMobileQuery from '../../../../common/hooks/useMobileQuery';
 import Button, {
@@ -14,9 +14,11 @@ const cx = classNames.bind(styles);
 const WritingList = ({ responsive = true }: { responsive?: boolean }) => {
   const isMobile = useMobileQuery();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleListClick = useCallback((writingId: string) => {
-    navigate(`/writing/${writingId}`);
+    const url = location.pathname.includes('/writing') ? '/writing' : '/review';
+    navigate(`${url}/${writingId}`);
   }, []);
   const writings = useWritings();
 

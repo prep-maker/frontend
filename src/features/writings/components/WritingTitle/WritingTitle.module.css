@@ -1,6 +1,6 @@
 .wrapper {
   max-width: 60%;
-  margin-top: 2.5rem;
+  margin: 2.5rem 0;
   font-size: var(--h3);
   overflow: hidden;
   white-space: nowrap;

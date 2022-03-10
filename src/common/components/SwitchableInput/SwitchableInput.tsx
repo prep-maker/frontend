@@ -1,22 +1,24 @@
 import React, { KeyboardEvent, useState } from 'react';
+
+import Textarea from '../Textarea/Textarea';
 import styles from './SwitchableInput.module.css';
 
 type SwitchableInputProps = {
   value: string;
-  name: string;
   onChange: React.FormEventHandler;
   onEnter: React.KeyboardEventHandler;
+  focusLine?: boolean;
 };
 
 const SwitchableInput = ({
   value,
-  name,
   onChange,
   onEnter,
+  focusLine = false,
 }: SwitchableInputProps) => {
   const [isInput, setIsInput] = useState(false);
 
-  const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       onEnter(e);
 
@@ -31,18 +33,18 @@ const SwitchableInput = ({
   return (
     <div className={styles.wrapper}>
       {isInput ? (
-        <input
-          name={name}
+        <Textarea
           value={value}
-          onKeyUp={handleKeyUp}
           onChange={onChange}
-          className={`${styles.wrapper} ${styles.input}`}
+          onKeyDown={handleKeyDown}
+          focusLine={focusLine}
         />
       ) : (
         <div
           onClick={() => {
             setIsInput(true);
           }}
+          className={styles.text}
         >
           {value}
         </div>

@@ -36,10 +36,10 @@ const WritingTitle = () => {
   return (
     <div className={styles.wrapper}>
       <SwitchableInput
-        name="title"
         value={value}
         onChange={onChange}
         onEnter={handleEnter}
+        focusLine={true}
       />
     </div>
   );

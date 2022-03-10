@@ -1,13 +1,23 @@
+import classNames from 'classnames/bind';
 import React, { useEffect, useRef } from 'react';
 
 import styles from './Textarea.module.css';
 
+const cx = classNames.bind(styles);
+
 type TextareaProps = {
   value: string;
   onChange: React.FormEventHandler;
+  onKeyDown?: React.KeyboardEventHandler;
+  focusLine?: boolean;
 };
 
-const Textarea = ({ value, onChange }: TextareaProps) => {
+const Textarea = ({
+  value,
+  onChange,
+  onKeyDown,
+  focusLine = false,
+}: TextareaProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -28,7 +38,12 @@ const Textarea = ({ value, onChange }: TextareaProps) => {
   };
 
   return (
-    <textarea ref={textareaRef} onChange={handleChange} className={styles.text}>
+    <textarea
+      ref={textareaRef}
+      onChange={handleChange}
+      onKeyDown={onKeyDown}
+      className={cx('text', { focusLine })}
+    >
       {value}
     </textarea>
   );

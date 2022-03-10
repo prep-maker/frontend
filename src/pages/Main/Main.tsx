@@ -9,11 +9,12 @@ import styles from './Main.module.css';
 
 const Main = ({ children }: { children: React.ReactNode }) => {
   const isLoading = useAppSelector(({ ui }) => ui.loading) === 'pending';
+  const writings = useAppSelector(({ writings }) => writings.allIds);
 
   return (
     <>
       <Header isLoggedIn={true} />
-      {isLoading ? (
+      {isLoading && !writings?.length ? (
         <MainSkeleton />
       ) : (
         <main className={styles.main}>

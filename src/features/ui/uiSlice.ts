@@ -3,10 +3,11 @@ import {
   AsyncThunk,
   createSlice,
 } from '@reduxjs/toolkit';
-import { createBlock, deleteBlock } from '../blocks/actions';
+import { createBlock, deleteBlock, saveBlocks } from '../blocks/actions';
 import { login, signup } from '../user/userSlice';
 import {
   deleteWriting,
+  fetchDoneByUserId,
   fetchEditingByUserId,
   updateWriting,
 } from '../writings/actions';
@@ -47,10 +48,12 @@ export const uiSlice = createSlice({
     handleThunkStatus(builder, login);
     handleThunkStatus(builder, signup);
     handleThunkStatus(builder, fetchEditingByUserId);
+    handleThunkStatus(builder, fetchDoneByUserId);
     handleThunkStatus(builder, updateWriting);
     handleThunkStatus(builder, deleteWriting);
     handleThunkStatus(builder, createBlock);
     handleThunkStatus(builder, deleteBlock);
+    handleThunkStatus(builder, saveBlocks);
   },
 });
 

@@ -43,9 +43,8 @@ const Textarea = ({
       onChange={handleChange}
       onKeyDown={onKeyDown}
       className={cx('text', { focusLine })}
-    >
-      {value}
-    </textarea>
+      value={value}
+    />
   );
 };
 

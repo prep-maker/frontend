@@ -10,7 +10,7 @@ import AuthRequired from '../common/components/AuthRequired/AuthRequired';
 import BlockEditor from '../features/blocks/components/BlockEditor/BlockEditor';
 import WritingList from '../features/writings/components/WritingList/WritingList';
 import Review from '../pages/Review/Review';
-import WritingViewer from '../features/reviews/components/WritingViewer';
+import WritingViewer from '../features/reviews/components/WritingViewer/WritingViewer';
 
 const App = () => {
   const isLoggedIn = !!useAppSelector(({ user }) => user.id);

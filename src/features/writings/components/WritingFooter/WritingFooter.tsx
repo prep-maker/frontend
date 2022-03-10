@@ -54,6 +54,7 @@ const WritingFooter = () => {
     };
     await dispatch(saveBlocks({ writingId: writing.id, blocks }));
     dispatch(updateWriting(finished));
+    navigate('/review');
   }, [writing, userId]);
 
   const handleSave = () => {

@@ -42,11 +42,6 @@ export const writingsSlice = createSlice({
       .addCase(updateWriting.fulfilled, (state, action) => {
         const { id, title, isDone } = action.payload;
 
-        if (isDone) {
-          deleteFromStore(state, id);
-          return;
-        }
-
         state.byId[id].title = title;
         state.byId[id].isDone = isDone;
       })
@@ -88,6 +83,7 @@ const setWritings = (
 ) => {
   const ids = writings.map((writing) => writing.id);
   state.allIds = ids;
+  state.byId = {};
 
   for (const writing of writings) {
     state.byId[writing.id] = {

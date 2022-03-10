@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  border: var(--border);
+  border-radius: 10px;
+}
+
+.index {
+  width: 1.5rem;
+  border-radius: 10px 0 0 10px;
+  background-color: var(--lightGray);
+}
+
+.paragraphs {
+  width: 100%;
+  position: relative;
+  left: -12px;
+  z-index: 2;
+}

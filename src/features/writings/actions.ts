@@ -29,7 +29,7 @@ export const updateWriting = createAsyncThunk<
   WritingResponse,
   Omit<Writing, 'blocks'>,
   WritingExtraConfig
->('writings/updateTitleStatus', async (writing, { extra }) => {
+>('writings/updateStatus', async (writing, { extra }) => {
   const result = await extra.writingAPI.update(writing);
 
   return result;

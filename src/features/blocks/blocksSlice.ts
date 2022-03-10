@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { WritableDraft } from 'immer/dist/internal';
 import { NormalizedObjects } from '../../common/types/state';
 import { deleteFromStore } from '../../common/utils/store';
-import { fetchEditingByUserId, deleteWriting } from '../writings/actions';
+import {
+  fetchEditingByUserId,
+  deleteWriting,
+  fetchDoneByUserId,
+} from '../writings/actions';
+import { WritingResponse } from '../writings/writingAPI';
 import { createBlock, deleteBlock, saveBlocks } from './actions';
 import { BlockType, ParagraphType } from './types';
 
@@ -46,17 +52,11 @@ export const blocksSlice = createSlice({
     builder
       .addCase(fetchEditingByUserId.fulfilled, (state, action) => {
         const writings = action.payload;
-        state.byId = {};
-        state.allIds = [];
-
-        for (const writing of writings) {
-          const blockIds = writing.blocks.map((block) => block.id);
-          state.allIds.push(...blockIds);
-
-          for (const block of writing.blocks) {
-            state.byId[block.id] = block;
-          }
-        }
+        setBlocks(state, writings);
+      })
+      .addCase(fetchDoneByUserId.fulfilled, (state, action) => {
+        const writings = action.payload;
+        setBlocks(state, writings);
       })
       .addCase(createBlock.fulfilled, (state, action) => {
         const { blocks } = action.payload;
@@ -86,6 +86,23 @@ export const blocksSlice = createSlice({
       });
   },
 });
+
+const setBlocks = (
+  state: WritableDraft<NormalizedObjects<Block>>,
+  writings: WritingResponse[]
+) => {
+  state.byId = {};
+  state.allIds = [];
+
+  for (const writing of writings) {
+    const blockIds = writing.blocks.map((block) => block.id);
+    state.allIds.push(...blockIds);
+
+    for (const block of writing.blocks) {
+      state.byId[block.id] = block;
+    }
+  }
+};
 
 export const { updateParagraph, combineBlocks } = blocksSlice.actions;
 

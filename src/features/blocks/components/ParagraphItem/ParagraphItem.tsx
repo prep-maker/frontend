@@ -9,7 +9,7 @@ import useCorrection from '../../hooks/useCorrection';
 
 const cx = classNames.bind(styles);
 
-type ParagraphItemProps = Paragraph & {
+type ParagraphItemProps = Omit<Paragraph, 'comments'> & {
   index: number;
   blockId: string;
   onWarning: (value: string) => void;

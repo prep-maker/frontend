@@ -1,6 +1,7 @@
 .wrapper {
-  max-width: 100%;
-  text-align: center;
+  width: 100%;
+  text-align: inherit;
+  word-break: break-all;
 }
 
 .text {

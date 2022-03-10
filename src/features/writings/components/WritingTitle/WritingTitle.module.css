@@ -4,4 +4,5 @@
   font-size: var(--h3);
   overflow: hidden;
   white-space: nowrap;
+  text-align: center;
 }

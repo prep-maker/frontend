@@ -6,6 +6,9 @@
 .writing {
   height: 3rem;
   margin: 1rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .mobile-writing {

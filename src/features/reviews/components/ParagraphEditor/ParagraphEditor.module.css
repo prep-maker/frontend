@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
+.index {
+  width: 1rem;
+  font-size: var(--h6);
+}

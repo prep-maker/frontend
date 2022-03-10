@@ -1,6 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import classNames from 'classnames/bind';
 import { AiOutlinePlus } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 import useMobileQuery from '../../../../common/hooks/useMobileQuery';
 import Button, {
@@ -21,9 +22,11 @@ const WritingMenu = () => {
   const dispatch = useAppDispatch();
   const userId = useAppSelector(({ user }) => user.id);
   const show = useAppSelector(({ ui }) => ui.show.writingList);
+  const navigate = useNavigate();
 
   const handleCreate = useCallback(() => {
     dispatch(createWriting(userId));
+    navigate('/writing');
   }, [userId]);
 
   return (

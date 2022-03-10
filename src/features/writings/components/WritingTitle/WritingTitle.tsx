@@ -18,7 +18,6 @@ const WritingTitle = () => {
   const writing = useAppSelector(
     ({ writings }) => writings.byId[writingId as string]
   );
-  const userId: string = useAppSelector(({ user }) => user.id);
   const [value, isValid, onChange] = useInput(writing?.title, validateTitle);
 
   const handleEnter = () => {
@@ -31,7 +30,7 @@ const WritingTitle = () => {
       title: value,
       isDone: writing.isDone,
     };
-    dispatch(updateWriting({ userId, writing: updated }));
+    dispatch(updateWriting(updated));
   };
 
   return (

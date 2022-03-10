@@ -14,7 +14,6 @@ export type BlockType =
 export type ParagraphType = 'P' | 'R' | 'E';
 
 export type NewBlockRequest = {
-  userId: string;
   writingId: string;
   types: ParagraphType[];
 };
@@ -25,6 +24,7 @@ export type IdParams = {
   blockId: string;
 };
 
-export type BlocksUpdateRequest = Omit<IdParams, 'blockId'> & {
+export type BlocksUpdateRequest = {
+  writingId: string;
   blocks: Block[];
 };

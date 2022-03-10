@@ -15,14 +15,22 @@ export const fetchEditingByUserId = createAsyncThunk<
   return result;
 });
 
-type UpdateArg = { userId: string; writing: Omit<Writing, 'blocks'> };
+export const fetchDoneByUserId = createAsyncThunk<
+  WritingResponse[],
+  string,
+  WritingExtraConfig
+>('writings/fetchDoneByUserIdStatus', async (userId: string, { extra }) => {
+  const result = await extra.writingAPI.getDoneByUserId(userId);
+
+  return result;
+});
 
 export const updateWriting = createAsyncThunk<
   WritingResponse,
-  UpdateArg,
+  Omit<Writing, 'blocks'>,
   WritingExtraConfig
->('writings/updateTitleStatus', async ({ userId, writing }, { extra }) => {
-  const result = await extra.writingAPI.update(userId, writing);
+>('writings/updateTitleStatus', async (writing, { extra }) => {
+  const result = await extra.writingAPI.update(writing);
 
   return result;
 });

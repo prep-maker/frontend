@@ -14,7 +14,6 @@ export interface IWritingAPI {
   readonly getEditingByUserId: (userId: string) => Promise<WritingResponse[]>;
   readonly getDoneByUserId: (userId: string) => Promise<WritingResponse[]>;
   readonly update: (
-    userId: string,
     writing: Omit<Writing, 'blocks'>
   ) => Promise<WritingResponse>;
   readonly delete: (userId: string, writingId: string) => Promise<Block[]>;
@@ -47,11 +46,10 @@ class WritingAPI implements IWritingAPI {
   };
 
   update = async (
-    userId: string,
     writing: Omit<Writing, 'blocks'>
   ): Promise<WritingResponse> => {
     const result: AxiosResponse<WritingResponse> = await this.http.fetch(
-      `/users/${userId}/writings/${writing.id}`,
+      `/writings/${writing.id}`,
       { method: 'put', body: writing }
     );
 

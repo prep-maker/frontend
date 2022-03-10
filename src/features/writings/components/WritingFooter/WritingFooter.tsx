@@ -52,11 +52,11 @@ const WritingFooter = () => {
       title: writing.title,
       isDone: true,
     };
-    dispatch(updateWriting({ userId, writing: finished }));
+    dispatch(updateWriting(finished));
   }, [writing, userId]);
 
   const handleSave = () => {
-    dispatch(saveBlocks({ userId, writingId: writing.id, blocks }));
+    dispatch(saveBlocks({ writingId: writing.id, blocks }));
   };
 
   if (!writing) {

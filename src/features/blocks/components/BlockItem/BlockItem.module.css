@@ -2,10 +2,20 @@
   margin: 0.5rem 0;
 }
 
+.header {
+  display: flex;
+}
+
 .button {
   position: relative;
   top: 3.3rem;
   cursor: pointer;
+}
+
+.type {
+  position: relative;
+  top: 3.2rem;
+  font-weight: 700;
 }
 
 .isOver {

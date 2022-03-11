@@ -42,9 +42,12 @@ const BlockItem = ({ block }: BlockItemProps) => {
 
   return (
     <div className={cx('wrapper', { isOver })} ref={divRef}>
-      <button className={styles.button} onClick={handleDelete}>
-        <AiOutlineClose />
-      </button>
+      <header className={styles.header}>
+        <button className={styles.button} onClick={handleDelete}>
+          <AiOutlineClose />
+        </button>
+        <div className={styles.type}>{block.type}</div>
+      </header>
       <Warning message={warning} />
       {block.paragraphs.map((paragraph, i) => (
         <ParagraphItem

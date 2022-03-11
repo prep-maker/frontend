@@ -11,6 +11,7 @@ import BlockEditor from '../features/blocks/components/BlockEditor/BlockEditor';
 import WritingList from '../features/writings/components/WritingList/WritingList';
 import Review from '../pages/Review/Review';
 import WritingViewer from '../features/reviews/components/WritingViewer/WritingViewer';
+import Loading from '../common/components/Loading/Loading';
 
 const App = () => {
   const isLoggedIn = !!useAppSelector(({ user }) => user.id);
@@ -18,6 +19,7 @@ const App = () => {
   return (
     <>
       <ErrorAlert />
+      <Loading />
       <Routes>
         <Route
           path="/"

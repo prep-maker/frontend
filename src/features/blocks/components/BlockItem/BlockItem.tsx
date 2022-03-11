@@ -28,9 +28,14 @@ const BlockItem = ({ block }: BlockItemProps) => {
   const dispatch = useAppDispatch();
   const divRef = useRef<HTMLDivElement>(null);
 
-  const [, drag] = usePrepDrag(block.type, block.id, writingId as string);
+  const [, drag] = usePrepDrag(
+    block.type,
+    block.id,
+    writingId as string,
+    warning
+  );
 
-  const [{ isOver }, drop] = usePrepDrop(block.type, block.id);
+  const [{ isOver }, drop] = usePrepDrop(block.type, block.id, warning);
 
   const handleDelete = useCallback(() => {
     dispatch(

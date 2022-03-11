@@ -19,6 +19,7 @@ const WritingTitle = () => {
     ({ writings }) => writings.byId[writingId as string]
   );
   const [value, isValid, onChange] = useInput(writing?.title, validateTitle);
+  const userId = useAppSelector(({ user }) => user.id);
 
   const handleEnter = () => {
     if (!(isValid && writing)) {
@@ -28,6 +29,7 @@ const WritingTitle = () => {
     const updated: Omit<Writing, 'blocks'> = {
       id: writing.id,
       title: value,
+      author: userId,
       isDone: writing.isDone,
     };
     dispatch(updateWriting(updated));

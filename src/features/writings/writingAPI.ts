@@ -6,6 +6,7 @@ import { Block } from '../blocks/blocksSlice';
 export type WritingResponse = {
   id: string;
   isDone: boolean;
+  author: string;
   title: string;
   blocks: Block[];
 };

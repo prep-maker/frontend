@@ -16,6 +16,7 @@ import { WritingResponse } from './writingAPI';
 export type Writing = {
   id: string;
   title: string;
+  author: string;
   isDone: boolean;
   blocks: string[];
 };
@@ -50,9 +51,9 @@ export const writingsSlice = createSlice({
         deleteFromStore(state, id);
       })
       .addCase(createWriting.fulfilled, (state, action) => {
-        const { id, title, isDone } = action.payload;
+        const { id, title, author, isDone } = action.payload;
         state.allIds.push(id);
-        state.byId[id] = { id, title, isDone, blocks: [] };
+        state.byId[id] = { id, title, author, isDone, blocks: [] };
       })
       .addCase(deleteBlock.fulfilled, (state, action) => {
         const { writingId, blockId } = action.payload;
@@ -88,6 +89,7 @@ const setWritings = (
   for (const writing of writings) {
     state.byId[writing.id] = {
       id: writing.id,
+      author: writing.author,
       title: writing.title,
       isDone: writing.isDone,
       blocks: writing.blocks.map((block) => block.id),

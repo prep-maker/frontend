@@ -50,6 +50,7 @@ const WritingFooter = () => {
     const finished = {
       id: writing.id,
       title: writing.title,
+      author: userId,
       isDone: true,
     };
     await dispatch(saveBlocks({ writingId: writing.id, blocks }));

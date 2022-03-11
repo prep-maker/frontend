@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+
 import Login from '../pages/Login/Login';
 import { useAppSelector } from '../common/hooks/useRedux';
 import Writing from '../pages/Writing/Writing';
@@ -48,17 +49,7 @@ const App = () => {
           <Route index element={<WritingList responsive={false} />} />
           <Route path=":writingId" element={<BlockEditor />} />
         </Route>
-        <Route
-          path="/writing"
-          element={
-            <AuthRequired>
-              <Writing />
-            </AuthRequired>
-          }
-        >
-          <Route index element={<WritingList responsive={false} />} />
-          <Route path=":writingId" element={<BlockEditor />} />
-        </Route>
+
         <Route
           path="/review"
           element={

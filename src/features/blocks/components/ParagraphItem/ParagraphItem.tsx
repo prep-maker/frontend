@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -26,7 +26,9 @@ const ParagraphItem = ({
   const [isFolded, setIsFolded] = useState(false);
   const dispatch = useAppDispatch();
 
-  useCorrection({ type, value: content, callback: onWarning });
+  useEffect(() => {
+    useCorrection({ type, value: content, callback: onWarning });
+  }, [type, content]);
 
   const handleChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
     dispatch(updateParagraph({ blockId, index, value: e.currentTarget.value }));

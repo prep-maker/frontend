@@ -53,7 +53,7 @@ const WritingFooter = () => {
       isDone: true,
     };
     await dispatch(saveBlocks({ writingId: writing.id, blocks }));
-    dispatch(updateWriting(finished));
+    await dispatch(updateWriting(finished));
     navigate('/review');
   }, [writing, userId]);
 

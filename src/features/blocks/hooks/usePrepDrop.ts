@@ -1,7 +1,8 @@
 import { ConnectDropTarget, useDrop } from 'react-dnd';
+
 import { BlockType } from '../types';
 
-const mergePair: { [K in BlockType]: BlockType[] } = {
+const combinePair: { [K in BlockType]: BlockType[] } = {
   P: ['R', 'RE', 'REP'],
   R: ['E', 'EP'],
   E: ['P'],
@@ -17,12 +18,15 @@ const usePrepDrop = (
   type: BlockType,
   id: string
 ): [{ isOver: boolean }, ConnectDropTarget] =>
-  useDrop(() => ({
-    accept: mergePair[type],
-    drop: () => ({ id }),
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
+  useDrop(
+    () => ({
+      accept: combinePair[type],
+      drop: () => ({ id }),
+      collect: (monitor) => ({
+        isOver: monitor.isOver(),
+      }),
     }),
-  }));
+    [type]
+  );
 
 export default usePrepDrop;

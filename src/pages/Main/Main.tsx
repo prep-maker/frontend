@@ -3,8 +3,9 @@ import React from 'react';
 import Header from '../../common/components/Header/Header';
 import WritingTitle from '../../features/writings/components/WritingTitle/WritingTitle';
 import { useAppSelector } from '../../common/hooks/useRedux';
-import WritingMenu from '../../features/writings/components/WritingMenu/WritingMenu';
-import MainSkeleton from './MainSkeleton';
+import WritingMenu, {
+  WritingMenuSkeleton,
+} from '../../features/writings/components/WritingMenu/WritingMenu';
 import styles from './Main.module.css';
 
 const Main = ({ children }: { children: React.ReactNode }) => {
@@ -26,6 +27,14 @@ const Main = ({ children }: { children: React.ReactNode }) => {
         </main>
       )}
     </>
+  );
+};
+
+export const MainSkeleton = () => {
+  return (
+    <main className={styles.main}>
+      <WritingMenuSkeleton />
+    </main>
   );
 };
 

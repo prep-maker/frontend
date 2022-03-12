@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
+
 import { deleteFromStore } from '../../common/utils/store';
 import {
   fetchEditingByUserId,
@@ -15,8 +16,9 @@ export type Paragraph = {
   readonly type: ParagraphType;
   readonly content: string;
   readonly comments: {
-    author: string;
+    username: string;
     content: string;
+    isPending?: boolean;
   }[];
 };
 
@@ -50,6 +52,18 @@ export const blocksSlice = createSlice({
       }
 
       deleteFromStore(state, combinedId);
+    },
+    addCommentToParagraph: (state, action) => {
+      const { blockId, content, author, username, pIndex } = action.payload;
+      console.log(action.payload);
+      const comment = {
+        content,
+        author,
+        username,
+        isPending: true,
+      };
+
+      state.byId[blockId].paragraphs[pIndex].comments.push(comment);
     },
   },
   extraReducers: (builder) => {
@@ -116,6 +130,7 @@ const addBlocksToStore = (
   }
 };
 
-export const { updateParagraph, combineBlocks } = blocksSlice.actions;
+export const { updateParagraph, combineBlocks, addCommentToParagraph } =
+  blocksSlice.actions;
 
 export default blocksSlice.reducer;

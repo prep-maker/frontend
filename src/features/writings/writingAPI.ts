@@ -1,4 +1,4 @@
-import { Axios, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import { IHttpClient } from '../../network/http';
 import { Writing } from './writingsSlice';
 import { Block } from '../blocks/blocksSlice';

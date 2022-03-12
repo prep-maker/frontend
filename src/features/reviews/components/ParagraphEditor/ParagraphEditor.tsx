@@ -6,9 +6,8 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
-import { saveBlocks, updateBlock } from '../../../blocks/actions';
+import { updateBlock } from '../../../blocks/actions';
 import { updateParagraph } from '../../../blocks/blocksSlice';
-import useBlocksByWritingId from '../../../blocks/hooks/useBlocksByWritingId';
 import styles from './ParagraphEditor.module.css';
 
 type ParagraphEditorProp = {

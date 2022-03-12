@@ -6,6 +6,7 @@ import {
 import {
   createBlock,
   deleteBlock,
+  finishComment,
   saveBlocks,
   updateBlock,
 } from '../blocks/actions';
@@ -62,6 +63,7 @@ export const uiSlice = createSlice({
     handleThunkStatus(builder, deleteBlock);
     handleThunkStatus(builder, saveBlocks);
     handleThunkStatus(builder, updateBlock);
+    handleThunkStatus(builder, finishComment);
   },
 });
 

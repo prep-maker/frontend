@@ -6,12 +6,14 @@ import {
   NewBlockRequest,
   IdParams,
   BlocksUpdateRequest,
+  BlockUpdateRequest,
 } from './types';
 
 export interface IBlockAPI {
   readonly create: (request: NewBlockRequest) => Promise<Block[]>;
   readonly delete: (request: Omit<IdParams, 'userId'>) => Promise<void>;
-  readonly update: (request: BlocksUpdateRequest) => Promise<Block[]>;
+  readonly updateMany: (request: BlocksUpdateRequest) => Promise<Block[]>;
+  readonly updateOne: (request: BlockUpdateRequest) => Promise<Block>;
 }
 
 class BlockAPI implements IBlockAPI {
@@ -50,10 +52,19 @@ class BlockAPI implements IBlockAPI {
     });
   };
 
-  update = async ({ writingId, blocks }: BlocksUpdateRequest) => {
+  updateMany = async ({ writingId, blocks }: BlocksUpdateRequest) => {
     const result: AxiosResponse<Block[]> = await this.http.fetch(
       `/writings/${writingId}/blocks`,
       { method: 'put', body: { blocks } }
+    );
+
+    return result.data;
+  };
+
+  updateOne = async ({ writingId, blockId, block }: BlockUpdateRequest) => {
+    const result: AxiosResponse<Block> = await this.http.fetch(
+      `/writings/${writingId}/blocks/${blockId}`,
+      { method: 'put', body: block }
     );
 
     return result.data;

@@ -1,3 +1,4 @@
+import { StringMappingType } from 'typescript';
 import { Block } from './blocksSlice';
 
 export type BlockType =
@@ -27,4 +28,10 @@ export type IdParams = {
 export type BlocksUpdateRequest = {
   writingId: string;
   blocks: Block[];
+};
+
+export type BlockUpdateRequest = {
+  writingId: StringMappingType;
+  blockId: string;
+  block: Block;
 };

@@ -1,6 +1,5 @@
 .wrapper {
   display: flex;
-  align-items: center;
   padding: 0.5rem 0;
   width: 100%;
 }
@@ -10,6 +9,9 @@
 }
 
 .index {
+  position: relative;
+  top: 2px;
+  left: -14px;
   width: 1rem;
   font-size: var(--h6);
 }

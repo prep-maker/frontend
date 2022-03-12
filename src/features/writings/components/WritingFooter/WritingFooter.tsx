@@ -14,24 +14,22 @@ import { deleteWriting, updateWriting } from '../../actions';
 import styles from './WritingFooter.module.css';
 
 const WritingFooter = () => {
-  const { writingId } = useParams();
-  const dispatch = useAppDispatch();
+  const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
   const userId = useAppSelector(({ user }) => user.id);
-  const writing = useAppSelector(
-    ({ writings }) => writings.byId[writingId as string]
-  );
+  const writing = useAppSelector(({ writings }) => writings.byId[writingId]);
   const navigate = useNavigate();
-  const blocks = useBlocksByWritingId(writingId as string);
+  const dispatch = useAppDispatch();
 
   const handleDelete = useCallback(() => {
     if (!writing) {
       return;
     }
 
-    dispatch(deleteWriting({ userId, writingId: writingId as string }));
+    dispatch(deleteWriting({ userId, writingId }));
     navigate('/writing');
   }, [userId, writingId]);
 
+  const blocks = useBlocksByWritingId(writingId);
   const handleFinish = useCallback(async () => {
     if (!writing) {
       return;

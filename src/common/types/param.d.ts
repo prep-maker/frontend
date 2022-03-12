@@ -1,0 +1,3 @@
+type WritingIdParam = {
+  writingId: string;
+};

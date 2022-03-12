@@ -13,15 +13,15 @@ import styles from './WritingViewerHeader.module.css';
 const WritingViewerHeader = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { writingId } = useParams();
+  const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
   const userId = useAppSelector(({ user }) => user.id);
 
   const handleDelete = () => {
-    dispatch(deleteWriting({ userId, writingId: writingId as string }));
+    dispatch(deleteWriting({ userId, writingId }));
     navigate('/review');
   };
 
-  const paragraphs = useParagraphsByWritingId(writingId as string);
+  const paragraphs = useParagraphsByWritingId(writingId);
   const text = paragraphs.join('\n');
 
   const handleClick = () => {

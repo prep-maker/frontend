@@ -14,12 +14,10 @@ import styles from './WritingTitle.module.css';
 
 const WritingTitle = () => {
   const dispatch = useAppDispatch();
-  const { writingId } = useParams();
-  const writing = useAppSelector(
-    ({ writings }) => writings.byId[writingId as string]
-  );
-  const [value, isValid, onChange] = useInput(writing?.title, validateTitle);
+  const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
+  const writing = useAppSelector(({ writings }) => writings.byId[writingId]);
   const userId = useAppSelector(({ user }) => user.id);
+  const [value, isValid, onChange] = useInput(writing?.title, validateTitle);
 
   const handleEnter = () => {
     if (!(isValid && writing)) {

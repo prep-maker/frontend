@@ -26,12 +26,12 @@ const ParagraphEditor = ({ blockId, index }: ParagraphEditorProp) => {
     dispatch(updateParagraph({ blockId, index, value: e.currentTarget.value }));
   };
 
-  const { writingId } = useParams();
-  const blocks = useBlocksByWritingId(writingId as string);
+  const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
+  const blocks = useBlocksByWritingId(writingId);
 
   const handleEnter = () => {
     dispatch(updateParagraph({ blockId, index, value: content }));
-    dispatch(saveBlocks({ writingId: writingId as string, blocks }));
+    dispatch(saveBlocks({ writingId, blocks }));
   };
 
   return (

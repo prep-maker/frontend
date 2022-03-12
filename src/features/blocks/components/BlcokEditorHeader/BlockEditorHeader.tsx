@@ -9,11 +9,11 @@ import styles from './BlockEditorHeader.module.css';
 
 const BlockEditorHeader = () => {
   const dispatch = useAppDispatch();
-  const { writingId } = useParams();
+  const { writingId } = useParams<keyof WritingIdParam>() as WritingIdParam;
 
   const handleClick = useCallback(
     (types: ParagraphType[]) =>
-      dispatch(createBlock({ writingId: writingId as string, types })),
+      dispatch(createBlock({ writingId: writingId, types })),
     [writingId]
   );
 

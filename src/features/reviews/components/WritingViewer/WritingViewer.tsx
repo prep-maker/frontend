@@ -8,11 +8,11 @@ import WritingViewerHeader from '../WritingViewerHeader.tsx/WritingViewerHeader'
 import styles from './WritingViewer.module.css';
 
 const WritingViewer = () => {
-  const { writingId } = useParams();
+  const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
   const blockId = useAppSelector(
-    ({ writings }) => writings.byId[writingId as string].blocks[0]
+    ({ writings }) => writings.byId[writingId].blocks[0]
   );
-  const paragraphs = useParagraphsByWritingId(writingId as string);
+  const paragraphs = useParagraphsByWritingId(writingId);
 
   return (
     <>

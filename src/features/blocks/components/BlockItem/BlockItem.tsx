@@ -22,27 +22,19 @@ type BlockItemProps = {
 const cx = classNames.bind(styles);
 
 const BlockItem = ({ block }: BlockItemProps) => {
+  const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
   const [warning, setWarning] = useState('');
-  const { writingId } = useParams();
-  const userId = useAppSelector(({ user }) => user.id);
-  const dispatch = useAppDispatch();
-  const divRef = useRef<HTMLDivElement>(null);
 
-  const [, drag] = usePrepDrag(
-    block.type,
-    block.id,
-    writingId as string,
-    warning
-  );
-
+  const [, drag] = usePrepDrag(block.type, block.id, writingId, warning);
   const [{ isOver }, drop] = usePrepDrop(block.type, block.id, warning);
 
+  const dispatch = useAppDispatch();
+  const userId = useAppSelector(({ user }) => user.id);
   const handleDelete = useCallback(() => {
-    dispatch(
-      deleteBlock({ userId, writingId: writingId as string, blockId: block.id })
-    );
+    dispatch(deleteBlock({ userId, writingId, blockId: block.id }));
   }, [userId, writingId, block]);
 
+  const divRef = useRef<HTMLDivElement>(null);
   drag(drop(divRef));
 
   return (

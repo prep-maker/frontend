@@ -6,8 +6,8 @@ import BlockItem from '../BlockItem/BlockItem';
 import styles from './BlockList.module.css';
 
 const BlockList = () => {
-  const { writingId } = useParams();
-  const blocks = useBlocksByWritingId(writingId as string);
+  const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
+  const blocks = useBlocksByWritingId(writingId);
 
   return (
     <>

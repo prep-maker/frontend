@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+
 import BlockEditorHeader from '../BlcokEditorHeader/BlockEditorHeader';
 import BlockList from '../BlockList/BlockList';
 import styles from './BlockEditor.module.css';

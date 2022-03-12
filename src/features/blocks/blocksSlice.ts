@@ -5,6 +5,7 @@ import {
   fetchEditingByUserId,
   deleteWriting,
   fetchDoneByUserId,
+  fetchWritingById,
 } from '../writings/actions';
 import { WritingResponse } from '../writings/writingAPI';
 import { createBlock, deleteBlock, saveBlocks } from './actions';
@@ -54,12 +55,25 @@ export const blocksSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchEditingByUserId.fulfilled, (state, action) => {
+        state.allIds = [];
+        state.byId = {};
         const writings = action.payload;
-        setBlocks(state, writings);
+
+        for (const writing of writings) {
+          addBlocksToStore(state, writing);
+        }
       })
       .addCase(fetchDoneByUserId.fulfilled, (state, action) => {
+        state.allIds = [];
+        state.byId = {};
         const writings = action.payload;
-        setBlocks(state, writings);
+
+        for (const writing of writings) {
+          addBlocksToStore(state, writing);
+        }
+      })
+      .addCase(fetchWritingById.fulfilled, (state, action) => {
+        addBlocksToStore(state, action.payload);
       })
       .addCase(createBlock.fulfilled, (state, action) => {
         const { blocks } = action.payload;
@@ -90,20 +104,15 @@ export const blocksSlice = createSlice({
   },
 });
 
-const setBlocks = (
+const addBlocksToStore = (
   state: WritableDraft<NormalizedObjects<Block>>,
-  writings: WritingResponse[]
+  writing: WritingResponse
 ) => {
-  state.byId = {};
-  state.allIds = [];
+  const blockIds = writing.blocks.map((block) => block.id);
+  state.allIds.push(...blockIds);
 
-  for (const writing of writings) {
-    const blockIds = writing.blocks.map((block) => block.id);
-    state.allIds.push(...blockIds);
-
-    for (const block of writing.blocks) {
-      state.byId[block.id] = block;
-    }
+  for (const block of writing.blocks) {
+    state.byId[block.id] = block;
   }
 };
 

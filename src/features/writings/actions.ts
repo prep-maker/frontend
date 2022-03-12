@@ -25,6 +25,16 @@ export const fetchDoneByUserId = createAsyncThunk<
   return result;
 });
 
+export const fetchWritingById = createAsyncThunk<
+  WritingResponse,
+  string,
+  WritingExtraConfig
+>('writings/fetchByIdStatus', async (writingId: string, { extra }) => {
+  const result = await extra.writingAPI.getById(writingId);
+
+  return result;
+});
+
 export const updateWriting = createAsyncThunk<
   WritingResponse,
   Omit<Writing, 'blocks'>,

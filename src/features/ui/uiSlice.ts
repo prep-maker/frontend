@@ -9,6 +9,7 @@ import {
   deleteWriting,
   fetchDoneByUserId,
   fetchEditingByUserId,
+  fetchWritingById,
   updateWriting,
 } from '../writings/actions';
 
@@ -49,6 +50,7 @@ export const uiSlice = createSlice({
     handleThunkStatus(builder, signup);
     handleThunkStatus(builder, fetchEditingByUserId);
     handleThunkStatus(builder, fetchDoneByUserId);
+    handleThunkStatus(builder, fetchWritingById);
     handleThunkStatus(builder, updateWriting);
     handleThunkStatus(builder, deleteWriting);
     handleThunkStatus(builder, createBlock);

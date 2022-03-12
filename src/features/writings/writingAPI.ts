@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { Axios, AxiosResponse } from 'axios';
 import { IHttpClient } from '../../network/http';
 import { Writing } from './writingsSlice';
 import { Block } from '../blocks/blocksSlice';
@@ -14,6 +14,7 @@ export type WritingResponse = {
 export interface IWritingAPI {
   readonly getEditingByUserId: (userId: string) => Promise<WritingResponse[]>;
   readonly getDoneByUserId: (userId: string) => Promise<WritingResponse[]>;
+  readonly getById: (writingId: string) => Promise<WritingResponse>;
   readonly update: (
     writing: Omit<Writing, 'blocks'>
   ) => Promise<WritingResponse>;
@@ -27,9 +28,7 @@ class WritingAPI implements IWritingAPI {
   getEditingByUserId = async (userId: string): Promise<WritingResponse[]> => {
     const result: AxiosResponse<WritingResponse[]> = await this.http.fetch(
       `/users/${userId}/writings?state=editing`,
-      {
-        method: 'get',
-      }
+      { method: 'get' }
     );
 
     return result.data;
@@ -38,9 +37,16 @@ class WritingAPI implements IWritingAPI {
   getDoneByUserId = async (userId: string): Promise<WritingResponse[]> => {
     const result: AxiosResponse<WritingResponse[]> = await this.http.fetch(
       `/users/${userId}/writings?state=done`,
-      {
-        method: 'get',
-      }
+      { method: 'get' }
+    );
+
+    return result.data;
+  };
+
+  getById = async (writingId: string): Promise<WritingResponse> => {
+    const result: AxiosResponse<WritingResponse> = await this.http.fetch(
+      `/writings/${writingId}`,
+      { method: 'get' }
     );
 
     return result.data;
@@ -60,9 +66,7 @@ class WritingAPI implements IWritingAPI {
   delete = async (userId: string, writingId: string) => {
     const result = await this.http.fetch(
       `/users/${userId}/writings/${writingId}`,
-      {
-        method: 'delete',
-      }
+      { method: 'delete' }
     );
 
     return result.data;

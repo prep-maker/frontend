@@ -6,6 +6,7 @@ import {
   deleteWriting,
   createWriting,
   fetchDoneByUserId,
+  fetchWritingById,
 } from './actions';
 import { createBlock, deleteBlock, saveBlocks } from '../blocks/actions';
 import { combineBlocks } from '../blocks/blocksSlice';
@@ -32,16 +33,28 @@ export const writingsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchEditingByUserId.fulfilled, (state, action) => {
+        state.allIds = [];
+        state.byId = {};
         const writings = action.payload;
-        setWritings(state, writings);
+
+        for (const writing of writings) {
+          addWritingToStore(state, writing);
+        }
       })
       .addCase(fetchDoneByUserId.fulfilled, (state, action) => {
+        state.allIds = [];
+        state.byId = {};
         const writings = action.payload;
-        setWritings(state, writings);
+
+        for (const writing of writings) {
+          addWritingToStore(state, writing);
+        }
+      })
+      .addCase(fetchWritingById.fulfilled, (state, action) => {
+        addWritingToStore(state, action.payload);
       })
       .addCase(updateWriting.fulfilled, (state, action) => {
         const { id, title, isDone } = action.payload;
-
         state.byId[id].title = title;
         state.byId[id].isDone = isDone;
       })
@@ -77,23 +90,15 @@ export const writingsSlice = createSlice({
   },
 });
 
-const setWritings = (
+const addWritingToStore = (
   state: WritableDraft<NormalizedObjects<Writing>>,
-  writings: WritingResponse[]
+  writing: WritingResponse
 ) => {
-  const ids = writings.map((writing) => writing.id);
-  state.allIds = ids;
-  state.byId = {};
-
-  for (const writing of writings) {
-    state.byId[writing.id] = {
-      id: writing.id,
-      author: writing.author,
-      title: writing.title,
-      isDone: writing.isDone,
-      blocks: writing.blocks.map((block) => block.id),
-    };
-  }
+  state.allIds.push(writing.id);
+  state.byId[writing.id] = {
+    ...writing,
+    blocks: writing.blocks.map((block) => block.id),
+  };
 };
 
 export default writingsSlice.reducer;

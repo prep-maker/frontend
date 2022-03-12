@@ -12,14 +12,16 @@ import { WritingResponse } from '../writings/writingAPI';
 import { createBlock, deleteBlock, saveBlocks, updateBlock } from './actions';
 import { BlockType, ParagraphType } from './types';
 
+export type Comment = {
+  username: string;
+  content: string;
+  isPending?: boolean;
+};
+
 export type Paragraph = {
   readonly type: ParagraphType;
   readonly content: string;
-  readonly comments: {
-    username: string;
-    content: string;
-    isPending?: boolean;
-  }[];
+  readonly comments: Comment[];
 };
 
 export type Block = {

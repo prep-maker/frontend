@@ -1,0 +1,25 @@
+.wrapper {
+  margin: 1rem 0;
+  padding: 0 1rem 1rem 0.5rem;
+  border-top: 1px solid var(--lightGray);
+  border-bottom: 1px solid var(--lightGray);
+  transform: translateX(-3px);
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}
+
+.input {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid var(--lightGray);
+  border-radius: 10px;
+}
+
+.button {
+  height: 2rem;
+  width: 4rem;
+}

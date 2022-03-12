@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { memo, useState } from 'react';
+import CommentEditor from '../CommentEditor/CommentEditor';
 
 import styles from './CommentableParagraph.module.css';
 
@@ -11,12 +12,16 @@ const CommentableParagraph = ({
   content,
   index,
 }: CommentableParagraphProps) => {
+  const [isCommenting, setIsCommneting] = useState(false);
   return (
     <div className={styles.wrapper}>
       <div className={styles.index}>{index + 1}</div>
-      <p className={styles.p}>{content}</p>
+      <div className={styles.content}>
+        <p className={styles.p}>{content}</p>
+        <CommentEditor />
+      </div>
     </div>
   );
 };
 
-export default CommentableParagraph;
+export default memo(CommentableParagraph);

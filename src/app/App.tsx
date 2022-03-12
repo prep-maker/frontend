@@ -13,6 +13,7 @@ import WritingList from '../features/writings/components/WritingList/WritingList
 import Review from '../pages/Review/Review';
 import WritingViewer from '../features/reviews/components/WritingViewer/WritingViewer';
 import Loading from '../common/components/Loading/Loading';
+import Feedback from '../pages/Feedback/Feeadback';
 
 const App = () => {
   const isLoggedIn = !!useAppSelector(({ user }) => user.id);
@@ -54,6 +55,10 @@ const App = () => {
         <Route path="/review" element={reviewPage}>
           <Route index element={<WritingList responsive={false} />} />
           <Route path=":writingId" element={<WritingViewer />} />
+        </Route>
+
+        <Route path="/feedback">
+          <Route path=":writingId" element={<Feedback />} />
         </Route>
       </Routes>
     </>

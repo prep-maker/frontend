@@ -57,7 +57,6 @@ export const blocksSlice = createSlice({
     },
     addCommentToParagraph: (state, action) => {
       const { blockId, content, author, username, pIndex } = action.payload;
-      console.log(action.payload);
       const comment = {
         content,
         author,
@@ -118,8 +117,8 @@ export const blocksSlice = createSlice({
         blocks.forEach((block) => deleteFromStore(state, block.id));
       })
       .addCase(updateBlock.fulfilled, (state, action) => {
-        const { newBlock } = action.payload;
-        state.byId[newBlock.id] = newBlock;
+        const block = action.payload;
+        state.byId[block.id] = block;
       });
   },
 });

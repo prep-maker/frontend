@@ -9,7 +9,7 @@ import {
   fetchWritingById,
 } from '../writings/actions';
 import { WritingResponse } from '../writings/writingAPI';
-import { createBlock, deleteBlock, saveBlocks } from './actions';
+import { createBlock, deleteBlock, saveBlocks, updateBlock } from './actions';
 import { BlockType, ParagraphType } from './types';
 
 export type Paragraph = {
@@ -114,6 +114,10 @@ export const blocksSlice = createSlice({
       .addCase(deleteWriting.fulfilled, (state, action) => {
         const { blocks } = action.payload;
         blocks.forEach((block) => deleteFromStore(state, block.id));
+      })
+      .addCase(updateBlock.fulfilled, (state, action) => {
+        const { newBlock } = action.payload;
+        state.byId[newBlock.id] = newBlock;
       });
   },
 });

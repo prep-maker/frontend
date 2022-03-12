@@ -6,7 +6,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
-import { saveBlocks } from '../../../blocks/actions';
+import { saveBlocks, updateBlock } from '../../../blocks/actions';
 import { updateParagraph } from '../../../blocks/blocksSlice';
 import useBlocksByWritingId from '../../../blocks/hooks/useBlocksByWritingId';
 import styles from './ParagraphEditor.module.css';
@@ -14,24 +14,21 @@ import styles from './ParagraphEditor.module.css';
 type ParagraphEditorProp = {
   blockId: string;
   index: number;
+  content: string;
 };
 
-const ParagraphEditor = ({ blockId, index }: ParagraphEditorProp) => {
+const ParagraphEditor = ({ blockId, index, content }: ParagraphEditorProp) => {
   const dispatch = useAppDispatch();
-  const content = useAppSelector(
-    ({ blocks }) => blocks.byId[blockId].paragraphs[index].content
-  );
 
   const handleChange = (e: FormEvent<HTMLInputElement>) => {
     dispatch(updateParagraph({ blockId, index, value: e.currentTarget.value }));
   };
 
-  const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
-  const blocks = useBlocksByWritingId(writingId);
+  const { writingId } = useParams<keyof WritingIdParam>() as WritingIdParam;
+  const block = useAppSelector(({ blocks }) => blocks.byId[blockId]);
 
   const handleEnter = () => {
-    dispatch(updateParagraph({ blockId, index, value: content }));
-    dispatch(saveBlocks({ writingId, blocks }));
+    dispatch(updateBlock({ writingId, blockId, block }));
   };
 
   return (

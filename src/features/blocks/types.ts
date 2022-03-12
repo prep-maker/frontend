@@ -31,7 +31,7 @@ export type BlocksUpdateRequest = {
 };
 
 export type BlockUpdateRequest = {
-  writingId: StringMappingType;
+  writingId: string;
   blockId: string;
   block: Block;
 };

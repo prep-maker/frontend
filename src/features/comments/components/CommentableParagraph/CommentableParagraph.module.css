@@ -1,11 +1,23 @@
 .wrapper {
   display: flex;
+  align-items: flex-start;
   padding: 0.5rem 0;
   width: 100%;
 }
 
 .wrapper:hover {
   cursor: pointer;
+}
+
+.comments {
+  position: absolute;
+  padding: 2px 4px;
+  border-radius: 50%;
+  transform: translate(-44px, 2px);
+  font-size: var(--h6);
+  font-weight: 700;
+  color: white;
+  background-color: var(--blue);
 }
 
 .index {

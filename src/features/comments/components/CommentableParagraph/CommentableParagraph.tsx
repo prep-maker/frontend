@@ -24,13 +24,24 @@ const CommentableParagraph = ({
 
   return (
     <div className={styles.wrapper}>
+      {!!paragraph.comments.length && (
+        <div className={styles.comments}>{paragraph.comments.length}</div>
+      )}
       <div className={styles.index}>{index + 1}</div>
       <div className={styles.content}>
         <p className={styles.p} onClick={handlePClick}>
           {paragraph.content}
         </p>
         <CommentEditor show={isCommenting} index={index} blockId={blockId} />
-        <Comment author="익명" content="테스트" show={isCommenting} isPending />
+        {paragraph.comments.map((comment, i) => (
+          <Comment
+            key={i}
+            author={comment.username}
+            content={comment.content}
+            show={isCommenting}
+            isPending={!!comment.isPending}
+          />
+        ))}
       </div>
     </div>
   );

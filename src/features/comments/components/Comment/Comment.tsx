@@ -1,6 +1,6 @@
 import React from 'react';
-import CommentLayout from '../CommentLayout/CommentLayout';
 
+import CommentLayout from '../CommentLayout/CommentLayout';
 import styles from './Comment.module.css';
 
 type CommentProps = {

@@ -1,0 +1,9 @@
+.wrapper {
+  margin: auto;
+  max-width: 80%;
+}
+
+.title {
+  font-size: var(--h1);
+  text-align: center;
+}

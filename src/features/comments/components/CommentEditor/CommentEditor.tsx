@@ -1,6 +1,4 @@
 import React from 'react';
-import { AiOutlineClose } from 'react-icons/ai';
-import { useParams } from 'react-router-dom';
 
 import Button from '../../../../common/components/Button/Button';
 import Textarea from '../../../../common/components/Textarea/Textarea';
@@ -45,11 +43,6 @@ const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
     <>
       {show && (
         <CommentLayout>
-          <header className={styles.header}>
-            <button>
-              <AiOutlineClose />
-            </button>
-          </header>
           <div className={styles.input}>
             <Textarea value={value} onChange={handleChange} />
           </div>

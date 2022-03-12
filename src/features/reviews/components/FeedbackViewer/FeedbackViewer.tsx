@@ -25,11 +25,12 @@ const FeedbackViewer = () => {
 
   const paragraphs = useParagraphsByWritingId(writingId);
   const blockId = writing.blocks[0];
+  const comments = paragraphs.flatMap((paragraph) => paragraph.comments);
 
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>{writing.title}</h1>
-      <FeedbackViewerHeader />
+      <FeedbackViewerHeader comments={comments} />
       <ViewerLayout>
         {paragraphs?.map((paragraph, i) => (
           <CommentableParagraph

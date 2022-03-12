@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import ViewerLayout from '../../../../common/components/ViewerLayout/ViewerLayout';
 
+import ViewerLayout from '../../../../common/components/ViewerLayout/ViewerLayout';
 import { useAppSelector } from '../../../../common/hooks/useRedux';
 import useParagraphsByWritingId from '../../hooks/useParagraphsByWritingId';
 import ParagraphEditor from '../ParagraphEditor/ParagraphEditor';
@@ -17,8 +17,13 @@ const WritingViewer = () => {
     <>
       <WritingViewerHeader />
       <ViewerLayout>
-        {paragraphs.map((_, i) => (
-          <ParagraphEditor key={i} blockId={blockId} index={i} />
+        {paragraphs.map((paragraph, i) => (
+          <ParagraphEditor
+            key={i}
+            blockId={blockId}
+            index={i}
+            content={paragraph.content}
+          />
         ))}
       </ViewerLayout>
     </>

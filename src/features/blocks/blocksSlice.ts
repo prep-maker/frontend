@@ -9,7 +9,13 @@ import {
   fetchWritingById,
 } from '../writings/actions';
 import { WritingResponse } from '../writings/writingAPI';
-import { createBlock, deleteBlock, saveBlocks, updateBlock } from './actions';
+import {
+  createBlock,
+  deleteBlock,
+  finishComment,
+  saveBlocks,
+  updateBlock,
+} from './actions';
 import { BlockType, ParagraphType } from './types';
 
 export type Comment = {
@@ -65,6 +71,16 @@ export const blocksSlice = createSlice({
       };
 
       state.byId[blockId].paragraphs[pIndex].comments.push(comment);
+    },
+    cancelPendingComment: (state, action) => {
+      const blockId = action.payload;
+      const paragraphs = state.byId[blockId].paragraphs;
+
+      for (const paragraph of paragraphs) {
+        paragraph.comments = paragraph.comments.filter(
+          (comment) => !comment.isPending
+        );
+      }
     },
   },
   extraReducers: (builder) => {
@@ -135,7 +151,11 @@ const addBlocksToStore = (
   }
 };
 
-export const { updateParagraph, combineBlocks, addCommentToParagraph } =
-  blocksSlice.actions;
+export const {
+  updateParagraph,
+  combineBlocks,
+  addCommentToParagraph,
+  cancelPendingComment,
+} = blocksSlice.actions;
 
 export default blocksSlice.reducer;

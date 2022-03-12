@@ -49,3 +49,20 @@ export const updateBlock = createAsyncThunk<
 
   return updated;
 });
+
+export const finishComment = createAsyncThunk<
+  Block,
+  BlockUpdateRequest,
+  BlockExtraConfig
+>(
+  'blocks/finishCommentStatus',
+  async ({ writingId, blockId, block }, { extra }) => {
+    const updated = await extra.blockAPI.updateOne({
+      writingId,
+      blockId,
+      block,
+    });
+
+    return updated;
+  }
+);

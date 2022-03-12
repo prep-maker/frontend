@@ -1,7 +1,11 @@
 .header {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+}
+
+.column {
+  display: flex;
 }
 
 .author {

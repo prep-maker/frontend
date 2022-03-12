@@ -1,4 +1,5 @@
 import React from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
 
 import CommentLayout from '../CommentLayout/CommentLayout';
 import styles from './Comment.module.css';
@@ -16,8 +17,13 @@ const Comment = ({ author, content, isPending, show }: CommentProps) => {
       {show && (
         <CommentLayout>
           <header className={styles.header}>
-            <span className={styles.author}>{author}</span>
-            {isPending && <div className={styles.pending}>PENDING</div>}
+            <div className={styles.column}>
+              <span className={styles.author}>{author}</span>
+              {isPending && <div className={styles.pending}>PENDING</div>}
+            </div>
+            <button>
+              <AiOutlineClose />
+            </button>
           </header>
           <p className={styles.p}>{content}</p>
         </CommentLayout>

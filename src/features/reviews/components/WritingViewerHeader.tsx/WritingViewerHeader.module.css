@@ -4,3 +4,8 @@
   margin-bottom: 1rem;
   width: 100%;
 }
+
+.column {
+  display: flex;
+  gap: 1em;
+}

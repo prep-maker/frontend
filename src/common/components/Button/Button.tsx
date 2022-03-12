@@ -1,4 +1,4 @@
-import React, { memo, ReactElement } from 'react';
+import React, { memo, MouseEventHandler, ReactElement } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Button.module.css';
 
@@ -7,7 +7,7 @@ type ButtonProps = {
   color: 'pink' | 'yellow' | 'green' | 'blue' | 'white' | 'gray' | 'magenta';
   size: 'atom' | 'short' | 'middle' | 'long' | 'full';
   circle?: boolean;
-  onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: MouseEventHandler;
   disabled?: boolean;
   border?: boolean;
 };

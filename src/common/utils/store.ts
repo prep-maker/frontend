@@ -1,5 +1,4 @@
 import { WritableDraft } from 'immer/dist/internal';
-import { NormalizedObjects } from '../../common/types/state';
 
 export const deleteFromStore = <T>(
   state: WritableDraft<NormalizedObjects<T>>,

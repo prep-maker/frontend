@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
-import { NormalizedObjects } from '../../common/types/state';
 import { deleteFromStore } from '../../common/utils/store';
 import {
   fetchEditingByUserId,
@@ -14,6 +13,10 @@ import { BlockType, ParagraphType } from './types';
 export type Paragraph = {
   readonly type: ParagraphType;
   readonly content: string;
+  readonly comments: {
+    author: string;
+    content: string;
+  }[];
 };
 
 export type Block = {

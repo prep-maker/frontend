@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { deleteFromStore } from '../../common/utils/store';
-import { NormalizedObjects } from '../../common/types/state';
 import {
   fetchEditingByUserId,
   updateWriting,

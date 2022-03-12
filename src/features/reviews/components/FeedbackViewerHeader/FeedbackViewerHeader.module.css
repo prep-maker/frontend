@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.select {
+  position: absolute;
+  display: flex;
+  z-index: 5;
+  gap: 0.5rem;
+  transform: translateY(3rem);
+  background-color: white;
+}

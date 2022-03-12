@@ -9,6 +9,7 @@ import {
 import CommentableParagraph from '../../../comments/components/CommentableParagraph/CommentableParagraph';
 import { fetchWritingById } from '../../../writings/actions';
 import useParagraphsByWritingId from '../../hooks/useParagraphsByWritingId';
+import FeedbackViewerHeader from '../FeedbackViewerHeader/FeedbackViewerHeader';
 import styles from './FeedbackViewer.module.css';
 
 const ParagraphViewer = () => {
@@ -27,6 +28,7 @@ const ParagraphViewer = () => {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>{writing.title}</h1>
+      <FeedbackViewerHeader />
       <ViewerLayout>
         {paragraphs?.map((paragraph, i) => (
           <CommentableParagraph key={i} content={paragraph} index={i} />

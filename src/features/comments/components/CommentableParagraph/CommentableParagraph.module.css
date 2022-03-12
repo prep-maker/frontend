@@ -34,4 +34,9 @@
   height: fit-content;
   word-break: break-all;
   cursor: pointer;
+  transition: color 200ms ease-in;
+}
+
+.p:hover {
+  color: var(--gray);
 }

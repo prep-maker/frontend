@@ -36,14 +36,7 @@ const WritingViewerHeader = () => {
         size="short"
         onClick={handleDelete}
       />
-      <div className={styles.button}>
-        <Button
-          value="클립보드 복사"
-          color="green"
-          size="full"
-          onClick={handleClick}
-        />
-      </div>
+      <Button value="복사" color="green" size="short" onClick={handleClick} />
     </header>
   );
 };

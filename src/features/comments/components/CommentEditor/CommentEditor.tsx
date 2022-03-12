@@ -4,6 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai';
 import Button from '../../../../common/components/Button/Button';
 import Textarea from '../../../../common/components/Textarea/Textarea';
 import useInput from '../../../../common/hooks/useInput';
+import CommentLayout from '../CommentLayout/CommentLayout';
 import styles from './CommentEditor.module.css';
 
 const CommentEditor = ({ show }: { show: boolean }) => {
@@ -12,7 +13,7 @@ const CommentEditor = ({ show }: { show: boolean }) => {
   return (
     <>
       {show && (
-        <div className={styles.wrapper}>
+        <CommentLayout>
           <header className={styles.header}>
             <button>
               <AiOutlineClose />
@@ -31,7 +32,7 @@ const CommentEditor = ({ show }: { show: boolean }) => {
               />
             </div>
           </footer>
-        </div>
+        </CommentLayout>
       )}
     </>
   );

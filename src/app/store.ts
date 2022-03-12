@@ -7,6 +7,7 @@ import config from '../common/utils/config';
 import uiReducer from '../features/ui/uiSlice';
 import userReducer from '../features/user/userSlice';
 import writingsReducer from '../features/writings/writingsSlice';
+import commentsReducer from '../features/comments/commentsSlice';
 import AuthAPI from '../features/user/authAPI';
 import HttpClient from '../network/http';
 import WritingAPI from '../features/writings/writingAPI';
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   user: userReducer,
   writings: writingsReducer,
   blocks: blocksReducer,
+  comments: commentsReducer,
 });
 
 const persisitConfig = {

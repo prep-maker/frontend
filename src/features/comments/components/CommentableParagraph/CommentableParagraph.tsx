@@ -13,12 +13,19 @@ const CommentableParagraph = ({
   index,
 }: CommentableParagraphProps) => {
   const [isCommenting, setIsCommneting] = useState(false);
+
+  const handleClick = () => {
+    setIsCommneting((prev) => !prev);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.index}>{index + 1}</div>
       <div className={styles.content}>
-        <p className={styles.p}>{content}</p>
-        <CommentEditor />
+        <p className={styles.p} onClick={handleClick}>
+          {content}
+        </p>
+        <CommentEditor show={isCommenting} />
       </div>
     </div>
   );

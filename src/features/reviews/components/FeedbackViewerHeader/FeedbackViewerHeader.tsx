@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 
 import Button from '../../../../common/components/Button/Button';
 import styles from './FeedbackViewerHeader.module.css';
@@ -6,9 +6,9 @@ import styles from './FeedbackViewerHeader.module.css';
 const FeedbackViewerHeader = () => {
   const [showSelect, setShowSelect] = useState(false);
 
-  const handleClickFinish = () => {
+  const handleClickFinish = useCallback(() => {
     setShowSelect((prev) => !prev);
-  };
+  }, []);
 
   return (
     <header className={styles.wrapper}>
@@ -33,4 +33,4 @@ const FeedbackViewerHeader = () => {
   );
 };
 
-export default FeedbackViewerHeader;
+export default memo(FeedbackViewerHeader);

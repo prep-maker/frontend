@@ -24,6 +24,7 @@ const FeedbackViewer = () => {
   }, [writing]);
 
   const paragraphs = useParagraphsByWritingId(writingId);
+  const blockId = writing.blocks[0];
 
   return (
     <div className={styles.wrapper}>
@@ -31,7 +32,12 @@ const FeedbackViewer = () => {
       <FeedbackViewerHeader />
       <ViewerLayout>
         {paragraphs?.map((paragraph, i) => (
-          <CommentableParagraph key={i} paragraph={paragraph} index={i} />
+          <CommentableParagraph
+            key={i}
+            paragraph={paragraph}
+            index={i}
+            blockId={blockId}
+          />
         ))}
       </ViewerLayout>
     </div>

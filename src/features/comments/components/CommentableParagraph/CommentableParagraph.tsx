@@ -8,11 +8,13 @@ import styles from './CommentableParagraph.module.css';
 type CommentableParagraphProps = {
   paragraph: Paragraph;
   index: number;
+  blockId: string;
 };
 
 const CommentableParagraph = ({
   paragraph,
   index,
+  blockId,
 }: CommentableParagraphProps) => {
   const [isCommenting, setIsCommneting] = useState(false);
 
@@ -27,7 +29,7 @@ const CommentableParagraph = ({
         <p className={styles.p} onClick={handlePClick}>
           {paragraph.content}
         </p>
-        <CommentEditor show={isCommenting} />
+        <CommentEditor show={isCommenting} index={index} blockId={blockId} />
         <Comment author="익명" content="테스트" show={isCommenting} isPending />
       </div>
     </div>

@@ -1,14 +1,45 @@
 import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useParams } from 'react-router-dom';
 
 import Button from '../../../../common/components/Button/Button';
 import Textarea from '../../../../common/components/Textarea/Textarea';
 import useInput from '../../../../common/hooks/useInput';
+import {
+  useAppDispatch,
+  useAppSelector,
+} from '../../../../common/hooks/useRedux';
+import { addCommentToParagraph } from '../../../blocks/blocksSlice';
 import CommentLayout from '../CommentLayout/CommentLayout';
 import styles from './CommentEditor.module.css';
 
-const CommentEditor = ({ show }: { show: boolean }) => {
-  const [value, isValid, handleChange] = useInput('', () => true);
+type CommentEditorProps = {
+  show: boolean;
+  index: number;
+  blockId: string;
+};
+
+const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
+  const [value, isValid, handleChange, reset] = useInput('', () => true);
+  const user = useAppSelector(({ user }) => user);
+  const dispatch = useAppDispatch();
+
+  const addComment = () => {
+    dispatch(
+      addCommentToParagraph({
+        blockId,
+        content: value,
+        author: user.id,
+        username: user.name,
+        pIndex: index,
+      })
+    );
+    reset();
+  };
+
+  const handleClick = () => {
+    addComment();
+  };
 
   return (
     <>
@@ -28,7 +59,7 @@ const CommentEditor = ({ show }: { show: boolean }) => {
                 value="작성"
                 color="yellow"
                 size="full"
-                onClick={() => {}}
+                onClick={handleClick}
               />
             </div>
           </footer>

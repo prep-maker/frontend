@@ -22,7 +22,7 @@ const WritingViewerHeader = () => {
   };
 
   const paragraphs = useParagraphsByWritingId(writingId);
-  const text = paragraphs.join('\n');
+  const text = paragraphs.map((paragraph) => paragraph.content).join('\n');
 
   const handleClick = () => {
     navigator.clipboard.writeText(text);

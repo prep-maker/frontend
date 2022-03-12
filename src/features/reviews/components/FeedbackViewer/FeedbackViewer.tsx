@@ -31,7 +31,7 @@ const ParagraphViewer = () => {
       <FeedbackViewerHeader />
       <ViewerLayout>
         {paragraphs?.map((paragraph, i) => (
-          <CommentableParagraph key={i} content={paragraph} index={i} />
+          <CommentableParagraph key={i} content={paragraph.content} index={i} />
         ))}
       </ViewerLayout>
     </div>

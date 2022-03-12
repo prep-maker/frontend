@@ -9,7 +9,7 @@ import {
 import CommentableParagraph from '../../../comments/components/CommentableParagraph/CommentableParagraph';
 import { fetchWritingById } from '../../../writings/actions';
 import useParagraphsByWritingId from '../../hooks/useParagraphsByWritingId';
-import styles from './ParagraphViewer.module.css';
+import styles from './FeedbackViewer.module.css';
 
 const ParagraphViewer = () => {
   const { writingId } = useParams<keyof WritingIdParam>() as WritingIdParam;

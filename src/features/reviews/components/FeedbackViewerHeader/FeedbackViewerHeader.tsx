@@ -21,10 +21,12 @@ const FeedbackViewerHeader = ({ comments }: { comments: Comment[] }) => {
 
   const handleClickSending = useCallback(() => {
     dispatch(updateBlock({ writingId, blockId: block.id, block }));
+    setShowSelect(false);
   }, [writingId, block]);
 
   const handleClickCancel = useCallback(() => {
     dispatch(cancelPendingComment(block.id));
+    setShowSelect(false);
   }, [block.id]);
 
   return (

@@ -1,20 +1,22 @@
 import React, { memo, useState } from 'react';
-import CommentEditor from '../CommentEditor/CommentEditor';
 
+import { Paragraph } from '../../../blocks/blocksSlice';
+import Comment from '../Comment/Comment';
+import CommentEditor from '../CommentEditor/CommentEditor';
 import styles from './CommentableParagraph.module.css';
 
 type CommentableParagraphProps = {
-  content: string;
+  paragraph: Paragraph;
   index: number;
 };
 
 const CommentableParagraph = ({
-  content,
+  paragraph,
   index,
 }: CommentableParagraphProps) => {
   const [isCommenting, setIsCommneting] = useState(false);
 
-  const handleClick = () => {
+  const handlePClick = () => {
     setIsCommneting((prev) => !prev);
   };
 
@@ -22,10 +24,11 @@ const CommentableParagraph = ({
     <div className={styles.wrapper}>
       <div className={styles.index}>{index + 1}</div>
       <div className={styles.content}>
-        <p className={styles.p} onClick={handleClick}>
-          {content}
+        <p className={styles.p} onClick={handlePClick}>
+          {paragraph.content}
         </p>
         <CommentEditor show={isCommenting} />
+        <Comment author="익명" content="테스트" show={isCommenting} isPending />
       </div>
     </div>
   );

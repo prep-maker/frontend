@@ -1,8 +1,12 @@
 .wrapper {
   display: flex;
   align-items: center;
-  margin: 0.5rem 0;
+  padding: 0.5rem 0;
   width: 100%;
+}
+
+.wrapper:hover {
+  cursor: pointer;
 }
 
 .index {

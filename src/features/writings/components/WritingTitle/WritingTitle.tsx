@@ -39,7 +39,7 @@ const WritingTitle = () => {
         value={value}
         onChange={onChange}
         onEnter={handleEnter}
-        focusLine={true}
+        focusLine
       />
     </div>
   );

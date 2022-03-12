@@ -41,6 +41,7 @@ const ParagraphEditor = ({ blockId, index }: ParagraphEditorProp) => {
         value={content}
         onChange={handleChange}
         onEnter={handleEnter}
+        focusLine
       />
     </div>
   );

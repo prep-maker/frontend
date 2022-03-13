@@ -98,3 +98,23 @@
 .no-border {
   border: none;
 }
+
+@media only screen and (max-width: 768px) {
+  .button {
+    font-size: 14px;
+  }
+  .middle {
+    width: 4.5rem;
+    height: 2rem;
+  }
+
+  .short {
+    width: 3.5rem;
+    height: 2rem;
+  }
+
+  .atom {
+    width: 2rem;
+    height: 2rem;
+  }
+}

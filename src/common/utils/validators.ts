@@ -40,3 +40,12 @@ export const validateTitle = (title: string): boolean => {
 
   return true;
 };
+
+export const validateComment = (content: string): boolean => {
+  content.trim();
+  if (content.length < 1) {
+    return false;
+  }
+
+  return true;
+};

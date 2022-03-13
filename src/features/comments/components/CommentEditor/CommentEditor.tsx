@@ -7,6 +7,7 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '../../../../common/hooks/useRedux';
+import { validateComment } from '../../../../common/utils/validators';
 import { addCommentToParagraph } from '../../../blocks/blocksSlice';
 import CommentLayout from '../CommentLayout/CommentLayout';
 import styles from './CommentEditor.module.css';
@@ -18,7 +19,7 @@ type CommentEditorProps = {
 };
 
 const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
-  const [value, _, handleChange, reset] = useInput('', () => true);
+  const [value, isValid, handleChange, reset] = useInput('', validateComment);
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
 
@@ -36,6 +37,10 @@ const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
   };
 
   const handleClick = () => {
+    if (!isValid) {
+      return;
+    }
+
     addComment();
   };
 

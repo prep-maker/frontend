@@ -35,9 +35,9 @@ const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
     reset();
   };
 
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     addComment();
-  }, [blockId, index, user]);
+  };
 
   return (
     <>

@@ -22,7 +22,6 @@
 
 .p {
   margin: 0.5rem 0;
-  padding: 0.5rem;
-  border: solid 1px var(--lightGray);
+  padding: 0.5rem 0;
   border-radius: 5px;
 }

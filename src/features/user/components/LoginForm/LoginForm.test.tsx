@@ -4,9 +4,9 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
-import { store } from '../../../app/store';
-import { PLACEHOLDER } from '../../../common/constants/auth';
-import LoginForm from '../components/LoginForm/LoginForm';
+import { store } from '../../../../app/store';
+import { PLACEHOLDER } from '../../../../common/constants/auth';
+import LoginForm from './LoginForm';
 
 describe('LoginForm Component', () => {
   beforeEach(() => {

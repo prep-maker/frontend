@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 
-import { store } from '../../../app/store';
-import { PLACEHOLDER } from '../../../common/constants/auth';
-import SignupForm from '../components/SignupForm/SignupForm';
+import { store } from '../../../../app/store';
+import { PLACEHOLDER } from '../../../../common/constants/auth';
+import SignupForm from './SignupForm';
 
 describe('LoginForm Component', () => {
   beforeEach(() => {

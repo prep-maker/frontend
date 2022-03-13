@@ -64,7 +64,7 @@ class WritingAPI implements IWritingAPI {
     return result.data;
   };
 
-  delete = async (userId: string, writingId: string) => {
+  delete = async (userId: string, writingId: string): Promise<Block[]> => {
     const result = await this.http.fetch(
       `/users/${userId}/writings/${writingId}`,
       { method: 'delete' }
@@ -73,7 +73,7 @@ class WritingAPI implements IWritingAPI {
     return result.data;
   };
 
-  create = async (userId: string) => {
+  create = async (userId: string): Promise<WritingResponse> => {
     const result: AxiosResponse<WritingResponse> = await this.http.fetch(
       `users/${userId}/writings`,
       { method: 'post' }

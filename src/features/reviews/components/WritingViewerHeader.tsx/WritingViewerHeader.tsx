@@ -54,7 +54,7 @@ const WritingViewerHeader = () => {
             value="공유"
             color="yellow"
             size="short"
-            onClick={handleModalClose}
+            onClick={() => setShowModal(true)}
           />
           <Button
             value="복사"

@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 
 import styles from './LinkTo.module.css';
 
-type LinkProps = {
+type LinkProps<T> = {
   value: string;
   url: '/login' | '/writing' | '/signup' | '/review';
+  state?: T;
 };
 
-const LinkTo = ({ value, url }: LinkProps) => {
+const LinkTo = <T extends object>({ value, url, state }: LinkProps<T>) => {
   return (
-    <Link to={url} className={styles.link}>
+    <Link to={url} className={styles.link} state={state}>
       {value}
     </Link>
   );

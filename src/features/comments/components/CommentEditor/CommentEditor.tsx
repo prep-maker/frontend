@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Button from '../../../../common/components/Button/Button';
 import Textarea from '../../../../common/components/Textarea/Textarea';
@@ -23,6 +24,9 @@ const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
 
+  const isLoggedIn = !!user.id;
+  const navigate = useNavigate();
+
   const addComment = () => {
     dispatch(
       addCommentToParagraph({
@@ -36,8 +40,14 @@ const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
     reset();
   };
 
+  const location = useLocation();
   const handleClick = () => {
     if (!isValid) {
+      return;
+    }
+
+    if (!isLoggedIn) {
+      navigate('/login', { state: { pathname: location.pathname } });
       return;
     }
 

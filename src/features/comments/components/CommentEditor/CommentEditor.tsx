@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import Button from '../../../../common/components/Button/Button';
 import Textarea from '../../../../common/components/Textarea/Textarea';
@@ -18,7 +18,7 @@ type CommentEditorProps = {
 };
 
 const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
-  const [value, isValid, handleChange, reset] = useInput('', () => true);
+  const [value, _, handleChange, reset] = useInput('', () => true);
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
 
@@ -35,9 +35,9 @@ const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
     reset();
   };
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     addComment();
-  };
+  }, [blockId, index, user]);
 
   return (
     <>

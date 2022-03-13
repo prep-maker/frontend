@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
 import CommentLayout from '../CommentLayout/CommentLayout';
@@ -39,4 +39,4 @@ const Comment = ({
   );
 };
 
-export default Comment;
+export default memo(Comment);

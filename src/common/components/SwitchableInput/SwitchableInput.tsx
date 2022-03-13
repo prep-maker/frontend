@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, useState } from 'react';
+import React, { KeyboardEvent, memo, useCallback, useState } from 'react';
 
 import Textarea from '../Textarea/Textarea';
 import styles from './SwitchableInput.module.css';
@@ -18,7 +18,7 @@ const SwitchableInput = ({
 }: SwitchableInputProps) => {
   const [isInput, setIsInput] = useState(false);
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter') {
       onEnter(e);
 
@@ -28,7 +28,7 @@ const SwitchableInput = ({
 
       setIsInput(false);
     }
-  };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -53,4 +53,4 @@ const SwitchableInput = ({
   );
 };
 
-export default SwitchableInput;
+export default memo(SwitchableInput);

@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -31,15 +31,18 @@ const CommentableParagraph = ({
   const { writingId } = useParams<keyof WritingIdParam>() as WritingIdParam;
   const block = useAppSelector(({ blocks }) => blocks.byId[blockId]);
 
-  const handleDelete = (content: string) => {
-    const deleted = paragraph.comments.filter(
-      (comment) => comment.content !== content
-    );
-    const copy: Block = JSON.parse(JSON.stringify(block));
-    copy.paragraphs[index].comments = deleted;
+  const handleDelete = useCallback(
+    (content: string) => {
+      const deleted = paragraph.comments.filter(
+        (comment) => comment.content !== content
+      );
+      const copy: Block = JSON.parse(JSON.stringify(block));
+      copy.paragraphs[index].comments = deleted;
 
-    dispatch(updateBlock({ writingId, blockId, block: copy }));
-  };
+      dispatch(updateBlock({ writingId, blockId, block: copy }));
+    },
+    [paragraph, block]
+  );
 
   return (
     <div className={styles.wrapper}>

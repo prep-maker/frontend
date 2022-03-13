@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 
 import SwitchableInput from '../../../../common/components/SwitchableInput/SwitchableInput';
@@ -19,16 +19,21 @@ type ParagraphEditorProp = {
 const ParagraphEditor = ({ blockId, index, content }: ParagraphEditorProp) => {
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: FormEvent<HTMLInputElement>) => {
-    dispatch(updateParagraph({ blockId, index, value: e.currentTarget.value }));
-  };
+  const handleChange = useCallback(
+    (e: FormEvent<HTMLInputElement>) => {
+      dispatch(
+        updateParagraph({ blockId, index, value: e.currentTarget.value })
+      );
+    },
+    [blockId, index]
+  );
 
   const { writingId } = useParams<keyof WritingIdParam>() as WritingIdParam;
   const block = useAppSelector(({ blocks }) => blocks.byId[blockId]);
 
-  const handleEnter = () => {
+  const handleEnter = useCallback(() => {
     dispatch(updateBlock({ writingId, blockId, block }));
-  };
+  }, [writingId, blockId, block]);
 
   return (
     <div className={styles.wrapper}>

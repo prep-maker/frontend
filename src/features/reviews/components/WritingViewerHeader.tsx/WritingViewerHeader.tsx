@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Button from '../../../../common/components/Button/Button';
@@ -19,21 +19,21 @@ const WritingViewerHeader = () => {
   const userId = useAppSelector(({ user }) => user.id);
   const [showModal, setShowModal] = useState(false);
 
-  const handleModalClose = () => {
+  const handleModalClose = useCallback(() => {
     setShowModal(false);
-  };
+  }, []);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     dispatch(deleteWriting({ userId, writingId }));
     navigate('/review');
-  };
+  }, [userId, writingId]);
 
   const paragraphs = useParagraphsByWritingId(writingId);
   const text = paragraphs.map((paragraph) => paragraph.content).join('\n');
 
-  const handleClick = () => {
+  const handleClickCopy = useCallback(() => {
     navigator.clipboard.writeText(text);
-  };
+  }, [text]);
 
   return (
     <>
@@ -54,13 +54,13 @@ const WritingViewerHeader = () => {
             value="공유"
             color="yellow"
             size="short"
-            onClick={() => setShowModal(true)}
+            onClick={handleModalClose}
           />
           <Button
             value="복사"
             color="green"
             size="short"
-            onClick={handleClick}
+            onClick={handleClickCopy}
           />
         </div>
       </header>
@@ -68,4 +68,4 @@ const WritingViewerHeader = () => {
   );
 };
 
-export default WritingViewerHeader;
+export default memo(WritingViewerHeader);

@@ -7,6 +7,7 @@ import styles from './Login.module.css';
 
 const Login = () => {
   const isLoggedIn = !!useAppSelector(({ user }) => user.id);
+
   return (
     <>
       {isLoggedIn ? (

@@ -56,34 +56,41 @@ const WritingFooter = () => {
     navigate('/review');
   }, [writing, userId]);
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     dispatch(saveBlocks({ writingId: writing.id, blocks }));
-  };
-
-  if (!writing) {
-    return <div className={styles.wrapper} />;
-  }
+  }, [writing, blocks]);
 
   return (
-    <div className={styles.wrapper}>
-      <Button
-        value="삭제"
-        color="magenta"
-        size="short"
-        onClick={handleDelete}
-      />
-      <div className={styles.column}>
-        <div className={styles.middle}>
+    <>
+      {writing ? (
+        <div className={styles.wrapper}>
           <Button
-            value="완료"
-            color="yellow"
+            value="삭제"
+            color="magenta"
             size="short"
-            onClick={handleFinish}
+            onClick={handleDelete}
           />
+          <div className={styles.column}>
+            <div className={styles.middle}>
+              <Button
+                value="완료"
+                color="yellow"
+                size="short"
+                onClick={handleFinish}
+              />
+            </div>
+            <Button
+              value="저장"
+              color="blue"
+              size="short"
+              onClick={handleSave}
+            />
+          </div>
         </div>
-        <Button value="저장" color="blue" size="short" onClick={handleSave} />
-      </div>
-    </div>
+      ) : (
+        <div className={styles.wrapper} />
+      )}
+    </>
   );
 };
 

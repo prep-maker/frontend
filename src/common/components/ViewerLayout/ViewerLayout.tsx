@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import styles from './ViewerLayout.module.css';
 
@@ -11,4 +11,4 @@ const ViewerLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default ViewerLayout;
+export default memo(ViewerLayout);

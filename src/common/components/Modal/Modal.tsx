@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React, { memo, MouseEventHandler } from 'react';
 
 import Portal from '../Portal/Portal';
 import styles from './Modal.module.css';
@@ -18,4 +18,4 @@ const Modal = ({ onClose, children }: ModalProps) => {
   );
 };
 
-export default Modal;
+export default memo(Modal);

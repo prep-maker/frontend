@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import React, { useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 
 import styles from './Textarea.module.css';
 
@@ -48,7 +48,7 @@ const Textarea = ({
   );
 };
 
-export default Textarea;
+export default memo(Textarea);
 
 const heightenByScroll = (element: HTMLTextAreaElement) => {
   const MIN_HEIGHT = '16px';

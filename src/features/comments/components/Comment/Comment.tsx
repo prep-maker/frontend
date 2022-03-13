@@ -28,9 +28,11 @@ const Comment = ({
               <span className={styles.author}>{author}</span>
               {isPending && <div className={styles.pending}>PENDING</div>}
             </div>
-            <button onClick={() => onDelete(content)}>
-              <AiOutlineClose />
-            </button>
+            {!isPending && (
+              <button onClick={() => onDelete(content)}>
+                <AiOutlineClose />
+              </button>
+            )}
           </header>
           <p className={styles.p}>{content}</p>
         </CommentLayout>

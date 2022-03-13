@@ -9,8 +9,8 @@ import {
 import Modal from '../../../../common/components/Modal/Modal';
 import { deleteWriting } from '../../../writings/actions';
 import useParagraphsByWritingId from '../../hooks/useParagraphsByWritingId';
-import styles from './WritingViewerHeader.module.css';
 import Share from '../Share/Share';
+import styles from './WritingViewerHeader.module.css';
 
 const WritingViewerHeader = () => {
   const dispatch = useAppDispatch();

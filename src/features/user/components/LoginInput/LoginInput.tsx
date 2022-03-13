@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './LoginInput.module.css';
+
 import Input, { InputProps } from '../../../../common/components/Input/Input';
+import styles from './LoginInput.module.css';
 
 type LoignInputProps = Omit<InputProps, 'fontSize'>;
 

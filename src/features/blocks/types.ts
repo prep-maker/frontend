@@ -1,4 +1,3 @@
-import { StringMappingType } from 'typescript';
 import { Block } from './blocksSlice';
 
 export type BlockType =

@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { WritableDraft } from 'immer/dist/internal';
+
 import { deleteFromStore } from '../../common/utils/store';
+
+import { createBlock, deleteBlock, saveBlocks } from '../blocks/actions';
+import { combineBlocks } from '../blocks/blocksSlice';
 import {
   fetchEditingByUserId,
   updateWriting,
@@ -8,9 +13,6 @@ import {
   fetchDoneByUserId,
   fetchWritingById,
 } from './actions';
-import { createBlock, deleteBlock, saveBlocks } from '../blocks/actions';
-import { combineBlocks } from '../blocks/blocksSlice';
-import { WritableDraft } from 'immer/dist/internal';
 import { WritingResponse } from './writingAPI';
 
 export type Writing = {

@@ -7,12 +7,12 @@ import {
   validateEmail,
   validatePassword,
 } from '../../../../common/utils/validators';
+import { PLACEHOLDER } from '../../../../common/constants/auth';
 import { useAppDispatch } from '../../../../common/hooks/useRedux';
 import { login } from '../../userSlice';
 import { LoginInfo } from '../../types';
 import LoginInput from '../LoginInput/LoginInput';
 import styles from './LoginForm.module.css';
-import { PLACEHOLDER } from '../../../../common/constants/auth';
 
 const LoginForm = () => {
   const [email, isEmailValid, handleEmailChange] = useInput('', validateEmail);

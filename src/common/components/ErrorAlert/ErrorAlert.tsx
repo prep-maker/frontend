@@ -1,7 +1,8 @@
 import React, { memo, useEffect } from 'react';
-import styles from './ErrorAlert.module.css';
-import { useAppSelector, useAppDispatch } from '../../hooks/useRedux';
+
 import { clearError } from '../../../features/ui/uiSlice';
+import { useAppSelector, useAppDispatch } from '../../hooks/useRedux';
+import styles from './ErrorAlert.module.css';
 
 const ErrorAlert = () => {
   const error = useAppSelector(({ ui }) => ui.error);

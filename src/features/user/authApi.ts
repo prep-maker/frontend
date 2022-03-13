@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { User, LoginInfo, UserState } from './types';
+
 import { IHttpClient } from '../../network/http';
+import { User, LoginInfo, UserState } from './types';
 
 export interface IAuthAPI {
   readonly signup: (user: User) => Promise<UserState>;

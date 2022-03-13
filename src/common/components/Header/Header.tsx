@@ -3,11 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { FiLogOut } from 'react-icons/fi';
 import classNames from 'classnames/bind';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import styles from './Header.module.css';
-import { useAppDispatch } from '../../hooks/useRedux';
-import useMobileQuery from '../../hooks/useMobileQuery';
+
 import { logout } from '../../../features/user/userSlice';
 import { toggleWritingList } from '../../../features/ui/uiSlice';
+import useMobileQuery from '../../hooks/useMobileQuery';
+import { useAppDispatch } from '../../hooks/useRedux';
+import styles from './Header.module.css';
 
 const cx = classNames.bind(styles);
 

@@ -1,4 +1,3 @@
-import { BlockType } from '../types';
 import {
   ConnectDragPreview,
   ConnectDragSource,
@@ -7,6 +6,7 @@ import {
 } from 'react-dnd';
 
 import { useAppDispatch } from '../../../common/hooks/useRedux';
+import { BlockType } from '../types';
 import { combineBlocks } from '../blocksSlice';
 import { alertError } from '../../ui/uiSlice';
 

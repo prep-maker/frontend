@@ -1,6 +1,5 @@
 import React, { MouseEvent } from 'react';
-import styles from './SignupForm.module.css';
-import LoginInput from '../LoginInput/LoginInput';
+
 import useInput from '../../../../common/hooks/useInput';
 import {
   validateEmail,
@@ -9,8 +8,10 @@ import {
 } from '../../../../common/utils/validators';
 import Button from '../../../../common/components/Button/Button';
 import { useAppDispatch } from '../../../../common/hooks/useRedux';
-import { signup } from '../../userSlice';
 import { PLACEHOLDER } from '../../../../common/constants/auth';
+import { signup } from '../../userSlice';
+import LoginInput from '../LoginInput/LoginInput';
+import styles from './SignupForm.module.css';
 
 const SignupForm = () => {
   const [email, isEmailValid, handleEmailChange] = useInput('', validateEmail);

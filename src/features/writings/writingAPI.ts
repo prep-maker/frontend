@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios';
+
 import { IHttpClient } from '../../network/http';
-import { Writing } from './writingsSlice';
 import { Block } from '../blocks/blocksSlice';
+import { Writing } from './writingsSlice';
 
 export type WritingResponse = {
   id: string;

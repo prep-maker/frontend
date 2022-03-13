@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
 
 import Button from '../../../../common/components/Button/Button';
 import Textarea from '../../../../common/components/Textarea/Textarea';
+import Unauthorized from '../../../../common/components/Unauthorized/Unauthorized';
 import useInput from '../../../../common/hooks/useInput';
 import {
   useAppDispatch,
@@ -24,9 +24,6 @@ const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
   const user = useAppSelector(({ user }) => user);
   const dispatch = useAppDispatch();
 
-  const isLoggedIn = !!user.id;
-  const navigate = useNavigate();
-
   const addComment = () => {
     dispatch(
       addCommentToParagraph({
@@ -40,37 +37,38 @@ const CommentEditor = ({ show, index, blockId }: CommentEditorProps) => {
     reset();
   };
 
-  const location = useLocation();
   const handleClick = () => {
     if (!isValid) {
-      return;
-    }
-
-    if (!isLoggedIn) {
-      navigate('/login', { state: { pathname: location.pathname } });
       return;
     }
 
     addComment();
   };
 
+  const isLoggedIn = !!user.id;
+  const authorized = (
+    <>
+      <div className={styles.input}>
+        <Textarea value={value} onChange={handleChange} />
+      </div>
+      <footer className={styles.footer}>
+        <div className={styles.button}>
+          <Button
+            value="작성"
+            color="yellow"
+            size="full"
+            onClick={handleClick}
+          />
+        </div>
+      </footer>
+    </>
+  );
+
   return (
     <>
       {show && (
         <CommentLayout>
-          <div className={styles.input}>
-            <Textarea value={value} onChange={handleChange} />
-          </div>
-          <footer className={styles.footer}>
-            <div className={styles.button}>
-              <Button
-                value="작성"
-                color="yellow"
-                size="full"
-                onClick={handleClick}
-              />
-            </div>
-          </footer>
+          {isLoggedIn ? authorized : <Unauthorized />}
         </CommentLayout>
       )}
     </>

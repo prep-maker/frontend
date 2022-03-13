@@ -1,4 +1,5 @@
 import React, { MouseEvent, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Button from '../../../../common/components/Button/Button';
 import LinkTo from '../../../../common/components/LinkTo/LinkTo';
@@ -22,9 +23,16 @@ const LoginForm = () => {
   );
 
   const dispatch = useAppDispatch();
+  const { state } = useLocation() as { state: { pathname: string } };
+  const navigate = useNavigate();
 
   const handleButtonClick = useCallback((user: LoginInfo, e?: MouseEvent) => {
     e?.preventDefault();
+
+    if (state?.pathname) {
+      navigate(state.pathname);
+    }
+
     dispatch(login(user));
   }, []);
 

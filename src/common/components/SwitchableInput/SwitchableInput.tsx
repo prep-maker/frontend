@@ -18,17 +18,20 @@ const SwitchableInput = ({
 }: SwitchableInputProps) => {
   const [isInput, setIsInput] = useState(false);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter') {
-      onEnter(e);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === 'Enter') {
+        onEnter(e);
 
-      if (!e.currentTarget.value) {
-        return;
+        if (!e.currentTarget.value) {
+          return;
+        }
+
+        setIsInput(false);
       }
-
-      setIsInput(false);
-    }
-  }, []);
+    },
+    [onEnter]
+  );
 
   return (
     <div className={styles.wrapper}>

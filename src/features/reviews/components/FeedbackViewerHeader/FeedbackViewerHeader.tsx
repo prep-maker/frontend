@@ -12,7 +12,6 @@ const FeedbackViewerHeader = ({ comments }: { comments: Comment[] }) => {
   const [showSelect, setShowSelect] = useState(false);
   const { writingId } = useParams<keyof WritingIdParam>() as WritingIdParam;
   const block = useBlocksByWritingId(writingId)[0];
-  const pendings = comments.filter((comment) => comment.isPending);
   const dispatch = useAppDispatch();
 
   const handleClickFinish = useCallback(() => {
@@ -28,6 +27,8 @@ const FeedbackViewerHeader = ({ comments }: { comments: Comment[] }) => {
     dispatch(cancelPendingComment(block.id));
     setShowSelect(false);
   }, [block.id]);
+
+  const pendings = comments.filter((comment) => comment.isPending);
 
   return (
     <header className={styles.wrapper}>

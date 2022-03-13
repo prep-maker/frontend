@@ -9,9 +9,16 @@ type CommentProps = {
   content: string;
   isPending: boolean;
   show: boolean;
+  onDelete: (content: string) => void;
 };
 
-const Comment = ({ author, content, isPending, show }: CommentProps) => {
+const Comment = ({
+  author,
+  content,
+  isPending,
+  show,
+  onDelete,
+}: CommentProps) => {
   return (
     <>
       {show && (
@@ -21,7 +28,7 @@ const Comment = ({ author, content, isPending, show }: CommentProps) => {
               <span className={styles.author}>{author}</span>
               {isPending && <div className={styles.pending}>PENDING</div>}
             </div>
-            <button>
+            <button onClick={() => onDelete(content)}>
               <AiOutlineClose />
             </button>
           </header>

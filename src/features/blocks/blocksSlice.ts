@@ -9,13 +9,7 @@ import {
   fetchWritingById,
 } from '../writings/actions';
 import { WritingResponse } from '../writings/writingAPI';
-import {
-  createBlock,
-  deleteBlock,
-  finishComment,
-  saveBlocks,
-  updateBlock,
-} from './actions';
+import { createBlock, deleteBlock, saveBlocks, updateBlock } from './actions';
 import { BlockType, ParagraphType } from './types';
 
 export type Comment = {
@@ -27,7 +21,7 @@ export type Comment = {
 export type Paragraph = {
   readonly type: ParagraphType;
   readonly content: string;
-  readonly comments: Comment[];
+  comments: Comment[];
 };
 
 export type Block = {

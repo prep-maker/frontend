@@ -11,3 +11,6 @@
 .DS_Store
 .env
 /.history
+
+# Local Netlify folder
+.netlify

@@ -14,7 +14,6 @@ const FeedbackViewer = ({ writing }: { writing: Writing }) => {
 
   return (
     <>
-      (
       <div className={styles.wrapper}>
         <h1 className={styles.title}>{writing.title}</h1>
         <FeedbackViewerHeader comments={comments} />
@@ -29,7 +28,6 @@ const FeedbackViewer = ({ writing }: { writing: Writing }) => {
           ))}
         </ViewerLayout>
       </div>
-      )
     </>
   );
 };

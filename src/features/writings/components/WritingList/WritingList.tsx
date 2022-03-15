@@ -23,24 +23,30 @@ const WritingList = ({ responsive = true }: { responsive?: boolean }) => {
   const writings = useWritings();
 
   return (
-    <ul className={styles.list}>
-      {writings.map((writing) => (
-        <li
-          key={writing.id}
-          className={cx('writing', {
-            'mobile-writing': isMobile && responsive,
-          })}
-        >
-          <Button
-            border={!(isMobile && responsive)}
-            value={writing.title}
-            color="white"
-            size="full"
-            onClick={() => handleListClick(writing.id)}
-          />
-        </li>
-      ))}
-    </ul>
+    <>
+      {writings.length ? (
+        <ul className={styles.list}>
+          {writings.map((writing) => (
+            <li
+              key={writing.id}
+              className={cx('writing', {
+                'mobile-writing': isMobile && responsive,
+              })}
+            >
+              <Button
+                border={!(isMobile && responsive)}
+                value={writing.title}
+                color="white"
+                size="full"
+                onClick={() => handleListClick(writing.id)}
+              />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div>글이 없습니다.</div>
+      )}
+    </>
   );
 };
 

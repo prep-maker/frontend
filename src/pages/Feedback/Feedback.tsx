@@ -14,10 +14,8 @@ const Feedback = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!writing) {
-      dispatch(fetchWritingById(writingId));
-    }
-  }, [writing]);
+    dispatch(fetchWritingById(writingId));
+  }, []);
 
   return (
     <>

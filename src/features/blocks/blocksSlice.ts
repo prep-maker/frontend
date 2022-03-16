@@ -14,6 +14,7 @@ import { BlockType, ParagraphType } from './types';
 
 export type Comment = {
   username: string;
+  author: string;
   content: string;
   isPending?: boolean;
 };

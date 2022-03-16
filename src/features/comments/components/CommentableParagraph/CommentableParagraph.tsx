@@ -58,7 +58,8 @@ const CommentableParagraph = ({
         {paragraph.comments.map((comment, i) => (
           <Comment
             key={i}
-            author={comment.username}
+            author={comment.author}
+            username={comment.username}
             content={comment.content}
             show={isCommenting}
             isPending={!!comment.isPending}

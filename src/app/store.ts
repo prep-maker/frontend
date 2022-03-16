@@ -1,3 +1,4 @@
+import { Middleware } from 'redux';
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import storage from 'redux-persist/lib/storage';
@@ -24,8 +25,12 @@ const persisitConfig = {
   key: 'root',
   storage,
 };
-
 const persistedReducer = persistReducer(persisitConfig, reducers);
+const middlewares: Middleware[] = [];
+
+if (process.env.NODE_ENV === `development`) {
+  middlewares.push(logger);
+}
 
 const http = HttpClient.getHttp(config.baseUrl);
 const authAPI = new AuthAPI(http);
@@ -43,7 +48,7 @@ export const store = configureStore({
           blockAPI,
         },
       },
-    }).concat(logger),
+    }).concat(middlewares),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

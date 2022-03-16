@@ -50,7 +50,7 @@ const usePrepDrag = (
       item: { id: blockId },
       end: (item, monitor) => handleDropEnd(item, monitor),
     }),
-    [warning]
+    [warning, type]
   );
 };
 

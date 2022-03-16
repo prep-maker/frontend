@@ -74,6 +74,11 @@ const checkPType = (value: string) => {
   if (but.test(value)) {
     throw 'P "하지만, 그러나"는 쓸 수 없습니다.';
   }
+
+  const reason = /(왜냐하면)|(때문)/gm;
+  if (reason.test(value)) {
+    throw 'R문 단에서 "왜냐하면, 때문"이라는 단어는 쓸 수 없습니다.';
+  }
 };
 
 const checkRType = (value: string) => {

@@ -13,7 +13,10 @@ type Config = {
 };
 
 const config: Config = {
-  baseUrl: getEnv('REACT_APP_BASE_URL'),
+  baseUrl:
+    process.env.NODE_ENV !== 'development'
+      ? getEnv('REACT_APP_BASE_URL')
+      : getEnv('REACT_APP_DEV_URL'),
 };
 
 export default config;

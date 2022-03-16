@@ -28,7 +28,7 @@ const persisitConfig = {
 const persistedReducer = persistReducer(persisitConfig, reducers);
 const middlewares: Middleware[] = [];
 
-if (process.env.NODE_ENV === `development`) {
+if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
 }
 

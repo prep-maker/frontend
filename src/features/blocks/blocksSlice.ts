@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
 import { deleteFromStore } from '../../common/utils/store';
+import { logout } from '../user/userSlice';
 import {
   fetchEditingByUserId,
   deleteWriting,
@@ -130,6 +131,10 @@ export const blocksSlice = createSlice({
       .addCase(updateBlock.fulfilled, (state, action) => {
         const block = action.payload;
         state.byId[block.id] = block;
+      })
+      .addCase(logout, (state, action) => {
+        state.allIds = [];
+        state.byId = {};
       });
   },
 });

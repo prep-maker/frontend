@@ -5,6 +5,7 @@ import { deleteFromStore } from '../../common/utils/store';
 
 import { createBlock, deleteBlock, saveBlocks } from '../blocks/actions';
 import { combineBlocks } from '../blocks/blocksSlice';
+import { logout } from '../user/userSlice';
 import {
   fetchEditingByUserId,
   updateWriting,
@@ -88,6 +89,10 @@ export const writingsSlice = createSlice({
         const { writingId, combinedId } = action.payload;
         const blocks = state.byId[writingId].blocks;
         state.byId[writingId].blocks = blocks.filter((id) => id !== combinedId);
+      })
+      .addCase(logout, (state, action) => {
+        state.allIds = [];
+        state.byId = {};
       });
   },
 });

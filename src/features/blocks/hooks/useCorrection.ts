@@ -77,7 +77,7 @@ const checkPType = (value: string) => {
 
   const reason = /(왜냐하면)|(때문)/gm;
   if (reason.test(value)) {
-    throw 'R문 단에서 "왜냐하면, 때문"이라는 단어는 쓸 수 없습니다.';
+    throw 'P 문단에서 "왜냐하면, 때문"이라는 단어는 쓸 수 없습니다.';
   }
 };
 
@@ -89,7 +89,7 @@ const checkRType = (value: string) => {
 
   const reason = /(왜냐하면)|(때문)/gm;
   if (!reason.test(value)) {
-    throw 'R문 단에서 "왜냐하면, 때문"이라는 단어는 꼭 필수입니다.';
+    throw 'R 문단에서 "왜냐하면, 때문"이라는 단어는 꼭 필수입니다.';
   }
 };
 

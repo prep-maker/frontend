@@ -1,3 +1,4 @@
+import { CORRECTION } from '../../../common/constants/correction';
 import { ParagraphType } from '../types';
 
 const useCorrection = ({
@@ -48,58 +49,62 @@ export default useCorrection;
 
 const checkValue = (value: string) => {
   if (value.includes('\n')) {
-    throw '문단을 나눌 수 없습니다.';
+    throw CORRECTION.NO_NEW_LINE;
   }
 
   if (value.length < 10) {
-    throw '한 문단은 10글자 이상이어야 합니다.';
+    throw CORRECTION.MIN_LETTER;
   }
 
   if (value.length > 300) {
-    throw '한 문단은 300글자를 초과할 수 없습니다.';
+    throw CORRECTION.MAX_LETTER;
   }
 };
 
 const checkPType = (value: string) => {
   const example = /(예를 들면)|(예시로)|(예로)/gm;
   if (example.test(value)) {
-    throw 'P 문단에서 "예를 들면, 예시로, 예로"는 쓸 수 없습니다.';
+    throw CORRECTION.NO_EXAMPLE;
   }
 
   if (value.includes('?')) {
-    throw 'P 문단에서 "?"문장부호는 쓸 수 없습니다.';
+    throw CORRECTION.NO_QUESTION;
   }
 
   const but = /(하지만)|(그러나)/gm;
   if (but.test(value)) {
-    throw 'P "하지만, 그러나"는 쓸 수 없습니다.';
+    throw CORRECTION.NO_BUT;
   }
 
   const reason = /(왜냐하면)|(때문)/gm;
   if (reason.test(value)) {
-    throw 'P 문단에서 "왜냐하면, 때문"이라는 단어는 쓸 수 없습니다.';
+    throw CORRECTION.NO_REASON;
   }
 };
 
 const checkRType = (value: string) => {
   const example = /(예를 들면)|(예시로)|(예로)/gm;
   if (example.test(value)) {
-    throw 'R 문단에서 "예를 들면, 예시로, 예로"는 쓸 수 없습니다.';
+    throw CORRECTION.NO_EXAMPLE;
   }
 
   const reason = /(왜냐하면)|(때문)/gm;
   if (!reason.test(value)) {
-    throw 'R 문단에서 "왜냐하면, 때문"이라는 단어는 꼭 필수입니다.';
+    throw CORRECTION.RESULT_REQUIRED;
+  }
+
+  if (value.includes('결론적으로')) {
+    throw CORRECTION.NO_RESULT;
   }
 };
 
 const checkEType = (value: string) => {
   if (value.includes('결론적으로')) {
-    throw 'E 문단에서 "결론적으로"는 쓸 수 없습니다.';
+    throw CORRECTION.NO_RESULT;
   }
 
   const reason = /(왜냐하면)|(때문)/gm;
   if (reason.test(value)) {
-    throw 'E 문단에서 "왜냐하면, 때문"은 쓸 수 없습니다.';
+    throw CORRECTION.NO_REASON;
   }
 };

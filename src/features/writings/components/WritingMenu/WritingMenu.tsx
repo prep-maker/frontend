@@ -40,7 +40,9 @@ const WritingMenu = () => {
       <header className={cx('header', { 'mobile-header': isMobile })}>
         <Button
           border={!isMobile}
-          value={isMobile ? '새 글 작성' : <AiOutlinePlus />}
+          value={
+            isMobile ? '새 글 작성' : <AiOutlinePlus title="add writing" />
+          }
           circle={!isMobile}
           size={isMobile ? 'full' : 'middle'}
           color="green"

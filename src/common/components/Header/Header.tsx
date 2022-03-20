@@ -30,12 +30,8 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
     <header className={styles.header}>
       <div className={styles.white}>
         {isMobile && isLoggedIn ? (
-          <button
-            className={styles.hamburger}
-            onClick={handleClickHamburger}
-            data-testid="hamburger"
-          >
-            <GiHamburgerMenu size={25} />
+          <button className={styles.hamburger} onClick={handleClickHamburger}>
+            <GiHamburgerMenu size={25} title="hamburger" />
           </button>
         ) : (
           <div>PREP Maker</div>
@@ -56,12 +52,8 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
                 검토
               </Link>
             </nav>
-            <button
-              className={styles.logout}
-              onClick={handleLogout}
-              data-testid="logout"
-            >
-              <FiLogOut size="30" />
+            <button className={styles.logout} onClick={handleLogout}>
+              <FiLogOut size="30" title="logout" />
             </button>
           </>
         )}

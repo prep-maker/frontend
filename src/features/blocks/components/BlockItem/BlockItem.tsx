@@ -41,7 +41,7 @@ const BlockItem = ({ block }: BlockItemProps) => {
     <div className={cx('wrapper', { isOver })} ref={divRef}>
       <header className={styles.header}>
         <button className={styles.button} onClick={handleDelete}>
-          <AiOutlineClose />
+          <AiOutlineClose title="delete block" />
         </button>
         <div className={styles.type}>{block.type}</div>
       </header>

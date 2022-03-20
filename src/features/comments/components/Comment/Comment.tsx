@@ -35,7 +35,7 @@ const Comment = ({
             </div>
             {!isPending && isAuthor && (
               <button onClick={() => onDelete(content)}>
-                <AiOutlineClose />
+                <AiOutlineClose title="delete comment" />
               </button>
             )}
           </header>

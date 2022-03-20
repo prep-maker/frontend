@@ -20,8 +20,7 @@ export interface IBlockAPI {
 class BlockAPI implements IBlockAPI {
   constructor(private http: IHttpClient) {}
 
-  create = async (request: NewBlockRequest): Promise<Block[]> => {
-    const { writingId, types } = request;
+  create = async ({ writingId, types }: NewBlockRequest): Promise<Block[]> => {
     const fetch = this.requestNewBlock.bind(this, writingId);
     const result = await Promise.all(types.map(fetch));
 

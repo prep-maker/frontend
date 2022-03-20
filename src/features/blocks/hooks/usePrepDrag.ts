@@ -5,10 +5,11 @@ import {
   useDrag,
 } from 'react-dnd';
 
+import ERROR from '../../../common/constants/error';
 import { useAppDispatch } from '../../../common/hooks/useRedux';
+import { alertError } from '../../ui/uiSlice';
 import { BlockType } from '../types';
 import { combineBlocks } from '../blocksSlice';
-import { alertError } from '../../ui/uiSlice';
 
 type DropResult = {
   id: string;
@@ -31,7 +32,7 @@ const usePrepDrag = (
     }
 
     if (dropResult.warning || warning) {
-      dispatch(alertError('블록을 합치려면 문단을 올바르게 작성해야 합니다.'));
+      dispatch(alertError(ERROR.CORRECTION_REQUIRED));
       return;
     }
 

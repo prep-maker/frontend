@@ -4,6 +4,7 @@ import axios, {
   AxiosInstance,
   AxiosError,
 } from 'axios';
+import ERROR from '../common/constants/error';
 
 type ClientOption<T> = {
   body?: T;
@@ -49,11 +50,11 @@ class HttpClient implements IHttpClient {
       const err = error as AxiosError;
       if (err.response) {
         const data = err.response.data;
-        const message = data?.message ? data.message : '네트워크 에러';
+        const message = data?.message ? data.message : ERROR.NETWORK;
         throw new Error(message);
       }
 
-      throw new Error('연결 실패');
+      throw new Error(ERROR.CONNECTION_FAILED);
     }
   };
 }

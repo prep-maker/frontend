@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import Button from '../../../../common/components/Button/Button';
+import ERROR from '../../../../common/constants/error';
 import { BLOCK_TYPE } from '../../../../common/constants/block';
 import {
   useAppDispatch,
@@ -36,12 +37,12 @@ const WritingFooter = () => {
     }
 
     if (blocks.length !== 1) {
-      dispatch(alertError('블록이 1개일때만 완료할 수  있습니다.'));
+      dispatch(alertError(ERROR.COMBINE_REQUIRED));
       return;
     }
 
     if (blocks[0].type !== BLOCK_TYPE.PREP) {
-      dispatch(alertError('PREP 블럭만 완료할 수 있습니다.'));
+      dispatch(alertError(ERROR.PREP_REQUIRED));
       return;
     }
 

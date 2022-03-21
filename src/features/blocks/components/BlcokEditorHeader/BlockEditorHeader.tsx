@@ -18,7 +18,7 @@ const BlockEditorHeader = () => {
   );
 
   return (
-    <header className={styles.wrapper}>
+    <header className={styles.wrapper} data-testid="block-editor-header">
       <Button
         color="blue"
         value="PREP"

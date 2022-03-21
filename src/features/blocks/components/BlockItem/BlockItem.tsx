@@ -38,7 +38,11 @@ const BlockItem = ({ block }: BlockItemProps) => {
   drag(drop(divRef));
 
   return (
-    <div className={cx('wrapper', { isOver })} ref={divRef}>
+    <div
+      className={cx('wrapper', { isOver })}
+      ref={divRef}
+      data-testid={`${block.type}-block`}
+    >
       <header className={styles.header}>
         <button className={styles.button} onClick={handleDelete}>
           <AiOutlineClose title="delete block" />

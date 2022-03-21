@@ -44,6 +44,7 @@ const Textarea = ({
       onKeyDown={onKeyDown}
       className={cx('text', { focusLine })}
       value={value}
+      data-testid="textarea"
     />
   );
 };

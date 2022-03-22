@@ -22,7 +22,7 @@ class WritingAPIStub implements IWritingAPI {
       (writing) => writing.author === userId
     );
 
-    return writings.filter((writing) => writing.isDone) as any;
+    return writings.filter((writing) => !writing.isDone) as any;
   };
 
   getDoneByUserId = async (userId: string): Promise<WritingResponse[]> => {
@@ -30,7 +30,7 @@ class WritingAPIStub implements IWritingAPI {
       (writing) => writing.author === userId
     );
 
-    return writings.filter((writing) => !writing.isDone) as any;
+    return writings.filter((writing) => writing.isDone) as any;
   };
 
   getById = async (writingId: string): Promise<WritingResponse> => {

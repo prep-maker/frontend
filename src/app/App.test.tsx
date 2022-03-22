@@ -26,7 +26,7 @@ jest.mock('../features/writings/writingAPI');
 jest.mock('../features/blocks/blockAPI');
 
 describe('App', () => {
-  describe('Login page', () => {
+  describe('Login Page', () => {
     beforeEach(() => {
       render(
         <Provider store={store}>
@@ -88,7 +88,7 @@ describe('App', () => {
 
     it('로그인한 유저가 작성한 편집중인 글 목록을 불러온다.', async () => {
       login(screen);
-      const editings = dummyWritings.filter((writing) => writing.isDone);
+      const editings = dummyWritings.filter((writing) => !writing.isDone);
 
       for (const editing of editings) {
         const titles = await screen.findAllByText(editing.title);

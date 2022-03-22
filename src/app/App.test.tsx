@@ -229,6 +229,63 @@ describe('App', () => {
       });
     });
   });
+
+  describe('Review Page', () => {
+    beforeEach(async () => {
+      render(
+        <Provider store={store}>
+          <MemoryRouter initialEntries={['/review']}>
+            <App />
+          </MemoryRouter>
+        </Provider>
+      );
+      login(screen);
+      const nav = await screen.findByText('검토');
+      userEvent.click(nav);
+      const writing = await screen.findAllByText('test 1');
+      userEvent.click(writing[0]);
+    });
+    afterEach(() => {
+      jest.clearAllMocks();
+      store.dispatch(logout());
+    });
+
+    it('글 제목을 클릭하여 수정할 수 있다.', async () => {
+      const title = screen.getAllByText('test 1')[1];
+      userEvent.dblClick(title);
+      const input = screen.getByDisplayValue('test 1');
+
+      userEvent.type(input, 'update');
+      userEvent.keyboard('{enter}');
+
+      const updated = await screen.findByText(/update/g);
+      expect(updated).toBeInTheDocument();
+    });
+
+    it('문단을 클릭하여 문단 내용을 수정할 수 있다.', async () => {
+      const paragraph = screen.getByText('R 문단');
+      userEvent.dblClick(paragraph);
+      const input = screen.getByDisplayValue('R 문단');
+
+      userEvent.type(input, 'update');
+      userEvent.keyboard('{enter}');
+
+      const updated = await screen.findByText(/update/g);
+      expect(updated).toBeInTheDocument();
+    });
+
+    it('복사 버튼이 있다.', () => {
+      expect(screen.getByText('복사')).toBeInTheDocument();
+    });
+
+    it('공유 버튼을 누르면 피드백 페이지 링크를 복사할 수 있다', () => {
+      const button = screen.getByText('공유');
+
+      userEvent.click(button);
+
+      expect(screen.getByText('링크 복사')).toBeInTheDocument();
+    });
+  });
 });
 
 const login = async (screen: Screen) => {

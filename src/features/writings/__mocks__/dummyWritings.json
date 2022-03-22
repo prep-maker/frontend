@@ -7,11 +7,27 @@
     "blocks": [
       {
         "id": "1",
-        "type": "P",
+        "type": "PREP",
         "paragraphs": [
           {
             "type": "P",
-            "content": "P 블록"
+            "content": "P 문단",
+            "comments": []
+          },
+          {
+            "type": "R",
+            "content": "R 문단",
+            "comments": []
+          },
+          {
+            "type": "E",
+            "content": "E 문단",
+            "comments": []
+          },
+          {
+            "type": "P",
+            "content": "P 문단",
+            "comments": []
           }
         ]
       }
@@ -25,11 +41,27 @@
     "blocks": [
       {
         "id": "2",
-        "type": "R",
+        "type": "PREP",
         "paragraphs": [
           {
+            "type": "P",
+            "content": "P 문단",
+            "comments": []
+          },
+          {
             "type": "R",
-            "content": "R 블록"
+            "content": "R 문단",
+            "comments": []
+          },
+          {
+            "type": "E",
+            "content": "E 문단",
+            "comments": []
+          },
+          {
+            "type": "P",
+            "content": "P 문단",
+            "comments": []
           }
         ]
       }
@@ -47,7 +79,8 @@
         "paragraphs": [
           {
             "type": "E",
-            "content": "E 블록"
+            "content": "E 블록",
+            "comments": []
           }
         ]
       }
@@ -65,7 +98,8 @@
         "paragraphs": [
           {
             "type": "P",
-            "content": "P 블록"
+            "content": "P 블록",
+            "comments": []
           }
         ]
       }

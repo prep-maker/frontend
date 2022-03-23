@@ -13,6 +13,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import dummyWritings from '../features/writings/__mocks__/dummyWritings.json';
+import { USER_NAME } from '../features/user/__mocks__/authAPI';
 import { PLACEHOLDER } from '../common/constants/auth';
 import { logout } from '../features/user/userSlice';
 import { CORRECTION } from '../common/constants/correction';
@@ -50,7 +51,7 @@ describe('App', () => {
       expect(button).toBeInTheDocument();
     });
 
-    it('회원가입 링크를 누르면 회원가입 페이지로 전환된다.', () => {
+    it('회원가입 링크를 클릭하면 회원가입 페이지로 전환된다.', () => {
       const link = screen.getByText('회원가입');
 
       userEvent.click(link);
@@ -128,7 +129,7 @@ describe('App', () => {
         expect(screen.getByTestId('block-editor-header')).toBeInTheDocument();
       });
 
-      it('삭제 버튼을 누면 글이 삭제한다.', async () => {
+      it('삭제 버튼을 누면 글을 삭제한다.', async () => {
         const button = screen.getByText('삭제');
 
         userEvent.click(button);
@@ -138,6 +139,7 @@ describe('App', () => {
           expect(writing).not.toBeInTheDocument();
         });
       });
+
       it('블록 생성 버튼을 클릭하면 알맞는 타입의 블록을 생성한다.', async () => {
         const blockEditorHeader = screen.getByTestId('block-editor-header');
         const PButton = within(blockEditorHeader).getByText('P');
@@ -186,7 +188,7 @@ describe('App', () => {
         expect(PRBlock).toBeInTheDocument();
       });
 
-      it('블록을 삭제 버튼을 누르면 블록을 삭제한다.', async () => {
+      it('블록 삭제 버튼을 클릭하면 블록을 삭제한다.', async () => {
         userEvent.click(PREPButton);
         const buttons = await screen.findAllByTitle('delete block');
 
@@ -283,7 +285,7 @@ describe('App', () => {
       expect(screen.getByText('복사')).toBeInTheDocument();
     });
 
-    it('공유 버튼을 누르면 피드백 페이지 링크를 복사할 수 있다', () => {
+    it('공유 버튼을 클릭하면 피드백 페이지 링크를 복사할 수 있다', () => {
       const button = screen.getByText('공유');
 
       userEvent.click(button);
@@ -299,6 +301,134 @@ describe('App', () => {
       await waitFor(() => {
         const writing = screen.queryByText('Untitled');
         expect(writing).not.toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('Feedback Page', () => {
+    beforeEach(() => {
+      render(
+        <Provider store={store}>
+          <MemoryRouter initialEntries={['/feedback/1']}>
+            <App />
+          </MemoryRouter>
+        </Provider>
+      );
+    });
+
+    it('url의 param과 id가 일치하는 글을 보여준다.', () => {
+      expect(screen.getByText('test 1')).toBeInTheDocument();
+    });
+
+    it('로그인하지 않은 유저가 문단을 클릭하면 로그인 링크를 보여준다.', () => {
+      const paragraph = screen.getByText('R 문단');
+
+      userEvent.click(paragraph);
+
+      expect(screen.getByText('로그인하러 가기')).toBeInTheDocument();
+    });
+
+    it('로그인한 유저가 문단을 클릭하면 코멘트를 작성할 수 있다.', async () => {
+      const paragraph = screen.getByText('R 문단');
+      userEvent.click(paragraph);
+      const link = screen.getByText('로그인하러 가기');
+
+      userEvent.click(link);
+      login();
+      await waitFor(() => {
+        const paragraph = screen.getByText('R 문단');
+        userEvent.click(paragraph);
+      });
+
+      expect(screen.getByText('작성')).toBeInTheDocument();
+      store.dispatch(logout());
+    });
+
+    describe('코멘트를 작성했을 때', () => {
+      beforeEach(async () => {
+        const paragraph = screen.getByText('R 문단');
+        userEvent.click(paragraph);
+        const link = screen.getByText('로그인하러 가기');
+        userEvent.click(link);
+        login();
+        await waitFor(() => {
+          const paragraph = screen.getByText('R 문단');
+          userEvent.click(paragraph);
+        });
+        const comment = screen.getByTestId('textarea');
+        const button = screen.getByText('작성');
+
+        userEvent.type(comment, '코멘트 테스트');
+        userEvent.click(button);
+      });
+      afterEach(() => {
+        store.dispatch(logout());
+      });
+
+      it('작성 버튼을 클릭하면 작성자의 이름과 코멘트가 pending 상태임을 표시한다.', async () => {
+        const pending = await screen.findByText('pending');
+        expect(pending).toBeInTheDocument();
+        expect(screen.getByText(USER_NAME)).toBeInTheDocument();
+      });
+
+      it('완료 버튼과 전송 버튼을 클릭하면 pending 상태였던 코멘트를 저장한다.', async () => {
+        const finish = screen.getByRole('button', { name: /완료/g });
+        userEvent.click(finish);
+        const send = screen.getByText('전송');
+
+        userEvent.click(send);
+
+        await waitFor(() => {
+          const pending = screen.queryByText('pending');
+          const comment = screen.getByText('코멘트 테스트');
+          expect(pending).not.toBeInTheDocument();
+          expect(comment).toBeInTheDocument();
+        });
+      });
+
+      it('완료 버튼과 취소 버튼을 클릭하면 pending 상태였던 코멘트들을 삭제한다.', async () => {
+        const finish = screen.getByRole('button', { name: /완료/g });
+        userEvent.click(finish);
+        const cancel = screen.getByText('취소');
+
+        userEvent.click(cancel);
+
+        await waitFor(() => {
+          const pending = screen.queryByText('pending');
+          const comment = screen.queryByText('코멘트 테스트');
+          expect(pending).not.toBeInTheDocument();
+          expect(comment).not.toBeInTheDocument();
+        });
+      });
+
+      it('완료 버튼과 취소 버튼을 클릭하면 pending 상태였던 코멘트들을 삭제한다.', async () => {
+        const finish = screen.getByRole('button', { name: /완료/g });
+        userEvent.click(finish);
+        const cancel = screen.getByText('취소');
+
+        userEvent.click(cancel);
+
+        await waitFor(() => {
+          const pending = screen.queryByText('pending');
+          const comment = screen.queryByText('코멘트 테스트');
+          expect(pending).not.toBeInTheDocument();
+          expect(comment).not.toBeInTheDocument();
+        });
+      });
+
+      it('코멘트 삭제 버튼을 클릭하면 저장된 코멘트를 삭제한다.', async () => {
+        const finish = screen.getByRole('button', { name: /완료/g });
+        userEvent.click(finish);
+        const send = screen.getByText('전송');
+        userEvent.click(send);
+        const button = await screen.findByTitle('delete comment');
+
+        userEvent.click(button);
+
+        await waitFor(() => {
+          const comment = screen.queryByText('코멘트 테스트');
+          expect(comment).not.toBeInTheDocument();
+        });
       });
     });
   });

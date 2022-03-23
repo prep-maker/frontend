@@ -60,7 +60,7 @@ describe('App', () => {
     });
 
     it('로그인하면 writing 페이지로 전환된다.', async () => {
-      login(screen);
+      login();
       const addButton = await screen.findByTitle('add writing');
       const nav = screen.getByText('편집');
 
@@ -80,7 +80,7 @@ describe('App', () => {
           </MemoryRouter>
         </Provider>
       );
-      login(screen);
+      login();
     });
     afterEach(() => {
       jest.clearAllMocks();
@@ -245,7 +245,7 @@ describe('App', () => {
           </MemoryRouter>
         </Provider>
       );
-      login(screen);
+      login();
       const nav = await screen.findByText('검토');
       userEvent.click(nav);
       const writing = await screen.findAllByText('test 1');
@@ -305,7 +305,7 @@ describe('App', () => {
   });
 });
 
-const login = async (screen: Screen) => {
+const login = () => {
   const emailInput = screen.getByPlaceholderText(PLACEHOLDER.EMAIL);
   const passwordInput = screen.getByPlaceholderText(PLACEHOLDER.PASSWORD);
   const button = screen.getByText('로그인');

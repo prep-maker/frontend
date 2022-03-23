@@ -31,7 +31,7 @@ const Comment = ({
           <header className={styles.header}>
             <div className={styles.column}>
               <span className={styles.username}>{username}</span>
-              {isPending && <div className={styles.pending}>PENDING</div>}
+              {isPending && <div className={styles.pending}>pending</div>}
             </div>
             {!isPending && isAuthor && (
               <button onClick={() => onDelete(content)}>

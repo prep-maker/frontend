@@ -31,7 +31,16 @@ class blockAPIStub implements IBlockAPI {
     return request.blocks;
   };
   updateOne = async (request: BlockUpdateRequest): Promise<Block> => {
-    return request.block;
+    const copy = JSON.parse(JSON.stringify(request.block));
+    const { paragraphs } = copy;
+
+    for (const paragraph of paragraphs) {
+      for (const comment of paragraph.comments) {
+        comment.isPending = false;
+      }
+    }
+
+    return copy;
   };
 }
 

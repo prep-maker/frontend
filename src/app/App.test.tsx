@@ -73,13 +73,14 @@ describe('App', () => {
     beforeEach(() => {
       render(
         <Provider store={store}>
-          <MemoryRouter initialEntries={['/writing']}>
+          <MemoryRouter>
             <DndProvider backend={HTML5Backend}>
               <App />
             </DndProvider>
           </MemoryRouter>
         </Provider>
       );
+      login(screen);
     });
     afterEach(() => {
       jest.clearAllMocks();
@@ -87,7 +88,6 @@ describe('App', () => {
     });
 
     it('로그인한 유저가 작성한 편집중인 글 목록을 불러온다.', async () => {
-      login(screen);
       const editings = dummyWritings.filter((writing) => !writing.isDone);
 
       for (const editing of editings) {
@@ -97,7 +97,6 @@ describe('App', () => {
     });
 
     it('글 생성 버튼을 클릭하면 새로운 글이 생성된다.', async () => {
-      login(screen);
       const button = await screen.findByTitle('add writing');
 
       userEvent.click(button);
@@ -107,7 +106,6 @@ describe('App', () => {
     });
 
     it('로그아웃 하면 로그인 페이지로 전환된다.', async () => {
-      login(screen);
       const logout = await screen.findByTitle('logout');
 
       userEvent.click(logout);
@@ -118,8 +116,6 @@ describe('App', () => {
     describe('글 제목을 클릭했을 때', () => {
       let PREPButton: HTMLElement;
       beforeEach(async () => {
-        login(screen);
-
         const button = await screen.findByTitle('add writing');
         userEvent.click(button);
         const title = await screen.findAllByText('Untitled');
@@ -244,7 +240,7 @@ describe('App', () => {
     beforeEach(async () => {
       render(
         <Provider store={store}>
-          <MemoryRouter initialEntries={['/review']}>
+          <MemoryRouter>
             <App />
           </MemoryRouter>
         </Provider>

@@ -133,7 +133,17 @@ describe('App', () => {
         expect(screen.getByTestId('block-editor-header')).toBeInTheDocument();
       });
 
-      it('블록 생성 버튼을 클릭하면 알맞는 타입의 블록을 생성한다.', async () => {
+      it('삭제 버튼을 누면 글이 삭제된다.', async () => {
+        const button = screen.getByText('삭제');
+
+        userEvent.click(button);
+
+        await waitFor(() => {
+          const writing = screen.queryByText('Untitled');
+          expect(writing).not.toBeInTheDocument();
+        });
+      });
+      -it('블록 생성 버튼을 클릭하면 알맞는 타입의 블록을 생성한다.', async () => {
         const blockEditorHeader = screen.getByTestId('block-editor-header');
         const PButton = within(blockEditorHeader).getByText('P');
         const RButton = within(blockEditorHeader).getByText('R');
@@ -284,6 +294,17 @@ describe('App', () => {
       userEvent.click(button);
 
       expect(screen.getByText('링크 복사')).toBeInTheDocument();
+    });
+
+    it('삭제 버튼을 누면 글이 삭제된다.', async () => {
+      const button = screen.getByText('삭제');
+
+      userEvent.click(button);
+
+      await waitFor(() => {
+        const writing = screen.queryByText('Untitled');
+        expect(writing).not.toBeInTheDocument();
+      });
     });
   });
 });

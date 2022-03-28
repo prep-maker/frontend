@@ -11,7 +11,7 @@ import AuthRequired from '../common/components/AuthRequired/AuthRequired';
 import BlockEditor from '../features/blocks/components/BlockEditor/BlockEditor';
 import WritingList from '../features/writings/components/WritingList/WritingList';
 import Review from '../pages/Review/Review';
-import WritingViewer from '../features/reviews/components/WritingViewer/WritingViewer';
+import WritingViewer from '../features/review/components/WritingViewer/WritingViewer';
 import Loading from '../common/components/Loading/Loading';
 import Feedback from '../pages/Feedback/Feedback';
 

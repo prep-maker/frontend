@@ -1,9 +1,9 @@
 import React from 'react';
 
 import ViewerLayout from '../../../../common/components/ViewerLayout/ViewerLayout';
-import CommentableParagraph from '../../../comments/components/CommentableParagraph/CommentableParagraph';
+import CommentableParagraph from '../CommentableParagraph/CommentableParagraph';
 import { Writing } from '../../../writings/writingsSlice';
-import useParagraphsByWritingId from '../../hooks/useParagraphsByWritingId';
+import useParagraphsByWritingId from '../../../review/hooks/useParagraphsByWritingId';
 import FeedbackViewerHeader from '../FeedbackViewerHeader/FeedbackViewerHeader';
 import styles from './FeedbackViewer.module.css';
 

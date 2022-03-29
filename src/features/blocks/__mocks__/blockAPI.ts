@@ -28,7 +28,7 @@ class blockAPIStub implements IBlockAPI {
 
   delete = async (request: Omit<IdParams, 'userId'>) => {};
 
-  pdateMany = async (request: BlocksUpdateRequest): Promise<Block[]> => {
+  updateMany = async (request: BlocksUpdateRequest): Promise<Block[]> => {
     return request.blocks;
   };
 

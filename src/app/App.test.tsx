@@ -265,9 +265,11 @@ describe('App', () => {
       userEvent.type(input, 'update');
       userEvent.keyboard('{enter}');
 
-      const updated = await screen.findAllByText(/update/g);
-      expect(updated[0]).toBeInTheDocument();
-      expect(updated[1]).toBeInTheDocument();
+      await waitFor(() => {
+        const updated = screen.getAllByText(/update/g);
+        expect(updated[0]).toBeInTheDocument();
+        expect(updated[1]).toBeInTheDocument();
+      });
     });
 
     it('문단을 클릭하여 문단 내용을 수정할 수 있다.', async () => {

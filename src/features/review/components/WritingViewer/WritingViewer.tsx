@@ -11,13 +11,15 @@ const WritingViewer = () => {
   const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
   const writing = useAppSelector(({ writings }) => writings.byId[writingId]);
   const blockId = writing.blocks[0];
-  const paragraphs = useParagraphsByWritingId(writingId);
+  const paragraphs = useParagraphsByWritingId(writing.id);
+
+  const content = paragraphs?.map((paragraph) => paragraph.content).join('\n');
 
   return (
     <>
-      <WritingViewerHeader />
+      <WritingViewerHeader content={content} />
       <ViewerLayout>
-        {paragraphs.map((paragraph, i) => (
+        {paragraphs?.map((paragraph, i) => (
           <ParagraphEditor
             key={i}
             blockId={blockId}

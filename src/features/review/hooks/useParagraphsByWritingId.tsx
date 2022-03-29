@@ -8,9 +8,11 @@ const useParagraphsByWritingId = (writingId: string) => {
   const block: Block = useAppSelector(({ blocks }) => blocks.byId[blockId]);
 
   if (block.type !== BLOCK_TYPE.PREP) {
-    throw new Error(
+    console.error(
       'useParagraphsByWritingId는 PREP 블록에서만 호출할 수 있습니다.'
     );
+
+    return [];
   }
 
   return block.paragraphs;

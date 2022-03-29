@@ -8,11 +8,10 @@ import {
 } from '../../../../common/hooks/useRedux';
 import Modal from '../../../../common/components/Modal/Modal';
 import { deleteWriting } from '../../../writings/actions';
-import useParagraphsByWritingId from '../../hooks/useParagraphsByWritingId';
 import Share from '../Share/Share';
 import styles from './WritingViewerHeader.module.css';
 
-const WritingViewerHeader = () => {
+const WritingViewerHeader = ({ content }: { content: string }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { writingId } = useParams<WritingIdParam>() as WritingIdParam;
@@ -28,12 +27,9 @@ const WritingViewerHeader = () => {
     navigate('/review');
   }, [userId, writingId]);
 
-  const paragraphs = useParagraphsByWritingId(writingId);
-  const text = paragraphs.map((paragraph) => paragraph.content).join('\n');
-
   const handleClickCopy = useCallback(() => {
-    navigator.clipboard.writeText(text);
-  }, [text]);
+    navigator.clipboard.writeText(content);
+  }, [content]);
 
   return (
     <>

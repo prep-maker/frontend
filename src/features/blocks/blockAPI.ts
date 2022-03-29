@@ -55,7 +55,7 @@ class BlockAPI implements IBlockAPI {
   updateMany = async ({ writingId, blocks }: BlocksUpdateRequest) => {
     const result: AxiosResponse<Block[]> = await this.http.fetch(
       `/writings/${writingId}/blocks`,
-      { method: 'put', body: { blocks } }
+      { method: 'put', body: blocks }
     );
 
     return result.data;

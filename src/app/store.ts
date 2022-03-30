@@ -24,6 +24,7 @@ const reducers = combineReducers({
 const persisitConfig = {
   key: 'root',
   storage,
+  blacklist: ['ui'],
 };
 const persistedReducer = persistReducer(persisitConfig, reducers);
 const middlewares: Middleware[] = [];

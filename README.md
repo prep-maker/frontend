@@ -5,9 +5,19 @@ PREP Maker는 구조적 글쓰기를 도와주는 앱입니다. PREP 앱과 함�
 
 ## 사용법
 
+ <details>
+  <summary>로그인 페이지</summary>
+  <div markdown="1">
+
 ![로그인 페이지](https://user-images.githubusercontent.com/80461702/159209265-baa73dbe-427e-490f-ae31-0c55e7bb9091.png)
 
 1. 로그인을 합니다. 계정이 없으면 회원가입을 합니다.
+</div>
+</details>
+
+ <details>
+  <summary>편집 페이지</summary>
+  <div markdown="1">
 
 ![편집 페이지](https://user-images.githubusercontent.com/80461702/159209328-dae5e2ea-c01f-4e65-b333-366f276e25a9.png)
 ![편집 페이지](https://user-images.githubusercontent.com/80461702/159209337-00f274df-b928-415f-9fcd-d6224142c000.png)
@@ -21,11 +31,25 @@ PREP Maker는 구조적 글쓰기를 도와주는 앱입니다. PREP 앱과 함�
 7. 블록을 드래그 앤 드롭하여 PREP 순서로 블록을 합체합니다. 문단 검사를 통과하지 못한 블록은 합체가 불가합니다.
 8. 블록이 모두 합체되면 완료 버튼을 눌러 검토 페이지로 이동합니다.
 
+9. 로그인을 합니다. 계정이 없으면 회원가입을 합니다.
+</div>
+</details>
+
+<details>
+  <summary>검토 페이지</summary>
+  <div markdown="1">
+  
 ![검토 페이지](https://user-images.githubusercontent.com/80461702/159209690-0d7ee104-5e7d-403a-8a48-59b5ad039bb1.png)
 
 9. 검토페이지에서 문단을 클릭하여 문단을 수정할 수 있습니다.
 10. 공유버튼을 눌러 다른 사람에게 공유할 수 있는 링크를 복사할 수 있습니다.
+</div>
+</details>
 
+<details>
+  <summary>검토 페이지</summary>
+  <div markdown="1">
+  
 ![피드백 페이지](https://user-images.githubusercontent.com/80461702/159209604-b1c9bd32-f023-47b1-af60-d52a42d889be.png)
 
 11. 공유된 링크를 주소에 붙여넣으면 피드백 페이지가 열립니다.
@@ -33,6 +57,8 @@ PREP Maker는 구조적 글쓰기를 도와주는 앱입니다. PREP 앱과 함�
 13. 코멘트 작성 버튼을 누르면 pending 상태의 코멘트가 생성됩니다.
 14. 완료 버튼을 눌러 전송, 취소를 선택할 수 있습니다. 전송 버튼을 누르면 코멘트가 저장됩니다. 취소 버튼을 누르면 pending 상태인 코멘트가 삭제됩니다.
 15. 코멘트 작성자는 삭제 버튼을 눌러 작성된 코멘트를 삭제할 수 있습니다.
+</div>
+</details>
 
 ## 프로젝트 기간
 
@@ -53,17 +79,13 @@ PREP Maker는 구조적 글쓰기를 도와주는 앱입니다. PREP 앱과 함�
 
 ## 기술스택
 
-- Frontend
-  - React
-  - Redux
-  - Typescript
-  - Jest
-  - Testing Library
-- Backend
-  - Express
-  - Typescript
-  - FxTS
-  - Jest
+|    공통    |    Frontend     |  Backend  |
+| :--------: | :-------------: | :-------: |
+| TypeScript |      React      |  Node.js  |
+|    Jest    |      Redux      |  Express  |
+|            |      Thunk      |  MongoDB  |
+|            | Testing Library |   FxTS    |
+|            |                 | Supertest |
 
 ## OOP
 

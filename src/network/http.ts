@@ -24,7 +24,7 @@ class HttpClient implements IHttpClient {
 
   private constructor(readonly baseURL: string) {}
 
-  static getHttp = (baseURL: string) => {
+  static getInstance = (baseURL: string) => {
     if (!this.http) {
       this.http = new HttpClient(baseURL);
     }

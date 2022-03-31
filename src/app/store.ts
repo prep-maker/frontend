@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'development') {
   middlewares.push(logger);
 }
 
-const http = HttpClient.getHttp(config.baseUrl);
+const http = HttpClient.getInstance(config.baseUrl);
 const authAPI = new AuthAPI(http);
 const writingAPI = new WritingAPI(http);
 const blockAPI = new BlockAPI(http);

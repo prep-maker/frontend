@@ -32,7 +32,7 @@ const Main = ({ children }: { children: React.ReactNode }) => {
 
 export const MainSkeleton = () => {
   return (
-    <main className={styles.main}>
+    <main className={styles.main} data-testid="skeleton">
       <WritingMenuSkeleton />
     </main>
   );

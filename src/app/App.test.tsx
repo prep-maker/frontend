@@ -96,6 +96,21 @@ describe('App', () => {
       }
     });
 
+    it('글 목록을 불러오는 중에는 스켈레톤 컴포넌트를 보여준다.', () => {
+      render(
+        <Provider store={store}>
+          <MemoryRouter>
+            <DndProvider backend={HTML5Backend}>
+              <App />
+            </DndProvider>
+          </MemoryRouter>
+        </Provider>
+      );
+      const skeleton = screen.getAllByTestId('skeleton');
+
+      expect(skeleton.length).toBeGreaterThan(1);
+    });
+
     it('글 생성 버튼을 클릭하면 새로운 글이 생성된다.', async () => {
       const button = await screen.findByTitle('add writing');
 

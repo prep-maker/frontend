@@ -4,8 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { store } from './app/store';
 import App from './app/App';
@@ -18,9 +16,7 @@ ReactDOM.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-          <DndProvider backend={HTML5Backend}>
-            <App />
-          </DndProvider>
+          <App />
         </BrowserRouter>
       </PersistGate>
     </Provider>

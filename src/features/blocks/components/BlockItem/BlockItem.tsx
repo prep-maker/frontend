@@ -43,13 +43,13 @@ const BlockItem = ({ block }: BlockItemProps) => {
       ref={divRef}
       data-testid={`${block.type}-block`}
     >
+      <Warning message={warning} />
       <header className={styles.header}>
         <button className={styles.button} onClick={handleDelete}>
           <AiOutlineClose title="delete block" />
         </button>
         <div className={styles.type}>{block.type}</div>
       </header>
-      <Warning message={warning} />
       {block.paragraphs.map((paragraph, i) => (
         <ParagraphItem
           key={i}

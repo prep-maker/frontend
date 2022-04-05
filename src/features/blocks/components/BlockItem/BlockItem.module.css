@@ -1,20 +1,19 @@
 .wrapper {
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 }
 
 .header {
+  position: absolute;
   display: flex;
+  transform: translateY(0.7em);
 }
 
 .button {
-  position: relative;
-  top: 3.3rem;
   cursor: pointer;
 }
 
 .type {
   position: relative;
-  top: 3.2rem;
   font-weight: 700;
 }
 

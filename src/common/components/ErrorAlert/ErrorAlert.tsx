@@ -20,7 +20,7 @@ const ErrorAlert = () => {
     return () => clearTimeout(timer);
   }, [error]);
 
-  return <div>{error && <div className={styles.banner}>{error}</div>}</div>;
+  return <>{error && <div className={styles.banner}>{error}</div>}</>;
 };
 
 export default memo(ErrorAlert);

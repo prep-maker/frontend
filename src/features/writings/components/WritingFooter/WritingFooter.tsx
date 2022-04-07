@@ -22,20 +22,12 @@ const WritingFooter = () => {
   const dispatch = useAppDispatch();
 
   const handleDelete = useCallback(() => {
-    if (!writing) {
-      return;
-    }
-
     dispatch(deleteWriting({ userId, writingId }));
     navigate('/writing');
   }, [userId, writingId]);
 
   const blocks = useBlocksByWritingId(writingId);
   const handleFinish = useCallback(async () => {
-    if (!writing) {
-      return;
-    }
-
     if (blocks.length !== 1) {
       dispatch(alertError(ERROR.COMBINE_REQUIRED));
       return;

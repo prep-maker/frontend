@@ -351,16 +351,36 @@ describe('App', () => {
       expect(updated).toBeInTheDocument();
     });
 
-    it('복사 버튼이 있다.', () => {
-      expect(screen.getByText('복사')).toBeInTheDocument();
+    it('복사 버튼을 눌러 글 내용을 복사할 수 있다.', () => {
+      Object.assign(navigator, {
+        clipboard: {
+          writeText: jest.fn(),
+        },
+      });
+      const button = screen.getByText('복사');
+
+      userEvent.click(button);
+
+      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+        'P 문단\nR 문단\nE 문단\nP 문단'
+      );
     });
 
     it('공유 버튼을 클릭하면 피드백 페이지 링크를 복사할 수 있다', () => {
+      Object.assign(navigator, {
+        clipboard: {
+          writeText: jest.fn(),
+        },
+      });
       const button = screen.getByText('공유');
 
       userEvent.click(button);
 
-      expect(screen.getByText('링크 복사')).toBeInTheDocument();
+      const copyButton = screen.getByText('링크 복사');
+      expect(copyButton).toBeInTheDocument();
+
+      userEvent.click(copyButton);
+      expect(navigator.clipboard.writeText).toHaveBeenCalled();
     });
 
     it('삭제 버튼을 누면 글을 삭제한다.', async () => {

@@ -1,18 +1,7 @@
 import { Block } from '../../blocks/blocksSlice';
 import { Writing } from '../writingsSlice';
-import { WritingResponse } from '../writingAPI';
+import { WritingResponse, IWritingAPI } from '../writingAPI';
 import dummyWritings from './dummyWritings.json';
-
-export interface IWritingAPI {
-  readonly getEditingByUserId: (userId: string) => Promise<WritingResponse[]>;
-  readonly getDoneByUserId: (userId: string) => Promise<WritingResponse[]>;
-  readonly getById: (writingId: string) => Promise<WritingResponse>;
-  readonly update: (
-    writing: Omit<Writing, 'blocks'>
-  ) => Promise<WritingResponse>;
-  readonly delete: (userId: string, writingId: string) => Promise<Block[]>;
-  readonly create: (userId: string) => Promise<WritingResponse>;
-}
 
 class WritingAPIStub implements IWritingAPI {
   constructor() {}

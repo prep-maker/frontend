@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 
 import { deleteFromStore } from '../../common/utils/store';
-
 import { createBlock, deleteBlock, saveBlocks } from '../blocks/actions';
 import { combineBlocks } from '../blocks/blocksSlice';
 import { logout } from '../user/userSlice';

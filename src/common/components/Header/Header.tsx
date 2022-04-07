@@ -22,6 +22,7 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const handleLogout = () => {
     dispatch(logout());
   };
+
   const handleClickHamburger = () => {
     dispatch(toggleWritingList());
   };

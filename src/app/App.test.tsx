@@ -419,21 +419,6 @@ describe('App', () => {
         });
       });
 
-      it('완료 버튼과 취소 버튼을 클릭하면 pending 상태였던 코멘트들을 삭제한다.', async () => {
-        const finish = screen.getByRole('button', { name: /완료/g });
-        userEvent.click(finish);
-        const cancel = screen.getByText('취소');
-
-        userEvent.click(cancel);
-
-        await waitFor(() => {
-          const pending = screen.queryByText('pending');
-          const comment = screen.queryByText('코멘트 테스트');
-          expect(pending).not.toBeInTheDocument();
-          expect(comment).not.toBeInTheDocument();
-        });
-      });
-
       it('코멘트 삭제 버튼을 클릭하면 저장된 코멘트를 삭제한다.', async () => {
         const finish = screen.getByRole('button', { name: /완료/g });
         userEvent.click(finish);

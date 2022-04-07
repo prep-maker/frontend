@@ -45,7 +45,7 @@ const ParagraphItem = ({
             className={styles.button}
             onClick={() => setIsFolded((prev) => !prev)}
           >
-            <MdKeyboardArrowRight size={20} />
+            <MdKeyboardArrowRight size={20} title="unfold" />
           </button>
         </div>
       ) : (
@@ -55,7 +55,7 @@ const ParagraphItem = ({
               className={styles.button}
               onClick={() => setIsFolded((prev) => !prev)}
             >
-              <MdKeyboardArrowDown size={20} />
+              <MdKeyboardArrowDown size={20} title="fold" />
             </button>
           </header>
           <Textarea value={content} onChange={handleChange} />

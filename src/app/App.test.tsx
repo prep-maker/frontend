@@ -18,8 +18,14 @@ import { PLACEHOLDER } from '../common/constants/auth';
 import { logout } from '../features/user/userSlice';
 import { CORRECTION } from '../common/constants/correction';
 import ERROR from '../common/constants/error';
+import useMobileQuery from '../common/hooks/useMobileQuery';
 import { store } from './store';
 import App from './App';
+
+const useMobileQueryMock = useMobileQuery as jest.MockedFunction<
+  typeof useMobileQuery
+>;
+jest.mock('../common/hooks/useMobileQuery');
 
 jest.mock('../features/user/authAPI');
 jest.mock('../features/writings/writingAPI');
@@ -130,6 +136,17 @@ describe('App', () => {
       expect(skeleton.length).toBeGreaterThan(1);
     });
 
+    it('모바일 화면에서 햄버거 버튼 클릭하면 글 작성 버튼을 보여준다.', async () => {
+      useMobileQueryMock.mockImplementation(() => true);
+      const hamburger = await screen.findByTitle('hamburger');
+
+      userEvent.click(hamburger);
+
+      const button = screen.getByText('새 글 작성');
+
+      expect(button).toBeInTheDocument();
+    });
+
     it('글 생성 버튼을 클릭하면 새로운 글이 생성된다.', async () => {
       const button = await screen.findByTitle('add writing');
 
@@ -220,6 +237,22 @@ describe('App', () => {
 
         const PRBlock = await screen.findByTestId('PR-block');
         expect(PRBlock).toBeInTheDocument();
+      });
+
+      it('블록 접힘 버튼과 블록 펼침 버튼으로 블록을 접고 펼 수 있다.', async () => {
+        userEvent.click(PREPButton);
+        const foldingButtons = await screen.findAllByTitle('fold');
+        expect(foldingButtons.length).toBe(4);
+
+        userEvent.click(foldingButtons[0]);
+        const unfoldingButton = screen.getByTitle('unfold');
+        const secondFoldingButtons = screen.getAllByTitle('fold');
+        expect(unfoldingButton).toBeInTheDocument();
+        expect(secondFoldingButtons.length).toBe(3);
+
+        userEvent.click(unfoldingButton);
+        const thirdFoldingButtons = screen.getAllByTitle('fold');
+        expect(thirdFoldingButtons.length).toBe(4);
       });
 
       it('블록 삭제 버튼을 클릭하면 블록을 삭제한다.', async () => {

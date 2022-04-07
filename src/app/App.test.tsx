@@ -67,6 +67,25 @@ describe('App', () => {
       expect(addButton).toBeInTheDocument();
       expect(nav).not.toHaveClass('inactive');
     });
+
+    it('회원가입하면 로그인 되어 writing 페이지로 전환된다.', async () => {
+      const link = screen.getByText('회원가입');
+      userEvent.click(link);
+      const emailInput = screen.getByPlaceholderText(PLACEHOLDER.EMAIL);
+      const passwordInput = screen.getByPlaceholderText(PLACEHOLDER.PASSWORD);
+      const nameInput = screen.getByPlaceholderText(PLACEHOLDER.NAME);
+      const button = screen.getByText('가입하기');
+
+      userEvent.type(emailInput, 'test@email.com');
+      userEvent.type(passwordInput, 'test1234');
+      userEvent.type(nameInput, 'test');
+      userEvent.click(button);
+
+      const addButton = await screen.findByTitle('add writing');
+      const nav = screen.getByText('편집');
+      expect(addButton).toBeInTheDocument();
+      expect(nav).not.toHaveClass('inactive');
+    });
   });
 
   describe('Writing Page', () => {
